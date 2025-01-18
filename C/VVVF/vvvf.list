@@ -10,60 +10,216 @@ Disassembly of section .program_ptr:
 Disassembly of section .init_fun:
 
 00000004 <init>:
-   4:	b508      	push	{r3, lr}
-   6:	4b07      	ldr	r3, [pc, #28]	; (24 <init+0x20>)
-   8:	4907      	ldr	r1, [pc, #28]	; (28 <init+0x24>)
-   a:	4808      	ldr	r0, [pc, #32]	; (2c <init+0x28>)
+   4:	4b0a      	ldr	r3, [pc, #40]	; (30 <init+0x2c>)
+   6:	490b      	ldr	r1, [pc, #44]	; (34 <init+0x30>)
+   8:	480b      	ldr	r0, [pc, #44]	; (38 <init+0x34>)
+   a:	b510      	push	{r4, lr}
    c:	447b      	add	r3, pc
-   e:	4479      	add	r1, pc
+   e:	4c07      	ldr	r4, [pc, #28]	; (2c <init+0x28>)
   10:	681b      	ldr	r3, [r3, #0]
-  12:	4b03      	ldr	r3, [pc, #12]	; (20 <init+0x1c>)
-  14:	4478      	add	r0, pc
-  16:	681b      	ldr	r3, [r3, #0]
+  12:	6823      	ldr	r3, [r4, #0]
+  14:	4479      	add	r1, pc
+  16:	4478      	add	r0, pc
   18:	4798      	blx	r3
-  1a:	2001      	movs	r0, #1
-  1c:	bd08      	pop	{r3, pc}
-  1e:	bf00      	nop
-  20:	1000f800 	andne	pc, r0, r0, lsl #16
-  24:	fffffff0 			; <UNDEFINED> instruction: 0xfffffff0
-  28:	0000002b 	andeq	r0, r0, fp, lsr #32
-  2c:	00000018 	andeq	r0, r0, r8, lsl r0
+  1a:	4908      	ldr	r1, [pc, #32]	; (3c <init+0x38>)
+  1c:	4808      	ldr	r0, [pc, #32]	; (40 <init+0x3c>)
+  1e:	6823      	ldr	r3, [r4, #0]
+  20:	4479      	add	r1, pc
+  22:	4478      	add	r0, pc
+  24:	4798      	blx	r3
+  26:	2001      	movs	r0, #1
+  28:	bd10      	pop	{r4, pc}
+  2a:	bf00      	nop
+  2c:	1000f800 	andne	pc, r0, r0, lsl #16
+  30:	fffffff0 			; <UNDEFINED> instruction: 0xfffffff0
+  34:	000001e5 	andeq	r0, r0, r5, ror #3
+  38:	00000036 	andeq	r0, r0, r6, lsr r0
+  3c:	000000c1 	andeq	r0, r0, r1, asr #1
+  40:	00000033 	andeq	r0, r0, r3, lsr r0
 
 Disassembly of section .text:
 
-00000030 <.text>:
-  30:	2d747865 	ldclcs	8, cr7, [r4, #-404]!	; 0xfffffe6c
-  34:	74736574 	ldrbtvc	r6, [r3], #-1396	; 0xfffffa8c
+00000050 <sineLookupTable-0x30>:
+  50:	2d747865 	ldclcs	8, cr7, [r4, #-404]!	; 0xfffffe6c
+  54:	74736574 	ldrbtvc	r6, [r3], #-1396	; 0xfffffa8c
+  58:	74786500 	ldrbtvc	r6, [r8], #-1280	; 0xfffffb00
+  5c:	6e65672d 	cdpvs	7, 6, cr6, cr5, cr13, {1}
+  60:	74617265 	strbtvc	r7, [r1], #-613	; 0xfffffd9b
+  64:	6e612d65 	cdpvs	13, 6, cr2, cr1, cr5, {3}
+  68:	6c702d64 	ldclvs	13, cr2, [r0], #-400	; 0xfffffe70
+  6c:	732d7961 			; <UNDEFINED> instruction: 0x732d7961
+  70:	6c706d61 	ldclvs	13, cr6, [r0], #-388	; 0xfffffe7c
+  74:	00007365 	andeq	r7, r0, r5, ror #6
 	...
+
+00000080 <sineLookupTable>:
+  80:	64584c40 	ldrbvs	r4, [r8], #-3136	; 0xfffff3c0
+  84:	91867b6f 	orrls	r7, r6, pc, ror #22
+  88:	bab0a69c 	blt	fec29b00 <ext_test+0xfec29904>
+  8c:	dbd3cbc3 	blle	ff4f2fa0 <ext_test+0xff4f2da4>
+  90:	f2ede7e1 	vqdmlsl.s32	q15, d29, d1[1]
+  94:	fdfcf9f6 	ldc2l	9, cr15, [ip, #492]!	; 0x1ec	; <UNPREDICTABLE>
+  98:	fdffffff 	ldc2l	15, cr15, [pc, #1020]!	; 49c <ext_test+0x2a0>
+  9c:	f2f6f9fc 			; <UNDEFINED> instruction: 0xf2f6f9fc
+  a0:	dbe1e7ed 	blle	ff87a05c <ext_test+0xff879e60>
+  a4:	bac3cbd3 	blt	ff0f2ff8 <ext_test+0xff0f2dfc>
+  a8:	919ca6b0 			; <UNDEFINED> instruction: 0x919ca6b0
+  ac:	646f7b86 	strbtvs	r7, [pc], #-2950	; b4 <sineLookupTable+0x34>
+  b0:	34404c58 	strbcc	r4, [r0], #-3160	; 0xfffff3a8
+  b4:	05111c28 	ldreq	r1, [r1, #-3112]	; 0xfffff3d8
+  b8:	dae4effa 	ble	ff93c0a8 <ext_test+0xff93beac>
+  bc:	b5bdc6d0 	ldrlt	ip, [sp, #1744]!	; 0x6d0
+  c0:	999fa5ad 	ldmibls	pc, {r0, r2, r3, r5, r7, r8, sl, sp, pc}	; <UNPREDICTABLE>
+  c4:	878a8e93 			; <UNDEFINED> instruction: 0x878a8e93
+  c8:	81818384 	orrhi	r8, r1, r4, lsl #7
+  cc:	87848381 	strhi	r8, [r4, r1, lsl #7]
+  d0:	99938e8a 	ldmibls	r3, {r1, r3, r7, r9, sl, fp, pc}
+  d4:	b5ada59f 	strlt	sl, [sp, #1439]!	; 0x59f
+  d8:	dad0c6bd 	ble	ff431bd4 <ext_test+0xff4319d8>
+  dc:	05faefe4 	ldrbeq	lr, [sl, #4068]!	; 0xfe4
+  e0:	34281c11 	strtcc	r1, [r8], #-3089	; 0xfffff3ef
+
+Disassembly of section .text.ext_generate_and_play_samples:
+
+000000e4 <ext_generate_and_play_samples>:
+  e4:	b5f0      	push	{r4, r5, r6, r7, lr}
+  e6:	ed2d 8b04 	vpush	{d8-d9}
+  ea:	2906      	cmp	r1, #6
+  ec:	b083      	sub	sp, #12
+  ee:	4d40      	ldr	r5, [pc, #256]	; (1f0 <ext_generate_and_play_samples+0x10c>)
+  f0:	af00      	add	r7, sp, #0
+  f2:	4604      	mov	r4, r0
+  f4:	d006      	beq.n	104 <ext_generate_and_play_samples+0x20>
+  f6:	f8d5 0094 	ldr.w	r0, [r5, #148]	; 0x94
+  fa:	370c      	adds	r7, #12
+  fc:	46bd      	mov	sp, r7
+  fe:	ecbd 8b04 	vpop	{d8-d9}
+ 102:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 104:	6feb      	ldr	r3, [r5, #124]	; 0x7c
+ 106:	6800      	ldr	r0, [r0, #0]
+ 108:	4798      	blx	r3
+ 10a:	2800      	cmp	r0, #0
+ 10c:	d0f3      	beq.n	f6 <ext_generate_and_play_samples+0x12>
+ 10e:	6feb      	ldr	r3, [r5, #124]	; 0x7c
+ 110:	6860      	ldr	r0, [r4, #4]
+ 112:	4798      	blx	r3
+ 114:	2800      	cmp	r0, #0
+ 116:	d0ee      	beq.n	f6 <ext_generate_and_play_samples+0x12>
+ 118:	6feb      	ldr	r3, [r5, #124]	; 0x7c
+ 11a:	68a0      	ldr	r0, [r4, #8]
+ 11c:	4798      	blx	r3
+ 11e:	2800      	cmp	r0, #0
+ 120:	d0e9      	beq.n	f6 <ext_generate_and_play_samples+0x12>
+ 122:	6feb      	ldr	r3, [r5, #124]	; 0x7c
+ 124:	68e0      	ldr	r0, [r4, #12]
+ 126:	4798      	blx	r3
+ 128:	2800      	cmp	r0, #0
+ 12a:	d0e4      	beq.n	f6 <ext_generate_and_play_samples+0x12>
+ 12c:	6f6b      	ldr	r3, [r5, #116]	; 0x74
+ 12e:	6920      	ldr	r0, [r4, #16]
+ 130:	4798      	blx	r3
+ 132:	2800      	cmp	r0, #0
+ 134:	d0df      	beq.n	f6 <ext_generate_and_play_samples+0x12>
+ 136:	6feb      	ldr	r3, [r5, #124]	; 0x7c
+ 138:	6960      	ldr	r0, [r4, #20]
+ 13a:	4798      	blx	r3
+ 13c:	2800      	cmp	r0, #0
+ 13e:	d0da      	beq.n	f6 <ext_generate_and_play_samples+0x12>
+ 140:	6820      	ldr	r0, [r4, #0]
+ 142:	6deb      	ldr	r3, [r5, #92]	; 0x5c
+ 144:	4798      	blx	r3
+ 146:	6860      	ldr	r0, [r4, #4]
+ 148:	6deb      	ldr	r3, [r5, #92]	; 0x5c
+ 14a:	eeb0 8a40 	vmov.f32	s16, s0
+ 14e:	4798      	blx	r3
+ 150:	68a0      	ldr	r0, [r4, #8]
+ 152:	6deb      	ldr	r3, [r5, #92]	; 0x5c
+ 154:	eeb0 9a40 	vmov.f32	s18, s0
+ 158:	4798      	blx	r3
+ 15a:	68e0      	ldr	r0, [r4, #12]
+ 15c:	6deb      	ldr	r3, [r5, #92]	; 0x5c
+ 15e:	ed87 0a01 	vstr	s0, [r7, #4]
+ 162:	4798      	blx	r3
+ 164:	6e6b      	ldr	r3, [r5, #100]	; 0x64
+ 166:	6960      	ldr	r0, [r4, #20]
+ 168:	eef0 8a40 	vmov.f32	s17, s0
+ 16c:	4798      	blx	r3
+ 16e:	eec9 7a28 	vdiv.f32	s15, s18, s17
+ 172:	1dc3      	adds	r3, r0, #7
+ 174:	f023 0307 	bic.w	r3, r3, #7
+ 178:	ebad 0d03 	sub.w	sp, sp, r3
+ 17c:	f8df e078 	ldr.w	lr, [pc, #120]	; 1f8 <ext_generate_and_play_samples+0x114>
+ 180:	4601      	mov	r1, r0
+ 182:	2600      	movs	r6, #0
+ 184:	4668      	mov	r0, sp
+ 186:	44fe      	add	lr, pc
+ 188:	f04f 0c64 	mov.w	ip, #100	; 0x64
+ 18c:	ed9f 9a19 	vldr	s18, [pc, #100]	; 1f4 <ext_generate_and_play_samples+0x110>
+ 190:	edd7 0a01 	vldr	s1, [r7, #4]
+ 194:	ee67 7a89 	vmul.f32	s15, s15, s18
+ 198:	ee28 8a09 	vmul.f32	s16, s16, s18
+ 19c:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+ 1a0:	eebc 8ac8 	vcvt.u32.f32	s16, s16
+ 1a4:	ee17 3a90 	vmov	r3, s15
+ 1a8:	ee18 2a10 	vmov	r2, s16
+ 1ac:	b29b      	uxth	r3, r3
+ 1ae:	b294      	uxth	r4, r2
+ 1b0:	428e      	cmp	r6, r1
+ 1b2:	db0d      	blt.n	1d0 <ext_generate_and_play_samples+0xec>
+ 1b4:	f8d5 33d4 	ldr.w	r3, [r5, #980]	; 0x3d4
+ 1b8:	eeb0 0a68 	vmov.f32	s0, s17
+ 1bc:	4798      	blx	r3
+ 1be:	ee07 4a90 	vmov	s15, r4
+ 1c2:	eeb8 0a67 	vcvt.f32.u32	s0, s15
+ 1c6:	6ceb      	ldr	r3, [r5, #76]	; 0x4c
+ 1c8:	ee80 0a09 	vdiv.f32	s0, s0, s18
+ 1cc:	4798      	blx	r3
+ 1ce:	e794      	b.n	fa <ext_generate_and_play_samples+0x16>
+ 1d0:	fbb4 f2fc 	udiv	r2, r4, ip
+ 1d4:	fb0c 4212 	mls	r2, ip, r2, r4
+ 1d8:	441c      	add	r4, r3
+ 1da:	b2a4      	uxth	r4, r4
+ 1dc:	b292      	uxth	r2, r2
+ 1de:	2c63      	cmp	r4, #99	; 0x63
+ 1e0:	f81e 2002 	ldrb.w	r2, [lr, r2]
+ 1e4:	5582      	strb	r2, [r0, r6]
+ 1e6:	bf84      	itt	hi
+ 1e8:	3c64      	subhi	r4, #100	; 0x64
+ 1ea:	b2a4      	uxthhi	r4, r4
+ 1ec:	3601      	adds	r6, #1
+ 1ee:	e7df      	b.n	1b0 <ext_generate_and_play_samples+0xcc>
+ 1f0:	1000f800 	andne	pc, r0, r0, lsl #16
+ 1f4:	42c80000 	sbcmi	r0, r8, #0
+ 1f8:	fffffef6 			; <UNDEFINED> instruction: 0xfffffef6
 
 Disassembly of section .text.ext_test:
 
-0000003c <ext_test>:
-  3c:	2901      	cmp	r1, #1
-  3e:	b570      	push	{r4, r5, r6, lr}
-  40:	4d09      	ldr	r5, [pc, #36]	; (68 <ext_test+0x2c>)
-  42:	4604      	mov	r4, r0
-  44:	d10d      	bne.n	62 <ext_test+0x26>
-  46:	6feb      	ldr	r3, [r5, #124]	; 0x7c
-  48:	6800      	ldr	r0, [r0, #0]
-  4a:	4798      	blx	r3
-  4c:	b148      	cbz	r0, 62 <ext_test+0x26>
-  4e:	6e6b      	ldr	r3, [r5, #100]	; 0x64
-  50:	6820      	ldr	r0, [r4, #0]
-  52:	6c2e      	ldr	r6, [r5, #64]	; 0x40
-  54:	4798      	blx	r3
-  56:	4633      	mov	r3, r6
-  58:	eb00 0040 	add.w	r0, r0, r0, lsl #1
-  5c:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
-  60:	4718      	bx	r3
-  62:	f8d5 0094 	ldr.w	r0, [r5, #148]	; 0x94
-  66:	bd70      	pop	{r4, r5, r6, pc}
-  68:	1000f800 	andne	pc, r0, r0, lsl #16
+000001fc <ext_test>:
+ 1fc:	2901      	cmp	r1, #1
+ 1fe:	b570      	push	{r4, r5, r6, lr}
+ 200:	4d09      	ldr	r5, [pc, #36]	; (228 <ext_test+0x2c>)
+ 202:	4604      	mov	r4, r0
+ 204:	d10d      	bne.n	222 <ext_test+0x26>
+ 206:	6feb      	ldr	r3, [r5, #124]	; 0x7c
+ 208:	6800      	ldr	r0, [r0, #0]
+ 20a:	4798      	blx	r3
+ 20c:	b148      	cbz	r0, 222 <ext_test+0x26>
+ 20e:	6e6b      	ldr	r3, [r5, #100]	; 0x64
+ 210:	6820      	ldr	r0, [r4, #0]
+ 212:	6c2e      	ldr	r6, [r5, #64]	; 0x40
+ 214:	4798      	blx	r3
+ 216:	4633      	mov	r3, r6
+ 218:	eb00 0040 	add.w	r0, r0, r0, lsl #1
+ 21c:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+ 220:	4718      	bx	r3
+ 222:	f8d5 0094 	ldr.w	r0, [r5, #148]	; 0x94
+ 226:	bd70      	pop	{r4, r5, r6, pc}
+ 228:	1000f800 	andne	pc, r0, r0, lsl #16
 
 Disassembly of section .comment:
 
 00000000 <.comment>:
-   0:	3a434347 	bcc	10d0d24 <ext_test+0x10d0ce8>
+   0:	3a434347 	bcc	10d0d24 <ext_test+0x10d0b28>
    4:	35312820 	ldrcc	r2, [r1, #-2080]!	; 0xfffff7e0
    8:	2e30313a 	mrccs	1, 1, r3, cr0, cr10, {1}
    c:	30322d33 	eorscc	r2, r2, r3, lsr sp

@@ -1,4 +1,14 @@
-(def chunk-size 200) ; Define the chunk size
+
+;; Compiled C Binary Code
+%COMPILED_C_BINARY
+
+;; Load the compiled c code
+(load-native-lib vvvf)
+
+
+
+
+(def chunk-size 400) ; Define the chunk size
 (def pi 3.1415926535) ; Basic pi definition
 
 ;; Create buffers
@@ -26,29 +36,14 @@
 (def motor_rpm 0.0) ; Current rpm of motor
 (def amplitude 0.0) ; Initialize amplitude to 0.0
 
-;; PWM settings (as globals)
-(def spwm-type 'fixed) ; Can be 'fixed, 'ramp, 'sync, or 'rspwm
-(def spwm-carrier-frequency 1000) ; For 'fixed mode
-(def spwm-min-carrier-frequency 500) ; For 'ramp and 'rspwm modes
-(def spwm-max-carrier-frequency 2000) ; For 'ramp and 'rspwm modes
-(def spwm-pulse-mode 10) ; For 'sync mode (number of pulses per command cycle)
-(def spwm-wide-pulse nil) ; Enable wide pulse mode
-(def spwm-modulation-index 1.5) ; Modulation index for wide pulse mode
-
-
-;; Compiled C Binary Code
-%COMPILED_C_BINARY
-
-;; Load the compiled c code
-(load-native-lib vvvf)
-
-(print (ext-test 1))
-
-
-
-
-
-
+; ;; PWM settings (as globals)
+; (def spwm-type 'fixed) ; Can be 'fixed, 'ramp, 'sync, or 'rspwm
+; (def spwm-carrier-frequency 1000) ; For 'fixed mode
+; (def spwm-min-carrier-frequency 500) ; For 'ramp and 'rspwm modes
+; (def spwm-max-carrier-frequency 2000) ; For 'ramp and 'rspwm modes
+; (def spwm-pulse-mode 10) ; For 'sync mode (number of pulses per command cycle)
+; (def spwm-wide-pulse nil) ; Enable wide pulse mode
+; (def spwm-modulation-index 1.5) ; Modulation index for wide pulse mode
 
 
 (defun map-value (value in-min in-max out-min out-max)
@@ -91,32 +86,7 @@
 
 
 
-;(defun get-samples (buf)
-  ;(progn
-    ;(def frequency 500) ; 1 kHz sine wave
-    ;(def angular-frequency (* 2 pi (/ frequency sample-rate))) ; Angular frequency
-    (var phase carrier-phase)
-    ;(def i 0) ; Initialize loop counter
-    ;(loopwhile (< i chunk-size) ; Loop condition
-      ;(progn
-        ;(var sample (round (* 127 (sin carrier-phase)))) ; Calculate sine wave sample using current phase
-        ;(bufset-i8 buf1 i sample) ; Write the sample to the buffer
-        ;(def carrier-phase (+ carrier-phase angular-frequency)) ; Update phase angle for the next sample
-        ;(def i (+ i 1)) ; Increment loop counter
-      ;)
-    ;)
-    (def carrier-phase phase)
-  ;)
-  ;buf
-;)
 
-
-
-(defun play-samples (buf) {
-        (get-samples buf)
-
-        (foc-play-samples buf sample-rate 0.03)
-})
 
 
 
@@ -135,9 +105,9 @@
   ;; -- PLAY SAMPLES --
   (if (> amplitude -0.1)
       (progn
-        (play-samples buf1)
-        (play-samples buf2)
-        (play-samples buf3)
+        ;; NOTE: The external generate and play samples is in the c code, and has these args
+        ;; ext_generate_and_play_samples(phase, frequency, samplerate. buffer, chunksize)
+        (def command-phase (ext-generate-and-play-samples command-phase 1000 0.05 sample-rate buf1 chunk-size))
 
        )
    )
