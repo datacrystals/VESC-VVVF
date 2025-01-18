@@ -1,0 +1,5 @@
+**.so
+**.bin
+**.elf
+C/examples/*/*.lisp
+C/examples/*/*.list

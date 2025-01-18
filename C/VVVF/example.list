@@ -1,0 +1,97 @@
+
+example.elf:     file format elf32-littlearm
+
+
+Disassembly of section .program_ptr:
+
+00000000 <prog_ptr>:
+   0:	00000000 	andeq	r0, r0, r0
+
+Disassembly of section .init_fun:
+
+00000004 <init>:
+   4:	b508      	push	{r3, lr}
+   6:	4b07      	ldr	r3, [pc, #28]	; (24 <init+0x20>)
+   8:	4907      	ldr	r1, [pc, #28]	; (28 <init+0x24>)
+   a:	4808      	ldr	r0, [pc, #32]	; (2c <init+0x28>)
+   c:	447b      	add	r3, pc
+   e:	4479      	add	r1, pc
+  10:	681b      	ldr	r3, [r3, #0]
+  12:	4b03      	ldr	r3, [pc, #12]	; (20 <init+0x1c>)
+  14:	4478      	add	r0, pc
+  16:	681b      	ldr	r3, [r3, #0]
+  18:	4798      	blx	r3
+  1a:	2001      	movs	r0, #1
+  1c:	bd08      	pop	{r3, pc}
+  1e:	bf00      	nop
+  20:	1000f800 	andne	pc, r0, r0, lsl #16
+  24:	fffffff0 			; <UNDEFINED> instruction: 0xfffffff0
+  28:	0000002b 	andeq	r0, r0, fp, lsr #32
+  2c:	00000018 	andeq	r0, r0, r8, lsl r0
+
+Disassembly of section .text:
+
+00000030 <.text>:
+  30:	2d747865 	ldclcs	8, cr7, [r4, #-404]!	; 0xfffffe6c
+  34:	74736574 	ldrbtvc	r6, [r3], #-1396	; 0xfffffa8c
+	...
+
+Disassembly of section .text.ext_test:
+
+0000003c <ext_test>:
+  3c:	2901      	cmp	r1, #1
+  3e:	b570      	push	{r4, r5, r6, lr}
+  40:	4d09      	ldr	r5, [pc, #36]	; (68 <ext_test+0x2c>)
+  42:	4604      	mov	r4, r0
+  44:	d10d      	bne.n	62 <ext_test+0x26>
+  46:	6feb      	ldr	r3, [r5, #124]	; 0x7c
+  48:	6800      	ldr	r0, [r0, #0]
+  4a:	4798      	blx	r3
+  4c:	b148      	cbz	r0, 62 <ext_test+0x26>
+  4e:	6e6b      	ldr	r3, [r5, #100]	; 0x64
+  50:	6820      	ldr	r0, [r4, #0]
+  52:	6c2e      	ldr	r6, [r5, #64]	; 0x40
+  54:	4798      	blx	r3
+  56:	4633      	mov	r3, r6
+  58:	eb00 0040 	add.w	r0, r0, r0, lsl #1
+  5c:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+  60:	4718      	bx	r3
+  62:	f8d5 0094 	ldr.w	r0, [r5, #148]	; 0x94
+  66:	bd70      	pop	{r4, r5, r6, pc}
+  68:	1000f800 	andne	pc, r0, r0, lsl #16
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <ext_test+0x10d0ce8>
+   4:	35312820 	ldrcc	r2, [r1, #-2080]!	; 0xfffff7e0
+   8:	2e30313a 	mrccs	1, 1, r3, cr0, cr10, {1}
+   c:	30322d33 	eorscc	r2, r2, r3, lsr sp
+  10:	302e3132 	eorcc	r3, lr, r2, lsr r1
+  14:	29342d37 	ldmdbcs	r4!, {r0, r1, r2, r4, r5, r8, sl, fp, sp}
+  18:	2e303120 	rsfcssp	f3, f0, f0
+  1c:	20312e33 	eorscs	r2, r1, r3, lsr lr
+  20:	31323032 	teqcc	r2, r2, lsr r0
+  24:	31323630 	teqcc	r2, r0, lsr r6
+  28:	65722820 	ldrbvs	r2, [r2, #-2080]!	; 0xfffff7e0
+  2c:	7361656c 	cmnvc	r1, #108, 10	; 0x1b000000
+  30:	Address 0x0000000000000030 is out of bounds.
+
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00003141 	andeq	r3, r0, r1, asr #2
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000027 	andeq	r0, r0, r7, lsr #32
+  10:	2d453705 	stclcs	7, cr3, [r5, #-20]	; 0xffffffec
+  14:	0d06004d 	stceq	0, cr0, [r6, #-308]	; 0xfffffecc
+  18:	02094d07 	andeq	r4, r9, #448	; 0x1c0
+  1c:	0412060a 	ldreq	r0, [r2], #-1546	; 0xfffff9f6
+  20:	01150114 	tsteq	r5, r4, lsl r1
+  24:	01180317 	tsteq	r8, r7, lsl r3
+  28:	011b011a 	tsteq	fp, sl, lsl r1
+  2c:	041e011c 	ldreq	r0, [lr], #-284	; 0xfffffee4
+  30:	Address 0x0000000000000030 is out of bounds.
+
