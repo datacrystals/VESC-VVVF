@@ -68,21 +68,21 @@ Disassembly of section .init_fun:
   8c:	00000991 	muleq	r0, r1, r9
   90:	0000086f 	andeq	r0, r0, pc, ror #16
 
+Disassembly of section .data.amplitude:
+
+00000094 <amplitude>:
+  94:	3d4ccccd 	stclcc	12, cr12, [ip, #-820]	; 0xfffffccc
+
 Disassembly of section .data.command_frequency:
 
-00000094 <command_frequency>:
-  94:	447a0000 	ldrbtmi	r0, [sl], #-0
+00000098 <command_frequency>:
+  98:	44fa0000 	ldrbtmi	r0, [sl], #0
 
 Disassembly of section .data.use_buffer1:
 
-00000098 <use_buffer1>:
-  98:	Address 0x0000000000000098 is out of bounds.
+0000009c <use_buffer1>:
+  9c:	Address 0x000000000000009c is out of bounds.
 
-
-Disassembly of section .bss.amplitude:
-
-0000009c <amplitude>:
-  9c:	00000000 	andeq	r0, r0, r0
 
 Disassembly of section .bss.audio_thread_data:
 
@@ -727,12 +727,12 @@ Disassembly of section .text.audio_loop:
  b08:	1000f800 	andne	pc, r0, r0, lsl #16
  b0c:	462c4400 	strtmi	r4, [ip], -r0, lsl #8
  b10:	fffff5f8 			; <UNDEFINED> instruction: 0xfffff5f8
- b14:	fffff5ea 			; <UNDEFINED> instruction: 0xfffff5ea
+ b14:	fffff5ee 			; <UNDEFINED> instruction: 0xfffff5ee
  b18:	fffffd5a 			; <UNDEFINED> instruction: 0xfffffd5a
- b1c:	fffff5d6 			; <UNDEFINED> instruction: 0xfffff5d6
- b20:	fffff5ca 			; <UNDEFINED> instruction: 0xfffff5ca
+ b1c:	fffff5ce 			; <UNDEFINED> instruction: 0xfffff5ce
+ b20:	fffff5ce 			; <UNDEFINED> instruction: 0xfffff5ce
  b24:	fffff5d2 			; <UNDEFINED> instruction: 0xfffff5d2
- b28:	fffff5a8 			; <UNDEFINED> instruction: 0xfffff5a8
+ b28:	fffff5ac 			; <UNDEFINED> instruction: 0xfffff5ac
  b2c:	fffff732 			; <UNDEFINED> instruction: 0xfffff732
 
 Disassembly of section .text.ext_set_command_frequency:
@@ -767,7 +767,7 @@ Disassembly of section .text.ext_set_command_frequency:
  b6e:	f8d4 008c 	ldr.w	r0, [r4, #140]	; 0x8c
  b72:	e7e4      	b.n	b3e <ext_set_command_frequency+0xe>
  b74:	1000f800 	andne	pc, r0, r0, lsl #16
- b78:	fffff53e 			; <UNDEFINED> instruction: 0xfffff53e
+ b78:	fffff542 			; <UNDEFINED> instruction: 0xfffff542
  b7c:	fffffcc6 			; <UNDEFINED> instruction: 0xfffffcc6
 
 Disassembly of section .text.ext_set_amplitude:
@@ -802,7 +802,7 @@ Disassembly of section .text.ext_set_amplitude:
  bbe:	f8d4 008c 	ldr.w	r0, [r4, #140]	; 0x8c
  bc2:	e7e4      	b.n	b8e <ext_set_amplitude+0xe>
  bc4:	1000f800 	andne	pc, r0, r0, lsl #16
- bc8:	fffff4f6 			; <UNDEFINED> instruction: 0xfffff4f6
+ bc8:	fffff4ee 			; <UNDEFINED> instruction: 0xfffff4ee
  bcc:	fffffc96 			; <UNDEFINED> instruction: 0xfffffc96
 
 Disassembly of section .comment:

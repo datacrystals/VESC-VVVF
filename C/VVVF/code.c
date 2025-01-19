@@ -22,7 +22,7 @@ static int8_t buffer1[400];  // Buffer 1 for audio samples
 static int8_t buffer2[400];  // Buffer 2 for audio samples
 static bool use_buffer1 = true;  // Flag to alternate between buffers
 static float command_phase = 0.0f;  // Phase for command signal
-static float amplitude = 0.0f;  // Amplitude of the sine wave
+static float amplitude = 0.05f;  // Amplitude of the sine wave
 static float sample_rate = 11025.0f;  // Sample rate (Hz)
 static int chunk_size = 400;  // Chunk size (number of samples per buffer)
 static float command_frequency = 1000.0f;  // Command frequency (Hz)
