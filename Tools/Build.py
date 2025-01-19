@@ -16,7 +16,7 @@ print(" -- Getting Lisp C Binary --\n")
 LispBinary = ""
 with open("../C/VVVF/vvvf.lisp", "r") as f:
     LispBinary = f.read()
-print(LispBinary)
+#print(LispBinary)
 print(" -- Done Getting Lisp C Binary --\n")
 
 
@@ -27,7 +27,7 @@ with open("../Lisp/Main.lisp", "r") as f:
     LispCode = f.read()
 
 LispCode = LispCode.replace("%COMPILED_C_BINARY", LispBinary)
-print(LispCode)
+#print(LispCode)
 
 ## Finally, put it into the output Lisp Code
 with open("../VVVF_COMPILED.lisp", "w") as f:

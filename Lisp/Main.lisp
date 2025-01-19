@@ -34,10 +34,8 @@
     ;; Calculate command frequency based on motor ERPM
     (def command-frequency (/ motor-rpm 60)) ; Convert ERPM to Hz
 
-    ;; Debug: Print calculated amplitude and frequency
-    (print amplitude)
-
     ;; Send updated parameters to the C code
+    (def amplitude 0.08)
     (ext-set-amplitude amplitude)
     ; (ext-set-command-frequency command-frequency)
   )
