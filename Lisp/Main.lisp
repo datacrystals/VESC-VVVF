@@ -2,26 +2,12 @@
 ;; Compiled C Binary Code
 %COMPILED_C_BINARY
 
-;; Load the compiled c code
+;; Load the compiled C code
 (load-native-lib vvvf)
 
-
-
-
+;; Define constants
 (def chunk-size 400) ; Define the chunk size
 (def pi 3.1415926535) ; Basic pi definition
-
-;; Create buffers
-(def buf1 (bufcreate chunk-size))
-(def buf2 (bufcreate chunk-size))
-(def buf3 (bufcreate chunk-size))
-
-;; Global phase angles
-(def command-phase 0.0) ; Phase for command signal
-(def carrier-phase 0.0) ; Phase for carrier signal
-
-;; Sample rate (Hz)
-(def sample-rate 11025.0) ; THIS MUST HAVE THE DECIMAL IN IT SO IT'S A FLOAT!!
 
 ;; Motor current range (in amps)
 (def min-current -10.0) ; Minimum motor current for mapping
@@ -31,85 +17,37 @@
 (def min-voltage 0.01) ; Minimum output voltage for mapping
 (def max-voltage 0.1) ; Maximum output voltage for mapping (capped at 0.3)
 
-;; Processing Variables
-(def motor_current 0.0) ; Current amperes of the motor
-(def motor_rpm 0.0) ; Current rpm of motor
-(def amplitude 0.0) ; Initialize amplitude to 0.0
+(def amplitude 0.0)
+(def motor-current 0.0)
+(def motor-rpm 0.0)
 
-; ;; PWM settings (as globals)
-; (def spwm-type 'fixed) ; Can be 'fixed, 'ramp, 'sync, or 'rspwm
-; (def spwm-carrier-frequency 1000) ; For 'fixed mode
-; (def spwm-min-carrier-frequency 500) ; For 'ramp and 'rspwm modes
-; (def spwm-max-carrier-frequency 2000) ; For 'ramp and 'rspwm modes
-; (def spwm-pulse-mode 10) ; For 'sync mode (number of pulses per command cycle)
-; (def spwm-wide-pulse nil) ; Enable wide pulse mode
-; (def spwm-modulation-index 1.5) ; Modulation index for wide pulse mode
-
-
+;; Function to map a value from one range to another
 (defun map-value (value in-min in-max out-min out-max)
-  ; "Maps a value from one range to another."
   (+ out-min (* (/ (- value in-min) (- in-max in-min)) (- out-max out-min))))
 
-(defun generate-command (frequency amplitude phase)
-  ; "Generates a command signal (sine wave)."
-  (def angular-frequency (* 2 pi (/ frequency sample-rate))) ; Replaced let with def
-  (* amplitude (sin (+ phase angular-frequency))))
+;; Function to update amplitude and command frequency
+(defun update-audio-parameters ()
+  (def motor-current (abs (get-current)))
+  (def motor-rpm (get-rpm))
 
-(defun generate-carrier (frequency mode phase)
-  ; "Generates a carrier signal (sawtooth or triangle wave)."
-  (def angular-frequency (* 2 pi (/ frequency sample-rate))) ; Replaced let with def
-  (case mode
-    ('sawtooth (mod (+ phase angular-frequency) pi)) ; Sawtooth wave
-    ('triangle (abs (- (* 2 (/ (mod (+ phase angular-frequency) pi) pi)) 1))) ; Triangle wave
-    (t 0))) ; Default to 0
-
-(defun generate-output (command carrier power-rail)
-  ; "Generates the output signal based on the command and carrier signals."
-  (cond
-    ((and (> command 0) (> command carrier)) power-rail)
-    ((and (< command 0) (< command (- carrier))) (- power-rail))
-    (t 0)))
-
-(defun get-carrier-frequency (erpm)
-  ; "Calculates the carrier frequency based on the selected PWM mode."
-  (case spwm-type
-    ('fixed spwm-carrier-frequency) ; Fixed frequency
-    ('ramp (+ spwm-min-carrier-frequency
-               (* (/ (- erpm min-speed) (- max-speed min-speed))
-                  (- spwm-max-carrier-frequency spwm-min-carrier-frequency)))) ; Ramp between min and max frequencies
-    ('sync (* spwm-pulse-mode (/ (abs erpm) 60))) ; Sync with command frequency
-    ('rspwm (+ spwm-min-carrier-frequency
-                (* (random 1.0)
-                   (- spwm-max-carrier-frequency spwm-min-carrier-frequency)))) ; Random switching
-    (t spwm-carrier-frequency))) ; Default to fixed frequency
-
-
-
-
-
-
-
-
-;; Main loop
-(loopwhile t {
-  ;; -- UPDATE RPM AND MOTOR CURRENT --
-  (def motor_current (abs (get-current)))
-  (def motor_rpm (get-rpm))
-
-  ;; -- NOW, USING ACQUIRED DATA, CALCULATE AMPLITUDE --
+  ;; Calculate amplitude based on motor current
   (def amplitude 0.0) ; Default to 0 amplitude unless otherwise specified
-  (if (> (abs motor_current) 1)
-      ; Map the range of amplitudes from the min current to max current across the min to max voltage
-      (def amplitude (map-value (abs motor_current) min-current max-current min-voltage max-voltage)))
+  (if (> (abs motor-current) -1)
+      (def amplitude (map-value (abs motor-current) min-current max-current min-voltage max-voltage)))
+  (def amplitude 0.03)
 
-  ;; -- PLAY SAMPLES --
-  (if (> amplitude -0.1)
-      (progn
-        ;; NOTE: The external generate and play samples is in the c code, and has these args
-        ;; ext_generate_and_play_samples(phase, frequency, samplerate. buffer, chunksize)
-        (def command-phase (ext-generate-and-play-samples command-phase 1000 0.05 sample-rate buf1 chunk-size))
+  ;; Calculate command frequency based on motor RPM
+  (def command-frequency (* motor-rpm 0.1)) ; Example scaling factor
 
-       )
-   )
+  ;; Send updated parameters to the C code
+  (ext-set-amplitude amplitude)
+  (ext-set-command-frequency command-frequency))
 
+;; Start the audio loop
+(ext-start-audio-loop)
+
+;; Main loop to update parameters every 20ms
+(loopwhile t {
+  (update-audio-parameters)
+  (sleep 0.02) ; Sleep for 20ms
 })
