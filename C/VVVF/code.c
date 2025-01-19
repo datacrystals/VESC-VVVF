@@ -35,7 +35,7 @@ static int producer_index = 0;  // Index of the buffer currently being filled by
 static int consumer_index = 0;  // Index of the buffer currently being consumed by the consumer
 static float phase = 0.0f;
 static float amplitude = 0.0f;
-static float sample_rate = 11025.0f;
+static float sample_rate = 44100.0f;
 static float frequency = 1000.0f;
 
 // Statistics
@@ -130,7 +130,7 @@ static void playback_loop(void *arg) {
         samples_consumed += BUFFER_LENGTH;
 
 		// TEMPORARY FIX!!!!!
-        // -- THIS SHOULD NOT BE NEEDED -- THE 
+        // -- THIS SHOULD NOT BE NEEDED -- THE PLAY AUDIO SAMPLES CODE SHOULD BLOCK BUT IT DOESNT!
         float sleep_time = (float)BUFFER_LENGTH / sample_rate * 1000.0f * 1000.0f;
         VESC_IF->sleep_us((uint32_t)sleep_time);
 

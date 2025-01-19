@@ -707,7 +707,7 @@ Disassembly of section .text.playback_loop:
  836:	4798      	blx	r3
  838:	4a15      	ldr	r2, [pc, #84]	; (890 <playback_loop+0xdc>)
  83a:	447a      	add	r2, pc
- 83c:	f648 50b9 	movw	r0, #36281	; 0x8db9
+ 83c:	f242 306e 	movw	r0, #9070	; 0x236e
  840:	6813      	ldr	r3, [r2, #0]
  842:	f503 73c8 	add.w	r3, r3, #400	; 0x190
  846:	6013      	str	r3, [r2, #0]
@@ -724,7 +724,7 @@ Disassembly of section .text.playback_loop:
  864:	6023      	str	r3, [r4, #0]
  866:	e7ad      	b.n	7c4 <playback_loop+0x10>
  868:	1000f800 	andne	pc, r0, r0, lsl #16
- 86c:	462c4400 	strtmi	r4, [ip], -r0, lsl #8
+ 86c:	472c4400 	strmi	r4, [ip, -r0, lsl #8]!
  870:	fffff90e 			; <UNDEFINED> instruction: 0xfffff90e
  874:	fffff8f0 			; <UNDEFINED> instruction: 0xfffff8f0
  878:	fffff90a 			; <UNDEFINED> instruction: 0xfffff90a
@@ -1018,7 +1018,7 @@ Disassembly of section .text.generator_loop:
  b62:	e781      	b.n	a68 <generator_loop+0x10>
  b64:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
  b68:	1000f800 	andne	pc, r0, r0, lsl #16
- b6c:	462c4400 	strtmi	r4, [ip], -r0, lsl #8
+ b6c:	472c4400 	strmi	r4, [ip, -r0, lsl #8]!
  b70:	42c80000 	sbcmi	r0, r8, #0
  b74:	fffff64e 			; <UNDEFINED> instruction: 0xfffff64e
  b78:	fffff662 			; <UNDEFINED> instruction: 0xfffff662
@@ -1156,9 +1156,9 @@ Disassembly of section .text.ext_set_amplitude:
  cd2:	bf00      	nop
  cd4:	f3af 8000 	nop.w
  cd8:	00000000 	andeq	r0, r0, r0
- cdc:	40c58880 	sbcmi	r8, r5, r0, lsl #17
+ cdc:	40e58880 	rscmi	r8, r5, r0, lsl #17
  ce0:	1000f800 	andne	pc, r0, r0, lsl #16
- ce4:	464eb801 	strbmi	fp, [lr], -r1, lsl #16
+ ce4:	474eb801 	strbmi	fp, [lr, -r1, lsl #16]
  ce8:	fffff476 			; <UNDEFINED> instruction: 0xfffff476
  cec:	fffff490 			; <UNDEFINED> instruction: 0xfffff490
  cf0:	fffff482 			; <UNDEFINED> instruction: 0xfffff482
