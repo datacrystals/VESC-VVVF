@@ -14,7 +14,7 @@
 
 ;; Output voltage range (capped at 0.3)
 (def min-voltage 0.05) ; Minimum output voltage for mapping
-(def max-voltage 0.2) ; Maximum output voltage for mapping (capped at 0.3)
+(def max-voltage 0.6) ; Maximum output voltage for mapping (capped at 0.3)
 
 ;; Function to map a value from one range to another
 (defun map-value (value in-min in-max out-min out-max)
@@ -35,9 +35,10 @@
     (def command-frequency (/ motor-rpm 60)) ; Convert ERPM to Hz
 
     ;; Send updated parameters to the C code
-    (def amplitude (+ amplitude 0.02))
+    (def amplitude (+ amplitude 0.04))
     (ext-set-amplitude amplitude)
-    (ext-set-command-frequency command-frequency)
+    (ext-set-command-frequency (+ 1 command-frequency))
+    (ext-set-carrier-frequency (+ motor-rpm 1000))
   )
 
 )

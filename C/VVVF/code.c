@@ -20,6 +20,7 @@ HEADER
 #define SAMPLE_RATE_WARNING_THRESHOLD 1.2f
 #define SAWTOOTH_MAX 127        // Maximum value for the sawtooth (int8 range: 0-127)
 #define NUM_BUFFERS 3
+#define NUM_AMPLITUDE_SAMPLES 20
 
 // SPWM modes
 #define SPWM_MODE_FIXED 0
@@ -47,13 +48,15 @@ static bool buffer_ready_for_consumption[NUM_BUFFERS];  // Flags to indicate if 
 static int producer_index = 0;  // Index of the buffer currently being filled by the producer
 static int consumer_index = 0;  // Index of the buffer currently being consumed by the consumer
 static float amplitude = 0.0f;
-static float sample_rate = 11025.0f;
+static float sample_rate = 25000.0f;
+static float amplitudes[NUM_AMPLITUDE_SAMPLES]; // Array of last n amplitude values used to average them
+static int current_amplitude_index; // Index of current sample to be replaced
 // static float frequency = 1000.0f;
 
 // SPWM variables
 static float carrier_phase = 0.0f; // Phase of the current carrier sin wave
 static float command_phase = 0.0f; // Phase of the current command sin wave
-static float carrier_frequency = 500.0f;  // Example carrier frequency
+static float carrier_frequency = 2000.0f;  // Example carrier frequency
 static float command_frequency = 1.0f;   // Example command frequency
 static float modulation_index = 1.0f;       // Modulation index for wide pulse mode
 static int spwm_mode = SPWM_MODE_FIXED;     // SPWM mode (fixed, ramp, sync)
@@ -73,6 +76,7 @@ typedef struct {
 
 static thread_data generator_thread_data;
 static thread_data playback_thread_data;
+
 
 // Wrapping helper function 
 static inline float wrap_phase(float input_phase) {
@@ -130,7 +134,7 @@ static void generate_spwm(int8_t *buffer, float command_frequency, float carrier
         }
 
         // Set output value
-        buffer[i] = output;
+        buffer[i] = carrier;
 
         // Wrap the phases at 2*pi
         command_phase = wrap_phase(command_phase);
@@ -221,11 +225,14 @@ static void print_stats(void) {
 
         if (actual_sample_rate > sample_rate * SAMPLE_RATE_WARNING_THRESHOLD) {
             VESC_IF->printf("WARNING: Sample rate too high! Actual: %.1f, Expected: %.1f\n",
-                            actual_sample_rate, sample_rate);
+                            (double)actual_sample_rate, (double)sample_rate);
         }
 
         VESC_IF->printf("(Generated samples/s: %.1f) (Consumed samples/s: %.1f)\n",
-                        actual_sample_rate, sample_consume_rate);
+                        (double)actual_sample_rate, (double)sample_consume_rate);
+
+		VESC_IF->printf("Command Frequency: %.1f, Carrier Frequency: %.1f", (double) command_frequency, carrier_frequency);
+
     }
 }
 
@@ -293,7 +300,19 @@ static lbm_value ext_set_amplitude(lbm_value *args, lbm_uint argn) {
         return VESC_IF->lbm_enc_sym_eerror;
     }
 
-    amplitude = VESC_IF->lbm_dec_as_float(args[0]);
+    float new_amplitude = VESC_IF->lbm_dec_as_float(args[0]);
+
+	// Update array of samples with new value, update current value pointer
+	amplitudes[current_amplitude_index] = new_amplitude;
+	current_amplitude_index = (current_amplitude_index + 1) % NUM_AMPLITUDE_SAMPLES;
+
+	// Now calculate average over the array, and use that as the actual amplitude
+	float total = 0;
+	for (unsigned int i = 0; i < NUM_AMPLITUDE_SAMPLES; i++) {
+		total += amplitudes[i];
+	}
+	amplitude = total / NUM_AMPLITUDE_SAMPLES;
+
     print_stats();
     return VESC_IF->lbm_enc_sym_true;
 }
@@ -305,9 +324,21 @@ static lbm_value ext_set_command_frequency(lbm_value *args, lbm_uint argn) {
     }
 
     command_frequency = VESC_IF->lbm_dec_as_float(args[0]);
-    VESC_IF->printf("Frequency set to: %f\n", command_frequency);
+
     return VESC_IF->lbm_enc_sym_true;
 }
+
+// Extension function to set carrier frequency
+static lbm_value ext_set_carrier_frequency(lbm_value *args, lbm_uint argn) {
+    if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
+        return VESC_IF->lbm_enc_sym_eerror;
+    }
+
+    carrier_frequency = VESC_IF->lbm_dec_as_float(args[0]);
+
+    return VESC_IF->lbm_enc_sym_true;
+}
+
 
 // Called when the code is stopped
 static void stop(void *arg) {
@@ -342,6 +373,7 @@ INIT_FUN(lib_info *info) {
     VESC_IF->lbm_add_extension("ext-stop-audio-loop", ext_stop_audio_loop);
     VESC_IF->lbm_add_extension("ext-set-amplitude", ext_set_amplitude);
     VESC_IF->lbm_add_extension("ext-set-command-frequency", ext_set_command_frequency);
+    VESC_IF->lbm_add_extension("ext-set-carrier-frequency", ext_set_carrier_frequency);
 
     info->stop_fun = stop;
     info->arg = NULL;
