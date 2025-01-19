@@ -2,6 +2,11 @@
 #include <stdint.h>
 #include <string.h>
 
+// TODO:
+// Low Pass filter on amplitude (we don't want *any* sharp changes in amplitude, that makes the motor lose tracking)
+// other spwm modes (rspwm, etc)
+// change spwm mode based on speed
+
 // HEADER macro
 HEADER
 
