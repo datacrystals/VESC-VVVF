@@ -11,7 +11,14 @@ HEADER
 #define TWO_PI 6.28318530718f
 #define BUFFER_LENGTH 400
 #define SAMPLE_RATE_WARNING_THRESHOLD 1.2f
+#define SAWTOOTH_MAX 127        // Maximum value for the sawtooth (int8 range: 0-127)
 #define NUM_BUFFERS 3
+
+// SPWM modes
+#define SPWM_MODE_FIXED 0
+#define SPWM_MODE_RAMP 1
+#define SPWM_MODE_SYNC 2
+
 
 // Sine lookup table
 static const int8_t sineLookupTable[SINE_TABLE_SIZE] = {
@@ -27,16 +34,22 @@ static const int8_t sineLookupTable[SINE_TABLE_SIZE] = {
     -48, -38, -28, -17, -6, 5, 17, 28, 40, 52
 };
 
-
 // Global variables
 static int8_t *buffers[NUM_BUFFERS];  // Array of pointers to buffers allocated on the heap
 static bool buffer_ready_for_consumption[NUM_BUFFERS];  // Flags to indicate if a buffer is ready for consumption
 static int producer_index = 0;  // Index of the buffer currently being filled by the producer
 static int consumer_index = 0;  // Index of the buffer currently being consumed by the consumer
-static float phase = 0.0f;
 static float amplitude = 0.0f;
-static float sample_rate = 44100.0f;
-static float frequency = 1000.0f;
+static float sample_rate = 11025.0f;
+// static float frequency = 1000.0f;
+
+// SPWM variables
+static float carrier_phase = 0.0f; // Phase of the current carrier sin wave
+static float command_phase = 0.0f; // Phase of the current command sin wave
+static float carrier_frequency = 500.0f;  // Example carrier frequency
+static float command_frequency = 1.0f;   // Example command frequency
+static float modulation_index = 1.0f;       // Modulation index for wide pulse mode
+static int spwm_mode = SPWM_MODE_FIXED;     // SPWM mode (fixed, ramp, sync)
 
 // Statistics
 static uint32_t samples_generated = 0;
@@ -54,23 +67,67 @@ typedef struct {
 static thread_data generator_thread_data;
 static thread_data playback_thread_data;
 
+// Wrapping helper function 
+static inline float wrap_phase(float input_phase) {
+	if (input_phase >= TWO_PI) {
+        input_phase -= TWO_PI;
+	}
+	return input_phase;
+}
+
 // Custom sine function using the lookup table
-static inline int8_t custom_sin(float phase) {
+static inline int8_t generate_sin(float phase) {
     int index = (int)(phase * SINE_TABLE_SIZE / TWO_PI) % SINE_TABLE_SIZE;
     if (index < 0) index += SINE_TABLE_SIZE;
     return sineLookupTable[index];
 }
 
-// Function to generate sine wave samples
-static void generate_sine_wave(int8_t *buffer, float frequency, float *phase) {
-    float phase_increment = (TWO_PI * frequency) / sample_rate;
+// Function to generate a sawtooth waveform in int8 range (0-127)
+static int8_t generate_sawtooth(float phase_offset) {
+
+    // Generate the sawtooth value
+    // The sawtooth waveform is a linear ramp from 0 to 127 based on the phase
+    float sawtooth_value = (phase_offset / TWO_PI) * SAWTOOTH_MAX;
+
+	if (sawtooth_value > SAWTOOTH_MAX) {
+		sawtooth_value = SAWTOOTH_MAX;
+	}
+
+    // Cast to int8 and return
+    return (int8_t)sawtooth_value;
+}
+
+
+// Function to generate SPWM samples
+static void generate_spwm(int8_t *buffer, float command_frequency, float carrier_frequency) {
+
 
     for (int i = 0; i < BUFFER_LENGTH; i++) {
-        buffer[i] = (int8_t)(custom_sin(*phase) * amplitude);
-        *phase += phase_increment;
-        if (*phase >= TWO_PI) {
-            *phase -= TWO_PI;
+
+		// Update phase offsets of both carrier and command based on frequency and sample rate
+		command_phase += (TWO_PI * command_frequency) / sample_rate;
+    	carrier_phase += (TWO_PI * carrier_frequency) / sample_rate;
+
+        // Now generate the carrier and command based on the current phase
+        int8_t command = generate_sin(command_phase);
+        int8_t carrier = generate_sawtooth(carrier_phase);
+
+        // SPWM logic
+        int8_t output;
+        if (command > 0 && command > carrier) {
+            output = 127;
+        } else if (command < 0 && command < -carrier) {
+            output = -127;
+        } else {
+            output = 0;
         }
+
+        // Set output value
+        buffer[i] = output;
+
+        // Wrap the phases at 2*pi
+        command_phase = wrap_phase(command_phase);
+        carrier_phase = wrap_phase(carrier_phase);
     }
 }
 
@@ -88,8 +145,8 @@ static void generator_loop(void *arg) {
             break;
         }
 
-        // Generate sine wave samples in the current buffer
-        generate_sine_wave(buffers[producer_index], frequency, &phase);
+        // Generate SPWM samples in the current buffer
+        generate_spwm(buffers[producer_index], command_frequency, carrier_frequency);
 
         // Mark the buffer as ready for consumption
         buffer_ready_for_consumption[producer_index] = true;
@@ -99,7 +156,6 @@ static void generator_loop(void *arg) {
 
         // Move to the next buffer in a circular manner
         producer_index = (producer_index + 1) % NUM_BUFFERS;
-
     }
 
     VESC_IF->printf("Generator loop thread terminated.\n");
@@ -114,10 +170,10 @@ static void playback_loop(void *arg) {
         while (!buffer_ready_for_consumption[consumer_index] && playback_thread_data.running) {
             VESC_IF->sleep_ms(1);  // Sleep briefly to avoid busy-waiting
 
-			// If we're not just booting up, the buffer should be full. If it isn't log errors.
-			if (VESC_IF->system_time() > 1) {
-    			VESC_IF->printf("[ERROR] Playback Thread Starved For Sample Buffers!\n");
-			}
+            // If we're not just booting up, the buffer should be full. If it isn't log errors.
+            if (VESC_IF->system_time() > 1) {
+                VESC_IF->printf("[ERROR] Playback Thread Starved For Sample Buffers!\n");
+            }
         }
 
         if (!playback_thread_data.running) {
@@ -125,11 +181,10 @@ static void playback_loop(void *arg) {
         }
 
         // Play the samples from the current buffer
-		// The documentation says this blocks once two buffers have been produced, but it does not appear to do that.
         VESC_IF->foc_play_audio_samples(buffers[consumer_index], BUFFER_LENGTH, sample_rate, amplitude);
         samples_consumed += BUFFER_LENGTH;
 
-		// TEMPORARY FIX!!!!!
+        // TEMPORARY FIX!!!!!
         // -- THIS SHOULD NOT BE NEEDED -- THE PLAY AUDIO SAMPLES CODE SHOULD BLOCK BUT IT DOESNT!
         float sleep_time = (float)BUFFER_LENGTH / sample_rate * 1000.0f * 1000.0f;
         VESC_IF->sleep_us((uint32_t)sleep_time);
@@ -149,13 +204,13 @@ static void print_stats(void) {
     float current_time = VESC_IF->system_time();
     if (current_time - last_time >= 1.0f) {
         uint32_t samples_per_second = samples_generated - last_samples_generated;
-		uint32_t samples_consumed_per_second = samples_consumed - last_samples_comsumed;
+        uint32_t samples_consumed_per_second = samples_consumed - last_samples_comsumed;
         last_samples_generated = samples_generated;
-		last_samples_comsumed = samples_consumed;
+        last_samples_comsumed = samples_consumed;
         last_time = current_time;
 
         float actual_sample_rate = (float)samples_per_second;
-		float sample_consume_rate = (float)samples_consumed_per_second;
+        float sample_consume_rate = (float)samples_consumed_per_second;
 
         if (actual_sample_rate > sample_rate * SAMPLE_RATE_WARNING_THRESHOLD) {
             VESC_IF->printf("WARNING: Sample rate too high! Actual: %.1f, Expected: %.1f\n",
@@ -237,13 +292,13 @@ static lbm_value ext_set_amplitude(lbm_value *args, lbm_uint argn) {
 }
 
 // Extension function to set frequency
-static lbm_value ext_set_frequency(lbm_value *args, lbm_uint argn) {
+static lbm_value ext_set_command_frequency(lbm_value *args, lbm_uint argn) {
     if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
         return VESC_IF->lbm_enc_sym_eerror;
     }
 
-    frequency = VESC_IF->lbm_dec_as_float(args[0]);
-    VESC_IF->printf("Frequency set to: %f\n", frequency);
+    command_frequency = VESC_IF->lbm_dec_as_float(args[0]);
+    VESC_IF->printf("Frequency set to: %f\n", command_frequency);
     return VESC_IF->lbm_enc_sym_true;
 }
 
@@ -279,7 +334,7 @@ INIT_FUN(lib_info *info) {
     VESC_IF->lbm_add_extension("ext-start-audio-loop", ext_start_audio_loop);
     VESC_IF->lbm_add_extension("ext-stop-audio-loop", ext_stop_audio_loop);
     VESC_IF->lbm_add_extension("ext-set-amplitude", ext_set_amplitude);
-    VESC_IF->lbm_add_extension("ext-set-frequency", ext_set_frequency);
+    VESC_IF->lbm_add_extension("ext-set-command-frequency", ext_set_command_frequency);
 
     info->stop_fun = stop;
     info->arg = NULL;
