@@ -6,6 +6,8 @@
 // Low Pass filter on amplitude (we don't want *any* sharp changes in amplitude, that makes the motor lose tracking)
 // other spwm modes (rspwm, etc)
 // change spwm mode based on speed
+// Open bug report on bldc firmware for play-samples being nonblocking
+
 
 // HEADER macro
 HEADER
