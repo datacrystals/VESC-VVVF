@@ -20,7 +20,7 @@ HEADER
 #define SAMPLE_RATE_WARNING_THRESHOLD 1.2f
 #define SAWTOOTH_MAX 127        // Maximum value for the sawtooth (int8 range: 0-127)
 #define NUM_BUFFERS 3
-#define NUM_AMPLITUDE_SAMPLES 20
+#define NUM_MOTOR_STAT_SAMPLES 20
 
 // SPWM modes
 #define SPWM_MODE_FIXED 0
@@ -49,9 +49,21 @@ static int producer_index = 0;  // Index of the buffer currently being filled by
 static int consumer_index = 0;  // Index of the buffer currently being consumed by the consumer
 static float amplitude = 0.0f;
 static float sample_rate = 25000.0f;
-static float amplitudes[NUM_AMPLITUDE_SAMPLES]; // Array of last n amplitude values used to average them
-static int current_amplitude_index; // Index of current sample to be replaced
-// static float frequency = 1000.0f;
+
+static float current_samples[NUM_MOTOR_STAT_SAMPLES]; // Array of last n current values used to average them
+static int active_current_index = 0; // Index of current sample to be replaced
+static float hz_samples[NUM_MOTOR_STAT_SAMPLES]; // Array of last n hz values used to average them
+static int active_hz_index = 0; // Index of current sample to be replaced
+
+static float inverter_current = 0.; // Number of phase amps pushed into the motor from the vesc
+static float inverter_hz = 0.; // Current freqency of the inverter in hz
+static int motor_poles = 0; // Number of poles of the motor
+
+// Motor Sound Config
+static float min_current = 3.0f; // Amperes - defines linear ramp min current
+static float max_current = 10.0f; // Amperes - defines linear ramp max current
+static float min_sound_voltage = 0.05; // Volts - defines linear ramp min voltage
+static float max_sound_voltage = 0.3; // Volts - defines linear ramp max voltage
 
 // SPWM variables
 static float carrier_phase = 0.0f; // Phase of the current carrier sin wave
@@ -61,12 +73,14 @@ static float command_frequency = 1.0f;   // Example command frequency
 static float modulation_index = 1.0f;       // Modulation index for wide pulse mode
 static int spwm_mode = SPWM_MODE_FIXED;     // SPWM mode (fixed, ramp, sync)
 
+
 // Statistics
 static uint32_t samples_generated = 0;
 static uint32_t last_samples_generated = 0;
 static uint32_t samples_consumed = 0;
 static uint32_t last_samples_comsumed = 0;
 static float last_time = 0.0f;
+
 
 // Thread data structure
 typedef struct {
@@ -140,6 +154,34 @@ static void generate_spwm(int8_t *buffer, float command_frequency, float carrier
         command_phase = wrap_phase(command_phase);
         carrier_phase = wrap_phase(carrier_phase);
     }
+}
+
+
+// Function to map a value from one range to another
+float map_value(float value, float in_min, float in_max, float out_min, float out_max) {
+    // Ensure the input range is not zero to avoid division by zero
+    if (in_min == in_max) {
+        return out_min;  // If input range is zero, return the minimum output value
+    }
+
+    // Map the value from the input range to the output range
+    return out_min + ((value - in_min) / (in_max - in_min)) * (out_max - out_min);
+}
+
+// Code to update the amplitude and other functions from the provided rpm and current)
+static void update_spwm_settings() {
+	
+	// Define amplitude based on current
+	amplitude = map_value(inverter_current, min_current, max_current, min_sound_voltage, max_sound_voltage);
+	if (amplitude < 0.) {
+		amplitude = 0.;
+	}
+	amplitude += 0.05;
+
+	carrier_frequency = 1000.f;
+
+
+
 }
 
 // Generator loop function
@@ -294,47 +336,73 @@ static lbm_value ext_stop_audio_loop(lbm_value *args, lbm_uint argn) {
     return VESC_IF->lbm_enc_sym_true;
 }
 
-// Extension function to set amplitude
-static lbm_value ext_set_amplitude(lbm_value *args, lbm_uint argn) {
+
+static lbm_value ext_set_motor_current(lbm_value *args, lbm_uint argn) {
     if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
         return VESC_IF->lbm_enc_sym_eerror;
     }
 
-    float new_amplitude = VESC_IF->lbm_dec_as_float(args[0]);
+	float new_current = VESC_IF->lbm_dec_as_float(args[0]);
 
 	// Update array of samples with new value, update current value pointer
-	amplitudes[current_amplitude_index] = new_amplitude;
-	current_amplitude_index = (current_amplitude_index + 1) % NUM_AMPLITUDE_SAMPLES;
+	current_samples[active_current_index] = new_current;
+	active_current_index = (active_current_index + 1) % NUM_MOTOR_STAT_SAMPLES;
 
 	// Now calculate average over the array, and use that as the actual amplitude
 	float total = 0;
-	for (unsigned int i = 0; i < NUM_AMPLITUDE_SAMPLES; i++) {
-		total += amplitudes[i];
+	for (unsigned int i = 0; i < NUM_MOTOR_STAT_SAMPLES; i++) {
+		total += current_samples[i];
 	}
-	amplitude = total / NUM_AMPLITUDE_SAMPLES;
+	inverter_current = total / NUM_MOTOR_STAT_SAMPLES;
+
+	update_spwm_settings();
+
+    return VESC_IF->lbm_enc_sym_true;
+}
+
+static lbm_value ext_set_motor_hz(lbm_value *args, lbm_uint argn) {
+    if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
+        return VESC_IF->lbm_enc_sym_eerror;
+    }
+
+	float new_freq = VESC_IF->lbm_dec_as_float(args[0]);
+
+	// Update array of samples with new value, update current value pointer
+	hz_samples[active_hz_index] = new_freq;
+	active_hz_index = (active_hz_index + 1) % NUM_MOTOR_STAT_SAMPLES;
+
+	// Now calculate average over the array, and use that as the actual amplitude
+	float total = 0;
+	for (unsigned int i = 0; i < NUM_MOTOR_STAT_SAMPLES; i++) {
+		total += hz_samples[i];
+	}
+	inverter_hz = total / NUM_MOTOR_STAT_SAMPLES;
+
+	update_spwm_settings();
+
+
+    return VESC_IF->lbm_enc_sym_true;
+}
+
+static lbm_value ext_set_motor_poles(lbm_value *args, lbm_uint argn) {
+    if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
+        return VESC_IF->lbm_enc_sym_eerror;
+    }
+
+    motor_poles = VESC_IF->lbm_dec_as_float(args[0]);
+
+	update_spwm_settings();
+
+    return VESC_IF->lbm_enc_sym_true;
+}
+
+static lbm_value ext_get_stats(lbm_value *args, lbm_uint argn) {
+    if (argn != 0) {
+        return VESC_IF->lbm_enc_sym_eerror;
+    }
 
     print_stats();
-    return VESC_IF->lbm_enc_sym_true;
-}
 
-// Extension function to set frequency
-static lbm_value ext_set_command_frequency(lbm_value *args, lbm_uint argn) {
-    if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
-        return VESC_IF->lbm_enc_sym_eerror;
-    }
-
-    command_frequency = VESC_IF->lbm_dec_as_float(args[0]);
-
-    return VESC_IF->lbm_enc_sym_true;
-}
-
-// Extension function to set carrier frequency
-static lbm_value ext_set_carrier_frequency(lbm_value *args, lbm_uint argn) {
-    if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
-        return VESC_IF->lbm_enc_sym_eerror;
-    }
-
-    carrier_frequency = VESC_IF->lbm_dec_as_float(args[0]);
 
     return VESC_IF->lbm_enc_sym_true;
 }
@@ -371,9 +439,10 @@ INIT_FUN(lib_info *info) {
 
     VESC_IF->lbm_add_extension("ext-start-audio-loop", ext_start_audio_loop);
     VESC_IF->lbm_add_extension("ext-stop-audio-loop", ext_stop_audio_loop);
-    VESC_IF->lbm_add_extension("ext-set-amplitude", ext_set_amplitude);
-    VESC_IF->lbm_add_extension("ext-set-command-frequency", ext_set_command_frequency);
-    VESC_IF->lbm_add_extension("ext-set-carrier-frequency", ext_set_carrier_frequency);
+    VESC_IF->lbm_add_extension("ext-get-stats", ext_get_stats);
+    VESC_IF->lbm_add_extension("ext-set-motor-current", ext_set_motor_current);
+    VESC_IF->lbm_add_extension("ext-set-motor-hz", ext_set_motor_hz);
+    VESC_IF->lbm_add_extension("ext-set-motor-poles", ext_set_motor_poles);
 
     info->stop_fun = stop;
     info->arg = NULL;
