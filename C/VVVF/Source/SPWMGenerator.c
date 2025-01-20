@@ -70,7 +70,7 @@ void SPWMGenerator_Init(SPWMGenerator* generator) {
     generator->CarrierPhase = 0.0f;
     generator->CommandPhase = 0.0f;
     generator->CarrierFrequency = 1000.0f; // Default carrier frequency
-    generator->CommandFrequency = 1.0f;    // Default command frequency
+    generator->CommandFrequency = 100.0f;    // Default command frequency
     generator->ModulationIndex = 1.0f;     // Default modulation index
     generator->Amplitude = 0.0f;           // Default amplitude
 }
@@ -128,12 +128,12 @@ int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, int8_t* buffer, int 
         if (generator->CarrierPhase >= TWO_PI) generator->CarrierPhase -= TWO_PI;
 
         // Generate command and carrier signals
-        //int8_t command = SPWMGenerator_GenerateSin(generator->CommandPhase);
+        // int8_t command = SPWMGenerator_GenerateSin(generator->CommandPhase);
         int8_t carrier = SPWMGenerator_GenerateSawtooth(generator->CarrierPhase);
 
         buffer[i] = carrier;
 
-        // SPWM logic
+        // // SPWM logic
         // if (command > 0 && command > carrier) {
         //     buffer[i] = INT8_SCALE;
         // } else if (command < 0 && command < -carrier) {

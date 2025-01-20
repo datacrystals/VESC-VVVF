@@ -73,14 +73,20 @@ void InitializeConfiguration(InverterConfig* _Config) {
     _Config->zeroSpeedCutoffMargin = ZERO_CUTOFF_MARGIN_KMH;
 
     // Now add ranges
-    // AddSPWM_RSPWM(_Config, 0, 0., 4., 1000, 10000); // RSPWM from 10-20km/h @ 2khz-3khz carrier
-    AddSPWM_AsyncFixed(_Config, 0, 0., 22.0, 1000); // Async SPWM from 0-5km/h @ 1khz carrier
-    // AddSPWM_AsyncRamp (_Config, 1, 17.0, 23.0, 1000, 2000); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
-    AddSPWM_AsyncFixed(_Config, 2, 22., 9999.0, 2000); // Async SPWM from 0-5km/h @ 1khz carrier
+    // AddSPWM_RSPWM(_Config, 0, 0., 22., 4000, 6000); // RSPWM from 10-20km/h @ 2khz-3khz carrier
+    // AddSPWM_AsyncFixed(_Config, 0, 0., 3.0, 1000); // Async SPWM from 0-5km/h @ 1khz carrier
+    AddSPWM_AsyncRamp (_Config, 0, 0.0, 4, 250, 500); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
+    AddSPWM_AsyncFixed(_Config, 1, 4, 7, 500); // Async SPWM from 0-5km/h @ 1khz carrier
+    AddSPWM_AsyncRamp (_Config, 2, 7., 7.5, 500, 300); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
+    // AddSPWM_AsyncFixed(_Config, 2, 6., 9.0, 3000); // Async SPWM from 0-5km/h @ 1khz carrier
+    // AddSPWM_AsyncFixed(_Config, 3, 9., 12.0, 4000); // Async SPWM from 0-5km/h @ 1khz carrier
+    // AddSPWM_AsyncFixed(_Config, 4, 12., 15.0, 5000); // Async SPWM from 0-5km/h @ 1khz carrier
     // AddSPWM_AsyncRamp (_Config, 1, 10.0, 13.0, 1000, 2000); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
     // AddSPWM_AsyncFixed(_Config, 2, 13.0, 20., 2000); // Async SPWM from 0-5km/h @ 1khz carrier
-    // AddSPWM_Sync      (_Config, 1, 20., 32., 12); // Sync SPWM from 20-30km/h with 4 pulses
-    // AddSPWM_Sync      (_Config, 2, 32., 55., 6); // Sync SPWM from 20-30km/h with 4 pulses
+    AddSPWM_Sync      (_Config, 3, 7.5, 12., 7); // Sync SPWM from 20-30km/h with 4 pulses
+    AddSPWM_Sync      (_Config, 4, 12., 18., 5); // Sync SPWM from 20-30km/h with 4 pulses
+    AddSPWM_Sync      (_Config, 5, 18., 22., 3); // Sync SPWM from 20-30km/h with 4 pulses
+    AddSPWM_Sync      (_Config, 6, 22., 27., 1); // Sync SPWM from 20-30km/h with 4 pulses
     // AddSPWM_Sync      (_Config, 3, 55., 9999., 4); // Sync SPWM from 20-30km/h with 4 pulses
 
 }

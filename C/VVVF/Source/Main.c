@@ -121,8 +121,8 @@ static void update_spwm_settings() {
         INVERTER_AMPLITUDE_SPEED_SCALAR_START,
         INVERTER_AMPLITUDE_SPEED_SCALAR_END
     );
+	amplitude += INVERTER_AMPLITUDE_BASE;
     amplitude = amplitude * AmplitudeScaleFactor;
-	// amplitude += INVERTER_AMPLITUDE_BASE;
 
     // VESC_IF->printf("Inverter Carrier Frequency: %f\n", carrier_frequency);
 	// carrier_frequency = 2000.f + inverter_hz;
@@ -231,7 +231,7 @@ static void print_stats(void) {
 
         // Print the current speed and active speed range
         VESC_IF->printf("Current Speed: %.1f km/h\n", (double)current_speed_kmh);
-        VESC_IF->printf("Active Speed Range: %d km/h to %d km/h\n",
+        VESC_IF->printf("Active Speed Range: %f km/h to %f km/h\n",
                         (double)ActiveSpeedRange.minSpeed, (double)ActiveSpeedRange.maxSpeed);
 
         // Print SPWM mode and carrier frequency
@@ -253,8 +253,8 @@ static void print_stats(void) {
                 spwm_mode_str = "Disabled";
                 break;
         }
-        VESC_IF->printf("SPWM Mode: %s, Carrier Frequency: %.1f Hz\n",
-                        spwm_mode_str, (double)generator.CarrierFrequency);
+        VESC_IF->printf("SPWM Mode: %s, Carrier Frequency: %.1fHz, Amplitude %.3fV\n",
+                        spwm_mode_str, (double)generator.CarrierFrequency, (double)amplitude);
     }
 }
 

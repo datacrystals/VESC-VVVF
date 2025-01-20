@@ -8,7 +8,7 @@ print("-- Starting, note that you need the arm toolchain for linux: apt install 
 
 # Build c into lisp
 print(" -- Building C Code --\n")
-assert(os.system("cd ../C/VVVF/ && make") == 0)
+assert(os.system("cd ../C/VVVF/ && make -j") == 0)
 print(" -- Done Building C Code --\n")
 
 # Now, get the binary and insert it into the lisp code to be used
