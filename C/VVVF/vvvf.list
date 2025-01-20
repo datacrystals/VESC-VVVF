@@ -19,9 +19,9 @@ Disassembly of section .init_fun:
   10:	4478      	add	r0, pc
   12:	681b      	ldr	r3, [r3, #0]
   14:	9001      	str	r0, [sp, #4]
-  16:	f001 fb79 	bl	170c <InitializeConfiguration>
+  16:	f001 fb4d 	bl	16b4 <InitializeConfiguration>
   1a:	9801      	ldr	r0, [sp, #4]
-  1c:	f001 fc32 	bl	1884 <PrintInverterConfig>
+  1c:	f001 fc0a 	bl	1834 <PrintInverterConfig>
   20:	4b1e      	ldr	r3, [pc, #120]	; (9c <init+0x98>)
   22:	491f      	ldr	r1, [pc, #124]	; (a0 <init+0x9c>)
   24:	481f      	ldr	r0, [pc, #124]	; (a4 <init+0xa0>)
@@ -598,7 +598,7 @@ Disassembly of section .text:
  780:	5252455b 	subspl	r4, r2, #381681664	; 0x16c00000
  784:	205d524f 	subscs	r5, sp, pc, asr #4
  788:	79616c50 	stmdbvc	r1!, {r4, r6, sl, fp, sp, lr}^
- 78c:	6b636162 	blvs	18d8d1c <SPWMGenerator_GenerateSamples+0x18d7274>
+ 78c:	6b636162 	blvs	18d8d1c <SPWMGenerator_GenerateSamples+0x18d72c4>
  790:	72685420 	rsbvc	r5, r8, #32, 8	; 0x20000000
  794:	20646165 	rsbcs	r6, r4, r5, ror #2
  798:	72617453 	rsbvc	r7, r1, #1392508928	; 0x53000000
@@ -607,7 +607,7 @@ Disassembly of section .text:
  7a4:	706d6153 	rsbvc	r6, sp, r3, asr r1
  7a8:	4220656c 	eormi	r6, r0, #108, 10	; 0x1b000000
  7ac:	65666675 	strbvs	r6, [r6, #-1653]!	; 0xfffff98b
- 7b0:	0a217372 	beq	85d580 <SPWMGenerator_GenerateSamples+0x85bad8>
+ 7b0:	0a217372 	beq	85d580 <SPWMGenerator_GenerateSamples+0x85bb28>
  7b4:	616c5000 	cmnvs	ip, r0
  7b8:	63616279 	cmnvs	r1, #-1879048185	; 0x90000007
  7bc:	6f6c206b 	svcvs	0x006c206b
@@ -655,7 +655,7 @@ Disassembly of section .text:
  868:	6165726c 	cmnvs	r5, ip, ror #4
  86c:	72207964 	eorvc	r7, r0, #100, 18	; 0x190000
  870:	696e6e75 	stmdbvs	lr!, {r0, r2, r4, r5, r6, r9, sl, fp, sp, lr}^
- 874:	0a2e676e 	beq	b9a634 <SPWMGenerator_GenerateSamples+0xb98b8c>
+ 874:	0a2e676e 	beq	b9a634 <SPWMGenerator_GenerateSamples+0xb98bdc>
 	...
  880:	656e6547 	strbvs	r6, [lr, #-1351]!	; 0xfffffab9
  884:	6f746172 	svcvs	0x00746172
@@ -666,7 +666,7 @@ Disassembly of section .text:
  898:	61657268 	cmnvs	r5, r8, ror #4
  89c:	73207364 			; <UNDEFINED> instruction: 0x73207364
  8a0:	70706f74 	rsbsvc	r6, r0, r4, ror pc
- 8a4:	0a2e6465 	beq	b99a40 <SPWMGenerator_GenerateSamples+0xb97f98>
+ 8a4:	0a2e6465 	beq	b99a40 <SPWMGenerator_GenerateSamples+0xb97fe8>
  8a8:	6e654700 	cdpvs	7, 6, cr4, cr5, cr0, {0}
  8ac:	74617265 	strbtvc	r7, [r1], #-613	; 0xfffffd9b
  8b0:	6120726f 			; <UNDEFINED> instruction: 0x6120726f
@@ -683,7 +683,7 @@ Disassembly of section .text:
  8dc:	00000000 	andeq	r0, r0, r0
  8e0:	61736944 	cmnvs	r3, r4, asr #18
  8e4:	64656c62 	strbtvs	r6, [r5], #-3170	; 0xfffff39e
- 8e8:	6b6e5500 	blvs	1b95cf0 <SPWMGenerator_GenerateSamples+0x1b94248>
+ 8e8:	6b6e5500 	blvs	1b95cf0 <SPWMGenerator_GenerateSamples+0x1b94298>
  8ec:	6e776f6e 	cdpvs	15, 7, cr6, cr7, cr14, {3}
  8f0:	6d615200 	sfmvs	f5, 2, [r1, #-0]
  8f4:	73412070 	movtvc	r2, #4208	; 0x1070
@@ -698,7 +698,7 @@ Disassembly of section .text:
  918:	73412064 	movtvc	r2, #4196	; 0x1064
  91c:	00636e79 	rsbeq	r6, r3, r9, ror lr
  920:	4e524157 	mrcmi	1, 2, r4, cr2, cr7, {2}
- 924:	3a474e49 	bcc	11d4250 <SPWMGenerator_GenerateSamples+0x11d27a8>
+ 924:	3a474e49 	bcc	11d4250 <SPWMGenerator_GenerateSamples+0x11d27f8>
  928:	6d615320 	stclvs	3, cr5, [r1, #-128]!	; 0xffffff80
  92c:	20656c70 	rsbcs	r6, r5, r0, ror ip
  930:	65746172 	ldrbvs	r6, [r4, #-370]!	; 0xfffffe8e
@@ -711,7 +711,7 @@ Disassembly of section .text:
  94c:	70784520 	rsbsvc	r4, r8, r0, lsr #10
  950:	65746365 	ldrbvs	r6, [r4, #-869]!	; 0xfffffc9b
  954:	25203a64 	strcs	r3, [r0, #-2660]!	; 0xfffff59c
- 958:	0a66312e 	beq	198ce18 <SPWMGenerator_GenerateSamples+0x198b370>
+ 958:	0a66312e 	beq	198ce18 <SPWMGenerator_GenerateSamples+0x198b3c0>
  95c:	65472800 	strbvs	r2, [r7, #-2048]	; 0xfffff800
  960:	6172656e 	cmnvs	r2, lr, ror #10
  964:	20646574 	rsbcs	r6, r4, r4, ror r5
@@ -725,7 +725,7 @@ Disassembly of section .text:
  984:	6c706d61 	ldclvs	13, cr6, [r0], #-388	; 0xfffffe7c
  988:	732f7365 			; <UNDEFINED> instruction: 0x732f7365
  98c:	2e25203a 	mcrcs	0, 1, r2, cr5, cr10, {1}
- 990:	0a296631 	beq	a5a25c <SPWMGenerator_GenerateSamples+0xa587b4>
+ 990:	0a296631 	beq	a5a25c <SPWMGenerator_GenerateSamples+0xa58804>
  994:	72754300 	rsbsvc	r4, r5, #0, 6
  998:	746e6572 	strbtvc	r6, [lr], #-1394	; 0xfffffa8e
  99c:	65705320 	ldrbvs	r5, [r0, #-800]!	; 0xfffffce0
@@ -750,7 +750,7 @@ Disassembly of section .text:
  9e8:	65697272 	strbvs	r7, [r9, #-626]!	; 0xfffffd8e
  9ec:	72462072 	subvc	r2, r6, #114	; 0x72
  9f0:	65757165 	ldrbvs	r7, [r5, #-357]!	; 0xfffffe9b
- 9f4:	3a79636e 	bcc	1e597b4 <SPWMGenerator_GenerateSamples+0x1e57d0c>
+ 9f4:	3a79636e 	bcc	1e597b4 <SPWMGenerator_GenerateSamples+0x1e57d5c>
  9f8:	312e2520 			; <UNDEFINED> instruction: 0x312e2520
  9fc:	2c7a4866 	ldclcs	8, cr4, [sl], #-408	; 0xfffffe68
  a00:	706d4120 	rsbvc	r4, sp, r0, lsr #2
@@ -783,7 +783,7 @@ Disassembly of section .text:
  a7c:	6f747320 	svcvs	0x00747320
  a80:	75662070 	strbvc	r2, [r6, #-112]!	; 0xffffff90
  a84:	6974636e 	ldmdbvs	r4!, {r1, r2, r3, r5, r6, r8, r9, sp, lr}^
- a88:	0a2e6e6f 	beq	b9c44c <SPWMGenerator_GenerateSamples+0xb9a9a4>
+ a88:	0a2e6e6f 	beq	b9c44c <SPWMGenerator_GenerateSamples+0xb9a9f4>
  a8c:	00000000 	andeq	r0, r0, r0
  a90:	2d747865 	ldclcs	8, cr7, [r4, #-404]!	; 0xfffffe6c
  a94:	72617473 	rsbvc	r7, r1, #1929379840	; 0x73000000
@@ -818,8 +818,8 @@ Disassembly of section .text:
  b08:	75646f6d 	strbvc	r6, [r4, #-3949]!	; 0xfffff093
  b0c:	6920656c 	stmdbvs	r0!, {r2, r3, r5, r6, r8, sl, sp, lr}
  b10:	6974696e 	ldmdbvs	r4!, {r1, r2, r3, r5, r6, r8, fp, sp, lr}^
- b14:	7a696c61 	bvc	1a5bca0 <SPWMGenerator_GenerateSamples+0x1a5a1f8>
- b18:	0a2e6465 	beq	b99cb4 <SPWMGenerator_GenerateSamples+0xb9820c>
+ b14:	7a696c61 	bvc	1a5bca0 <SPWMGenerator_GenerateSamples+0x1a5a248>
+ b18:	0a2e6465 	beq	b99cb4 <SPWMGenerator_GenerateSamples+0xb9825c>
  b1c:	00000000 	andeq	r0, r0, r0
  b20:	7074754f 	rsbsvc	r7, r4, pc, asr #10
  b24:	44207475 	strtmi	r7, [r0], #-1141	; 0xfffffb8b
@@ -834,13 +834,13 @@ Disassembly of section .text:
  b48:	746e696f 	strbtvc	r6, [lr], #-2415	; 0xfffff691
  b4c:	69207265 	stmdbvs	r0!, {r0, r2, r5, r6, r9, ip, sp, lr}
  b50:	554e2073 	strbpl	r2, [lr, #-115]	; 0xffffff8d
- b54:	0a2e4c4c 	beq	b93c8c <SPWMGenerator_GenerateSamples+0xb921e4>
+ b54:	0a2e4c4c 	beq	b93c8c <SPWMGenerator_GenerateSamples+0xb92234>
  b58:	766e4900 	strbtvc	r4, [lr], -r0, lsl #18
  b5c:	65747265 	ldrbvs	r7, [r4, #-613]!	; 0xfffffd9b
  b60:	6f432072 	svcvs	0x00432072
  b64:	6769666e 	strbvs	r6, [r9, -lr, ror #12]!
  b68:	74617275 	strbtvc	r7, [r1], #-629	; 0xfffffd8b
- b6c:	3a6e6f69 	bcc	1b9c918 <SPWMGenerator_GenerateSamples+0x1b9ae70>
+ b6c:	3a6e6f69 	bcc	1b9c918 <SPWMGenerator_GenerateSamples+0x1b9aec0>
  b70:	2020000a 	eorcs	r0, r0, sl
  b74:	204d5052 	subcs	r5, sp, r2, asr r0
  b78:	53206f74 			; <UNDEFINED> instruction: 0x53206f74
@@ -868,7 +868,7 @@ Disassembly of section .text:
  bd0:	000a3a64 	andeq	r3, sl, r4, ror #20
  bd4:	694d2020 	stmdbvs	sp, {r5, sp}^
  bd8:	7053206e 	subsvc	r2, r3, lr, rrx
- bdc:	3a646565 	bcc	191a178 <SPWMGenerator_GenerateSamples+0x19186d0>
+ bdc:	3a646565 	bcc	191a178 <SPWMGenerator_GenerateSamples+0x1918720>
  be0:	20662520 	rsbcs	r2, r6, r0, lsr #10
  be4:	682f6d6b 	stmdavs	pc!, {r0, r1, r3, r5, r6, r8, sl, fp, sp, lr}	; <UNPREDICTABLE>
  be8:	2020000a 	eorcs	r0, r0, sl
@@ -883,7 +883,7 @@ Disassembly of section .text:
  c0c:	53207963 			; <UNDEFINED> instruction: 0x53207963
  c10:	74726174 	ldrbtvc	r6, [r2], #-372	; 0xfffffe8c
  c14:	6425203a 	strtvs	r2, [r5], #-58	; 0xffffffc6
- c18:	0a7a4820 	beq	1e92ca0 <SPWMGenerator_GenerateSamples+0x1e911f8>
+ c18:	0a7a4820 	beq	1e92ca0 <SPWMGenerator_GenerateSamples+0x1e91248>
  c1c:	43202000 	nopmi	{0}	; <UNPREDICTABLE>
  c20:	69727261 	ldmdbvs	r2!, {r0, r5, r6, r9, ip, sp, lr}^
  c24:	46207265 	strtmi	r7, [r0], -r5, ror #4
@@ -891,13 +891,13 @@ Disassembly of section .text:
  c2c:	79636e65 	stmdbvc	r3!, {r0, r2, r5, r6, r9, sl, fp, sp, lr}^
  c30:	646e4520 	strbtvs	r4, [lr], #-1312	; 0xfffffae0
  c34:	6425203a 	strtvs	r2, [r5], #-58	; 0xffffffc6
- c38:	0a7a4820 	beq	1e92cc0 <SPWMGenerator_GenerateSamples+0x1e91218>
+ c38:	0a7a4820 	beq	1e92cc0 <SPWMGenerator_GenerateSamples+0x1e91268>
  c3c:	4e202000 	cdpmi	0, 2, cr2, cr0, cr0, {0}
  c40:	65626d75 	strbvs	r6, [r2, #-3445]!	; 0xfffff28b
  c44:	666f2072 			; <UNDEFINED> instruction: 0x666f2072
  c48:	6c755020 	ldclvs	0, cr5, [r5], #-128	; 0xffffff80
- c4c:	3a736573 	bcc	1cda220 <SPWMGenerator_GenerateSamples+0x1cd8778>
- c50:	0a642520 	beq	190a0d8 <SPWMGenerator_GenerateSamples+0x1908630>
+ c4c:	3a736573 	bcc	1cda220 <SPWMGenerator_GenerateSamples+0x1cd87c8>
+ c50:	0a642520 	beq	190a0d8 <SPWMGenerator_GenerateSamples+0x1908680>
 	...
 
 00000c60 <random_lookup_table>:
@@ -1081,7 +1081,7 @@ Disassembly of section .text.playback_loop:
  ee8:	4790      	blx	r2
  eea:	4a18      	ldr	r2, [pc, #96]	; (f4c <playback_loop+0xec>)
  eec:	447a      	add	r2, pc
- eee:	f640 4035 	movw	r0, #3125	; 0xc35
+ eee:	f242 7010 	movw	r0, #10000	; 0x2710
  ef2:	6813      	ldr	r3, [r2, #0]
  ef4:	33fa      	adds	r3, #250	; 0xfa
  ef6:	6013      	str	r3, [r2, #0]
@@ -1103,7 +1103,7 @@ Disassembly of section .text.playback_loop:
  f1c:	e7a8      	b.n	e70 <playback_loop+0x10>
  f1e:	bf00      	nop
  f20:	1000f800 	andne	pc, r0, r0, lsl #16
- f24:	479c4000 	ldrmi	r4, [ip, r0]
+ f24:	46c35000 	strbmi	r5, [r3], r0
  f28:	fffff4c6 			; <UNDEFINED> instruction: 0xfffff4c6
  f2c:	fffff434 			; <UNDEFINED> instruction: 0xfffff434
  f30:	fffff4c2 			; <UNDEFINED> instruction: 0xfffff4c2
@@ -1401,9 +1401,9 @@ Disassembly of section .text.ext_get_stats:
     1234:	e7d5      	b.n	11e2 <ext_get_stats+0x132>
     1236:	bf00      	nop
     1238:	00000000 	andeq	r0, r0, r0
-    123c:	40f38800 	rscsmi	r8, r3, r0, lsl #16
+    123c:	40d86a00 	sbcsmi	r6, r8, r0, lsl #20
     1240:	1000f800 	andne	pc, r0, r0, lsl #16
-    1244:	47bb8000 	ldrmi	r8, [fp, r0]!
+    1244:	46ea6001 	strbtmi	r6, [sl], r1
     1248:	fffff258 			; <UNDEFINED> instruction: 0xfffff258
     124c:	fffff248 			; <UNDEFINED> instruction: 0xfffff248
     1250:	fffff248 			; <UNDEFINED> instruction: 0xfffff248
@@ -1436,7 +1436,7 @@ Disassembly of section .text.generator_loop:
     12a6:	4c2a      	ldr	r4, [pc, #168]	; (1350 <generator_loop+0xb0>)
     12a8:	4e2a      	ldr	r6, [pc, #168]	; (1354 <generator_loop+0xb4>)
     12aa:	4478      	add	r0, pc
-    12ac:	f000 fbd0 	bl	1a50 <SPWMGenerator_Init>
+    12ac:	f000 fba8 	bl	1a00 <SPWMGenerator_Init>
     12b0:	447d      	add	r5, pc
     12b2:	447c      	add	r4, pc
     12b4:	447e      	add	r6, pc
@@ -1482,7 +1482,7 @@ Disassembly of section .text.generator_loop:
     1310:	22fa      	movs	r2, #250	; 0xfa
     1312:	447b      	add	r3, pc
     1314:	4478      	add	r0, pc
-    1316:	f000 fbc7 	bl	1aa8 <SPWMGenerator_GenerateSamples>
+    1316:	f000 fb9f 	bl	1a58 <SPWMGenerator_GenerateSamples>
     131a:	4b17      	ldr	r3, [pc, #92]	; (1378 <generator_loop+0xd8>)
     131c:	4917      	ldr	r1, [pc, #92]	; (137c <generator_loop+0xdc>)
     131e:	447b      	add	r3, pc
@@ -1615,9 +1615,9 @@ Disassembly of section .text.update_spwm_settings:
     147c:	f7ff ffb6 	bl	13ec <map_value>
     1480:	ed9f 1a1c 	vldr	s2, [pc, #112]	; 14f4 <update_spwm_settings+0xc4>
     1484:	ed85 0a00 	vstr	s0, [r5]
-    1488:	eeb0 2a00 	vmov.f32	s4, #0	; 0x40000000  2.0
+    1488:	eeb0 2a08 	vmov.f32	s4, #8	; 0x40400000  3.0
     148c:	eef7 1a00 	vmov.f32	s3, #112	; 0x3f800000  1.0
-    1490:	eef2 0a0e 	vmov.f32	s1, #46	; 0x41700000  15.0
+    1490:	eef1 0a04 	vmov.f32	s1, #20	; 0x40a00000  5.0
     1494:	eeb0 0a48 	vmov.f32	s0, s16
     1498:	f7ff ffa8 	bl	13ec <map_value>
     149c:	edd5 7a00 	vldr	s15, [r5]
@@ -1634,7 +1634,7 @@ Disassembly of section .text.update_spwm_settings:
     14c4:	ee80 0a27 	vdiv.f32	s0, s0, s15
     14c8:	4631      	mov	r1, r6
     14ca:	4620      	mov	r0, r4
-    14cc:	f000 f978 	bl	17c0 <GetSpeedRangeAtRPM>
+    14cc:	f000 f950 	bl	1770 <GetSpeedRangeAtRPM>
     14d0:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
     14d2:	447d      	add	r5, pc
     14d4:	c50f      	stmia	r5!, {r0, r1, r2, r3}
@@ -1824,518 +1824,477 @@ Disassembly of section .text.AddSPWM_AsyncFixed:
     16ac:	f8c0 318c 	str.w	r3, [r0, #396]	; 0x18c
     16b0:	bd30      	pop	{r4, r5, pc}
 
-Disassembly of section .text.AddSPWM_AsyncRamp:
-
-000016b2 <AddSPWM_AsyncRamp>:
-    16b2:	290f      	cmp	r1, #15
-    16b4:	b570      	push	{r4, r5, r6, lr}
-    16b6:	dc12      	bgt.n	16de <AddSPWM_AsyncRamp+0x2c>
-    16b8:	2418      	movs	r4, #24
-    16ba:	fb04 0501 	mla	r5, r4, r1, r0
-    16be:	fb01 4404 	mla	r4, r1, r4, r4
-    16c2:	2602      	movs	r6, #2
-    16c4:	4404      	add	r4, r0
-    16c6:	752e      	strb	r6, [r5, #20]
-    16c8:	61aa      	str	r2, [r5, #24]
-    16ca:	6063      	str	r3, [r4, #4]
-    16cc:	f8d0 318c 	ldr.w	r3, [r0, #396]	; 0x18c
-    16d0:	ed85 0a03 	vstr	s0, [r5, #12]
-    16d4:	3301      	adds	r3, #1
-    16d6:	edc5 0a04 	vstr	s1, [r5, #16]
-    16da:	f8c0 318c 	str.w	r3, [r0, #396]	; 0x18c
-    16de:	bd70      	pop	{r4, r5, r6, pc}
-
-Disassembly of section .text.AddSPWM_Sync:
-
-000016e0 <AddSPWM_Sync>:
-    16e0:	290f      	cmp	r1, #15
-    16e2:	b530      	push	{r4, r5, lr}
-    16e4:	dc11      	bgt.n	170a <AddSPWM_Sync+0x2a>
-    16e6:	2318      	movs	r3, #24
-    16e8:	fb03 0401 	mla	r4, r3, r1, r0
-    16ec:	fb01 3303 	mla	r3, r1, r3, r3
-    16f0:	4403      	add	r3, r0
-    16f2:	2504      	movs	r5, #4
-    16f4:	7525      	strb	r5, [r4, #20]
-    16f6:	609a      	str	r2, [r3, #8]
-    16f8:	f8d0 318c 	ldr.w	r3, [r0, #396]	; 0x18c
-    16fc:	ed84 0a03 	vstr	s0, [r4, #12]
-    1700:	3301      	adds	r3, #1
-    1702:	edc4 0a04 	vstr	s1, [r4, #16]
-    1706:	f8c0 318c 	str.w	r3, [r0, #396]	; 0x18c
-    170a:	bd30      	pop	{r4, r5, pc}
-
 Disassembly of section .text.InitializeConfiguration:
 
-0000170c <InitializeConfiguration>:
-    170c:	4b29      	ldr	r3, [pc, #164]	; (17b4 <InitializeConfiguration+0xa8>)
-    170e:	ed9f 0a2a 	vldr	s0, [pc, #168]	; 17b8 <InitializeConfiguration+0xac>
-    1712:	b510      	push	{r4, lr}
-    1714:	6043      	str	r3, [r0, #4]
-    1716:	4604      	mov	r4, r0
-    1718:	f7ff ffa0 	bl	165c <wheel_diameter_to_kmh_factor>
-    171c:	f04f 537e 	mov.w	r3, #1065353216	; 0x3f800000
-    1720:	ed84 0a00 	vstr	s0, [r4]
-    1724:	60a3      	str	r3, [r4, #8]
-    1726:	4620      	mov	r0, r4
-    1728:	f44f 73fa 	mov.w	r3, #500	; 0x1f4
-    172c:	ed9f 0a23 	vldr	s0, [pc, #140]	; 17bc <InitializeConfiguration+0xb0>
-    1730:	22fa      	movs	r2, #250	; 0xfa
-    1732:	eef1 0a00 	vmov.f32	s1, #16	; 0x40800000  4.0
-    1736:	2100      	movs	r1, #0
-    1738:	f7ff ffbb 	bl	16b2 <AddSPWM_AsyncRamp>
-    173c:	4620      	mov	r0, r4
-    173e:	f44f 72fa 	mov.w	r2, #500	; 0x1f4
-    1742:	eef1 0a0c 	vmov.f32	s1, #28	; 0x40e00000  7.0
-    1746:	eeb1 0a00 	vmov.f32	s0, #16	; 0x40800000  4.0
-    174a:	2101      	movs	r1, #1
-    174c:	f7ff ff9a 	bl	1684 <AddSPWM_AsyncFixed>
-    1750:	f44f 7396 	mov.w	r3, #300	; 0x12c
-    1754:	4620      	mov	r0, r4
-    1756:	f44f 72fa 	mov.w	r2, #500	; 0x1f4
-    175a:	eef1 0a0e 	vmov.f32	s1, #30	; 0x40f00000  7.5
-    175e:	eeb1 0a0c 	vmov.f32	s0, #28	; 0x40e00000  7.0
-    1762:	2102      	movs	r1, #2
-    1764:	f7ff ffa5 	bl	16b2 <AddSPWM_AsyncRamp>
-    1768:	4620      	mov	r0, r4
-    176a:	2207      	movs	r2, #7
-    176c:	eef2 0a08 	vmov.f32	s1, #40	; 0x41400000  12.0
-    1770:	eeb1 0a0e 	vmov.f32	s0, #30	; 0x40f00000  7.5
-    1774:	2103      	movs	r1, #3
-    1776:	f7ff ffb3 	bl	16e0 <AddSPWM_Sync>
-    177a:	4620      	mov	r0, r4
-    177c:	2205      	movs	r2, #5
-    177e:	eef3 0a02 	vmov.f32	s1, #50	; 0x41900000  18.0
-    1782:	eeb2 0a08 	vmov.f32	s0, #40	; 0x41400000  12.0
-    1786:	2104      	movs	r1, #4
-    1788:	f7ff ffaa 	bl	16e0 <AddSPWM_Sync>
-    178c:	4620      	mov	r0, r4
-    178e:	2203      	movs	r2, #3
-    1790:	eef3 0a06 	vmov.f32	s1, #54	; 0x41b00000  22.0
-    1794:	eeb3 0a02 	vmov.f32	s0, #50	; 0x41900000  18.0
-    1798:	2105      	movs	r1, #5
-    179a:	f7ff ffa1 	bl	16e0 <AddSPWM_Sync>
-    179e:	4620      	mov	r0, r4
-    17a0:	2201      	movs	r2, #1
-    17a2:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
-    17a6:	eef3 0a0b 	vmov.f32	s1, #59	; 0x41d80000  27.0
-    17aa:	eeb3 0a06 	vmov.f32	s0, #54	; 0x41b00000  22.0
-    17ae:	2106      	movs	r1, #6
-    17b0:	f7ff bf96 	b.w	16e0 <AddSPWM_Sync>
-    17b4:	42c80000 	sbcmi	r0, r8, #0
-    17b8:	44098000 	strmi	r8, [r9], #-0
-    17bc:	00000000 	andeq	r0, r0, r0
+000016b4 <InitializeConfiguration>:
+    16b4:	4b2a      	ldr	r3, [pc, #168]	; (1760 <InitializeConfiguration+0xac>)
+    16b6:	ed9f 0a2b 	vldr	s0, [pc, #172]	; 1764 <InitializeConfiguration+0xb0>
+    16ba:	b510      	push	{r4, lr}
+    16bc:	6043      	str	r3, [r0, #4]
+    16be:	4604      	mov	r4, r0
+    16c0:	f7ff ffcc 	bl	165c <wheel_diameter_to_kmh_factor>
+    16c4:	f04f 537e 	mov.w	r3, #1065353216	; 0x3f800000
+    16c8:	60a3      	str	r3, [r4, #8]
+    16ca:	ed84 0a00 	vstr	s0, [r4]
+    16ce:	4620      	mov	r0, r4
+    16d0:	ed9f 0a25 	vldr	s0, [pc, #148]	; 1768 <InitializeConfiguration+0xb4>
+    16d4:	f240 42d3 	movw	r2, #1235	; 0x4d3
+    16d8:	eef1 0a00 	vmov.f32	s1, #16	; 0x40800000  4.0
+    16dc:	2100      	movs	r1, #0
+    16de:	f7ff ffd1 	bl	1684 <AddSPWM_AsyncFixed>
+    16e2:	4620      	mov	r0, r4
+    16e4:	f240 42a6 	movw	r2, #1190	; 0x4a6
+    16e8:	eef2 0a00 	vmov.f32	s1, #32	; 0x41000000  8.0
+    16ec:	eeb1 0a00 	vmov.f32	s0, #16	; 0x40800000  4.0
+    16f0:	2101      	movs	r1, #1
+    16f2:	f7ff ffc7 	bl	1684 <AddSPWM_AsyncFixed>
+    16f6:	4620      	mov	r0, r4
+    16f8:	f240 42ba 	movw	r2, #1210	; 0x4ba
+    16fc:	eef2 0a04 	vmov.f32	s1, #36	; 0x41200000  10.0
+    1700:	eeb2 0a00 	vmov.f32	s0, #32	; 0x41000000  8.0
+    1704:	2102      	movs	r1, #2
+    1706:	f7ff ffbd 	bl	1684 <AddSPWM_AsyncFixed>
+    170a:	4620      	mov	r0, r4
+    170c:	f240 42d3 	movw	r2, #1235	; 0x4d3
+    1710:	eef2 0a0c 	vmov.f32	s1, #44	; 0x41600000  14.0
+    1714:	eeb2 0a04 	vmov.f32	s0, #36	; 0x41200000  10.0
+    1718:	2103      	movs	r1, #3
+    171a:	f7ff ffb3 	bl	1684 <AddSPWM_AsyncFixed>
+    171e:	4620      	mov	r0, r4
+    1720:	f240 52b4 	movw	r2, #1460	; 0x5b4
+    1724:	eef3 0a00 	vmov.f32	s1, #48	; 0x41800000  16.0
+    1728:	eeb2 0a0c 	vmov.f32	s0, #44	; 0x41600000  14.0
+    172c:	2104      	movs	r1, #4
+    172e:	f7ff ffa9 	bl	1684 <AddSPWM_AsyncFixed>
+    1732:	4620      	mov	r0, r4
+    1734:	f240 42ba 	movw	r2, #1210	; 0x4ba
+    1738:	eef3 0a03 	vmov.f32	s1, #51	; 0x41980000  19.0
+    173c:	eeb3 0a00 	vmov.f32	s0, #48	; 0x41800000  16.0
+    1740:	2105      	movs	r1, #5
+    1742:	f7ff ff9f 	bl	1684 <AddSPWM_AsyncFixed>
+    1746:	4620      	mov	r0, r4
+    1748:	eddf 0a08 	vldr	s1, [pc, #32]	; 176c <InitializeConfiguration+0xb8>
+    174c:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+    1750:	f240 42ce 	movw	r2, #1230	; 0x4ce
+    1754:	eeb3 0a03 	vmov.f32	s0, #51	; 0x41980000  19.0
+    1758:	2106      	movs	r1, #6
+    175a:	f7ff bf93 	b.w	1684 <AddSPWM_AsyncFixed>
+    175e:	bf00      	nop
+    1760:	42c80000 	sbcmi	r0, r8, #0
+    1764:	44098000 	strmi	r8, [r9], #-0
+    1768:	00000000 	andeq	r0, r0, r0
+    176c:	4479c000 	ldrbtmi	ip, [r9], #-0
 
 Disassembly of section .text.GetSpeedRangeAtRPM:
 
-000017c0 <GetSpeedRangeAtRPM>:
-    17c0:	b570      	push	{r4, r5, r6, lr}
-    17c2:	ed2d 8b02 	vpush	{d8}
-    17c6:	b086      	sub	sp, #24
-    17c8:	466b      	mov	r3, sp
-    17ca:	4606      	mov	r6, r0
-    17cc:	460c      	mov	r4, r1
-    17ce:	4618      	mov	r0, r3
-    17d0:	2218      	movs	r2, #24
-    17d2:	2100      	movs	r1, #0
-    17d4:	eeb0 8a40 	vmov.f32	s16, s0
-    17d8:	eef0 8a60 	vmov.f32	s17, s1
-    17dc:	f7fe ff78 	bl	6d0 <memset>
-    17e0:	4603      	mov	r3, r0
-    17e2:	b114      	cbz	r4, 17ea <GetSpeedRangeAtRPM+0x2a>
-    17e4:	f8d4 018c 	ldr.w	r0, [r4, #396]	; 0x18c
-    17e8:	b970      	cbnz	r0, 1808 <GetSpeedRangeAtRPM+0x48>
-    17ea:	4a25      	ldr	r2, [pc, #148]	; (1880 <GetSpeedRangeAtRPM+0xc0>)
-    17ec:	9201      	str	r2, [sp, #4]
-    17ee:	4635      	mov	r5, r6
-    17f0:	461c      	mov	r4, r3
-    17f2:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
-    17f4:	c50f      	stmia	r5!, {r0, r1, r2, r3}
-    17f6:	e894 0003 	ldmia.w	r4, {r0, r1}
-    17fa:	e885 0003 	stmia.w	r5, {r0, r1}
-    17fe:	4630      	mov	r0, r6
-    1800:	b006      	add	sp, #24
-    1802:	ecbd 8b02 	vpop	{d8}
-    1806:	bd70      	pop	{r4, r5, r6, pc}
-    1808:	ed94 0a00 	vldr	s0, [r4]
-    180c:	edd4 7a01 	vldr	s15, [r4, #4]
-    1810:	ee28 0a00 	vmul.f32	s0, s16, s0
-    1814:	eef4 7a40 	vcmp.f32	s15, s0
-    1818:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    181c:	bf48      	it	mi
-    181e:	eeb0 0a67 	vmovmi.f32	s0, s15
-    1822:	edd4 7a02 	vldr	s15, [r4, #8]
-    1826:	eef4 7ac0 	vcmpe.f32	s15, s0
-    182a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    182e:	dd06      	ble.n	183e <GetSpeedRangeAtRPM+0x7e>
-    1830:	eef0 7a08 	vmov.f32	s15, #8	; 0x40400000  3.0
-    1834:	eef4 8ae7 	vcmpe.f32	s17, s15
-    1838:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    183c:	d4d5      	bmi.n	17ea <GetSpeedRangeAtRPM+0x2a>
-    183e:	4622      	mov	r2, r4
-    1840:	2100      	movs	r1, #0
-    1842:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
-    1846:	4288      	cmp	r0, r1
-    1848:	ddcf      	ble.n	17ea <GetSpeedRangeAtRPM+0x2a>
-    184a:	edd2 7a03 	vldr	s15, [r2, #12]
-    184e:	b909      	cbnz	r1, 1854 <GetSpeedRangeAtRPM+0x94>
-    1850:	ee77 7ac7 	vsub.f32	s15, s15, s14
-    1854:	eeb4 0ae7 	vcmpe.f32	s0, s15
-    1858:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    185c:	db0c      	blt.n	1878 <GetSpeedRangeAtRPM+0xb8>
-    185e:	edd2 7a04 	vldr	s15, [r2, #16]
-    1862:	eef4 7ac0 	vcmpe.f32	s15, s0
-    1866:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    186a:	db05      	blt.n	1878 <GetSpeedRangeAtRPM+0xb8>
-    186c:	2318      	movs	r3, #24
-    186e:	fb03 4401 	mla	r4, r3, r1, r4
-    1872:	4635      	mov	r5, r6
-    1874:	340c      	adds	r4, #12
-    1876:	e7bc      	b.n	17f2 <GetSpeedRangeAtRPM+0x32>
-    1878:	3101      	adds	r1, #1
-    187a:	3218      	adds	r2, #24
-    187c:	e7e3      	b.n	1846 <GetSpeedRangeAtRPM+0x86>
-    187e:	bf00      	nop
-    1880:	47c34f80 	strbmi	r4, [r3, r0, lsl #31]
+00001770 <GetSpeedRangeAtRPM>:
+    1770:	b570      	push	{r4, r5, r6, lr}
+    1772:	ed2d 8b02 	vpush	{d8}
+    1776:	b086      	sub	sp, #24
+    1778:	466b      	mov	r3, sp
+    177a:	4606      	mov	r6, r0
+    177c:	460c      	mov	r4, r1
+    177e:	4618      	mov	r0, r3
+    1780:	2218      	movs	r2, #24
+    1782:	2100      	movs	r1, #0
+    1784:	eeb0 8a40 	vmov.f32	s16, s0
+    1788:	eef0 8a60 	vmov.f32	s17, s1
+    178c:	f7fe ffa0 	bl	6d0 <memset>
+    1790:	4603      	mov	r3, r0
+    1792:	b114      	cbz	r4, 179a <GetSpeedRangeAtRPM+0x2a>
+    1794:	f8d4 018c 	ldr.w	r0, [r4, #396]	; 0x18c
+    1798:	b970      	cbnz	r0, 17b8 <GetSpeedRangeAtRPM+0x48>
+    179a:	4a25      	ldr	r2, [pc, #148]	; (1830 <GetSpeedRangeAtRPM+0xc0>)
+    179c:	9201      	str	r2, [sp, #4]
+    179e:	4635      	mov	r5, r6
+    17a0:	461c      	mov	r4, r3
+    17a2:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
+    17a4:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+    17a6:	e894 0003 	ldmia.w	r4, {r0, r1}
+    17aa:	e885 0003 	stmia.w	r5, {r0, r1}
+    17ae:	4630      	mov	r0, r6
+    17b0:	b006      	add	sp, #24
+    17b2:	ecbd 8b02 	vpop	{d8}
+    17b6:	bd70      	pop	{r4, r5, r6, pc}
+    17b8:	ed94 0a00 	vldr	s0, [r4]
+    17bc:	edd4 7a01 	vldr	s15, [r4, #4]
+    17c0:	ee28 0a00 	vmul.f32	s0, s16, s0
+    17c4:	eef4 7a40 	vcmp.f32	s15, s0
+    17c8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    17cc:	bf48      	it	mi
+    17ce:	eeb0 0a67 	vmovmi.f32	s0, s15
+    17d2:	edd4 7a02 	vldr	s15, [r4, #8]
+    17d6:	eef4 7ac0 	vcmpe.f32	s15, s0
+    17da:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    17de:	dd06      	ble.n	17ee <GetSpeedRangeAtRPM+0x7e>
+    17e0:	eef0 7a08 	vmov.f32	s15, #8	; 0x40400000  3.0
+    17e4:	eef4 8ae7 	vcmpe.f32	s17, s15
+    17e8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    17ec:	d4d5      	bmi.n	179a <GetSpeedRangeAtRPM+0x2a>
+    17ee:	4622      	mov	r2, r4
+    17f0:	2100      	movs	r1, #0
+    17f2:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
+    17f6:	4288      	cmp	r0, r1
+    17f8:	ddcf      	ble.n	179a <GetSpeedRangeAtRPM+0x2a>
+    17fa:	edd2 7a03 	vldr	s15, [r2, #12]
+    17fe:	b909      	cbnz	r1, 1804 <GetSpeedRangeAtRPM+0x94>
+    1800:	ee77 7ac7 	vsub.f32	s15, s15, s14
+    1804:	eeb4 0ae7 	vcmpe.f32	s0, s15
+    1808:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    180c:	db0c      	blt.n	1828 <GetSpeedRangeAtRPM+0xb8>
+    180e:	edd2 7a04 	vldr	s15, [r2, #16]
+    1812:	eef4 7ac0 	vcmpe.f32	s15, s0
+    1816:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    181a:	db05      	blt.n	1828 <GetSpeedRangeAtRPM+0xb8>
+    181c:	2318      	movs	r3, #24
+    181e:	fb03 4401 	mla	r4, r3, r1, r4
+    1822:	4635      	mov	r5, r6
+    1824:	340c      	adds	r4, #12
+    1826:	e7bc      	b.n	17a2 <GetSpeedRangeAtRPM+0x32>
+    1828:	3101      	adds	r1, #1
+    182a:	3218      	adds	r2, #24
+    182c:	e7e3      	b.n	17f6 <GetSpeedRangeAtRPM+0x86>
+    182e:	bf00      	nop
+    1830:	47c34f80 	strbmi	r4, [r3, r0, lsl #31]
 
 Disassembly of section .text.PrintInverterConfig:
 
-00001884 <PrintInverterConfig>:
-    1884:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
-    1888:	4c46      	ldr	r4, [pc, #280]	; (19a4 <PrintInverterConfig+0x120>)
-    188a:	4606      	mov	r6, r0
-    188c:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1890:	b920      	cbnz	r0, 189c <PrintInverterConfig+0x18>
-    1892:	4845      	ldr	r0, [pc, #276]	; (19a8 <PrintInverterConfig+0x124>)
-    1894:	e8bd 47f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
-    1898:	4478      	add	r0, pc
-    189a:	4718      	bx	r3
-    189c:	4843      	ldr	r0, [pc, #268]	; (19ac <PrintInverterConfig+0x128>)
-    189e:	f8df 8110 	ldr.w	r8, [pc, #272]	; 19b0 <PrintInverterConfig+0x12c>
-    18a2:	f8df 9110 	ldr.w	r9, [pc, #272]	; 19b4 <PrintInverterConfig+0x130>
-    18a6:	f8df a110 	ldr.w	sl, [pc, #272]	; 19b8 <PrintInverterConfig+0x134>
-    18aa:	4478      	add	r0, pc
-    18ac:	4798      	blx	r3
-    18ae:	6830      	ldr	r0, [r6, #0]
-    18b0:	f7fe feb2 	bl	618 <__aeabi_f2d>
-    18b4:	4602      	mov	r2, r0
-    18b6:	4841      	ldr	r0, [pc, #260]	; (19bc <PrintInverterConfig+0x138>)
-    18b8:	460b      	mov	r3, r1
-    18ba:	4478      	add	r0, pc
-    18bc:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
-    18c0:	4788      	blx	r1
-    18c2:	6870      	ldr	r0, [r6, #4]
-    18c4:	f7fe fea8 	bl	618 <__aeabi_f2d>
-    18c8:	4602      	mov	r2, r0
-    18ca:	483d      	ldr	r0, [pc, #244]	; (19c0 <PrintInverterConfig+0x13c>)
-    18cc:	460b      	mov	r3, r1
-    18ce:	4478      	add	r0, pc
-    18d0:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
-    18d4:	4788      	blx	r1
-    18d6:	483b      	ldr	r0, [pc, #236]	; (19c4 <PrintInverterConfig+0x140>)
-    18d8:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    18dc:	f8d6 118c 	ldr.w	r1, [r6, #396]	; 0x18c
-    18e0:	4478      	add	r0, pc
-    18e2:	4798      	blx	r3
-    18e4:	4635      	mov	r5, r6
-    18e6:	2700      	movs	r7, #0
-    18e8:	44f8      	add	r8, pc
-    18ea:	44f9      	add	r9, pc
-    18ec:	44fa      	add	sl, pc
-    18ee:	f8d6 318c 	ldr.w	r3, [r6, #396]	; 0x18c
-    18f2:	42bb      	cmp	r3, r7
-    18f4:	dc01      	bgt.n	18fa <PrintInverterConfig+0x76>
-    18f6:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
-    18fa:	3701      	adds	r7, #1
-    18fc:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1900:	4639      	mov	r1, r7
-    1902:	4640      	mov	r0, r8
-    1904:	4798      	blx	r3
-    1906:	68e8      	ldr	r0, [r5, #12]
-    1908:	f7fe fe86 	bl	618 <__aeabi_f2d>
-    190c:	4602      	mov	r2, r0
-    190e:	460b      	mov	r3, r1
-    1910:	4648      	mov	r0, r9
-    1912:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
-    1916:	4788      	blx	r1
-    1918:	6928      	ldr	r0, [r5, #16]
-    191a:	f7fe fe7d 	bl	618 <__aeabi_f2d>
-    191e:	460b      	mov	r3, r1
-    1920:	4602      	mov	r2, r0
-    1922:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
-    1926:	4650      	mov	r0, sl
-    1928:	4788      	blx	r1
-    192a:	7d2b      	ldrb	r3, [r5, #20]
-    192c:	2b04      	cmp	r3, #4
-    192e:	d82d      	bhi.n	198c <PrintInverterConfig+0x108>
-    1930:	e8df f003 	tbb	[pc, r3]
-    1934:	23200329 			; <UNDEFINED> instruction: 0x23200329
-    1938:	49230026 	stmdbmi	r3!, {r1, r2, r5}
-    193c:	4479      	add	r1, pc
-    193e:	4823      	ldr	r0, [pc, #140]	; (19cc <PrintInverterConfig+0x148>)
-    1940:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1944:	4478      	add	r0, pc
-    1946:	4798      	blx	r3
-    1948:	7d2b      	ldrb	r3, [r5, #20]
-    194a:	1e5a      	subs	r2, r3, #1
-    194c:	2a02      	cmp	r2, #2
-    194e:	d820      	bhi.n	1992 <PrintInverterConfig+0x10e>
-    1950:	481f      	ldr	r0, [pc, #124]	; (19d0 <PrintInverterConfig+0x14c>)
-    1952:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1956:	69a9      	ldr	r1, [r5, #24]
-    1958:	4478      	add	r0, pc
-    195a:	4798      	blx	r3
-    195c:	7d2b      	ldrb	r3, [r5, #20]
-    195e:	3b02      	subs	r3, #2
-    1960:	2b01      	cmp	r3, #1
-    1962:	d805      	bhi.n	1970 <PrintInverterConfig+0xec>
-    1964:	481b      	ldr	r0, [pc, #108]	; (19d4 <PrintInverterConfig+0x150>)
-    1966:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    196a:	69e9      	ldr	r1, [r5, #28]
-    196c:	4478      	add	r0, pc
-    196e:	4798      	blx	r3
-    1970:	3518      	adds	r5, #24
-    1972:	e7bc      	b.n	18ee <PrintInverterConfig+0x6a>
-    1974:	4918      	ldr	r1, [pc, #96]	; (19d8 <PrintInverterConfig+0x154>)
-    1976:	4479      	add	r1, pc
-    1978:	e7e1      	b.n	193e <PrintInverterConfig+0xba>
-    197a:	4918      	ldr	r1, [pc, #96]	; (19dc <PrintInverterConfig+0x158>)
-    197c:	4479      	add	r1, pc
-    197e:	e7de      	b.n	193e <PrintInverterConfig+0xba>
-    1980:	4917      	ldr	r1, [pc, #92]	; (19e0 <PrintInverterConfig+0x15c>)
-    1982:	4479      	add	r1, pc
-    1984:	e7db      	b.n	193e <PrintInverterConfig+0xba>
-    1986:	4917      	ldr	r1, [pc, #92]	; (19e4 <PrintInverterConfig+0x160>)
-    1988:	4479      	add	r1, pc
-    198a:	e7d8      	b.n	193e <PrintInverterConfig+0xba>
-    198c:	4916      	ldr	r1, [pc, #88]	; (19e8 <PrintInverterConfig+0x164>)
-    198e:	4479      	add	r1, pc
-    1990:	e7d5      	b.n	193e <PrintInverterConfig+0xba>
-    1992:	2b04      	cmp	r3, #4
-    1994:	d1ec      	bne.n	1970 <PrintInverterConfig+0xec>
-    1996:	4815      	ldr	r0, [pc, #84]	; (19ec <PrintInverterConfig+0x168>)
-    1998:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    199c:	6a29      	ldr	r1, [r5, #32]
-    199e:	4478      	add	r0, pc
-    19a0:	e7e5      	b.n	196e <PrintInverterConfig+0xea>
-    19a2:	bf00      	nop
-    19a4:	1000f800 	andne	pc, r0, r0, lsl #16
-    19a8:	fffff29d 			; <UNDEFINED> instruction: 0xfffff29d
-    19ac:	fffff2ab 			; <UNDEFINED> instruction: 0xfffff2ab
-    19b0:	fffff2d6 			; <UNDEFINED> instruction: 0xfffff2d6
-    19b4:	fffff2e6 			; <UNDEFINED> instruction: 0xfffff2e6
-    19b8:	fffff29e 			; <UNDEFINED> instruction: 0xfffff29e
-    19bc:	fffff2b4 			; <UNDEFINED> instruction: 0xfffff2b4
-    19c0:	fffff2bc 			; <UNDEFINED> instruction: 0xfffff2bc
-    19c4:	fffff2c0 			; <UNDEFINED> instruction: 0xfffff2c0
-    19c8:	ffffefd4 			; <UNDEFINED> instruction: 0xffffefd4
-    19cc:	fffff2a2 			; <UNDEFINED> instruction: 0xfffff2a2
-    19d0:	fffff29f 			; <UNDEFINED> instruction: 0xfffff29f
-    19d4:	fffff2ad 			; <UNDEFINED> instruction: 0xfffff2ad
-    19d8:	ffffef77 			; <UNDEFINED> instruction: 0xffffef77
-    19dc:	ffffef7c 			; <UNDEFINED> instruction: 0xffffef7c
-    19e0:	ffffef82 			; <UNDEFINED> instruction: 0xffffef82
-    19e4:	fffff194 			; <UNDEFINED> instruction: 0xfffff194
-    19e8:	ffffef57 			; <UNDEFINED> instruction: 0xffffef57
-    19ec:	fffff29b 			; <UNDEFINED> instruction: 0xfffff29b
+00001834 <PrintInverterConfig>:
+    1834:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+    1838:	4c46      	ldr	r4, [pc, #280]	; (1954 <PrintInverterConfig+0x120>)
+    183a:	4606      	mov	r6, r0
+    183c:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    1840:	b920      	cbnz	r0, 184c <PrintInverterConfig+0x18>
+    1842:	4845      	ldr	r0, [pc, #276]	; (1958 <PrintInverterConfig+0x124>)
+    1844:	e8bd 47f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+    1848:	4478      	add	r0, pc
+    184a:	4718      	bx	r3
+    184c:	4843      	ldr	r0, [pc, #268]	; (195c <PrintInverterConfig+0x128>)
+    184e:	f8df 8110 	ldr.w	r8, [pc, #272]	; 1960 <PrintInverterConfig+0x12c>
+    1852:	f8df 9110 	ldr.w	r9, [pc, #272]	; 1964 <PrintInverterConfig+0x130>
+    1856:	f8df a110 	ldr.w	sl, [pc, #272]	; 1968 <PrintInverterConfig+0x134>
+    185a:	4478      	add	r0, pc
+    185c:	4798      	blx	r3
+    185e:	6830      	ldr	r0, [r6, #0]
+    1860:	f7fe feda 	bl	618 <__aeabi_f2d>
+    1864:	4602      	mov	r2, r0
+    1866:	4841      	ldr	r0, [pc, #260]	; (196c <PrintInverterConfig+0x138>)
+    1868:	460b      	mov	r3, r1
+    186a:	4478      	add	r0, pc
+    186c:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
+    1870:	4788      	blx	r1
+    1872:	6870      	ldr	r0, [r6, #4]
+    1874:	f7fe fed0 	bl	618 <__aeabi_f2d>
+    1878:	4602      	mov	r2, r0
+    187a:	483d      	ldr	r0, [pc, #244]	; (1970 <PrintInverterConfig+0x13c>)
+    187c:	460b      	mov	r3, r1
+    187e:	4478      	add	r0, pc
+    1880:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
+    1884:	4788      	blx	r1
+    1886:	483b      	ldr	r0, [pc, #236]	; (1974 <PrintInverterConfig+0x140>)
+    1888:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    188c:	f8d6 118c 	ldr.w	r1, [r6, #396]	; 0x18c
+    1890:	4478      	add	r0, pc
+    1892:	4798      	blx	r3
+    1894:	4635      	mov	r5, r6
+    1896:	2700      	movs	r7, #0
+    1898:	44f8      	add	r8, pc
+    189a:	44f9      	add	r9, pc
+    189c:	44fa      	add	sl, pc
+    189e:	f8d6 318c 	ldr.w	r3, [r6, #396]	; 0x18c
+    18a2:	42bb      	cmp	r3, r7
+    18a4:	dc01      	bgt.n	18aa <PrintInverterConfig+0x76>
+    18a6:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+    18aa:	3701      	adds	r7, #1
+    18ac:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    18b0:	4639      	mov	r1, r7
+    18b2:	4640      	mov	r0, r8
+    18b4:	4798      	blx	r3
+    18b6:	68e8      	ldr	r0, [r5, #12]
+    18b8:	f7fe feae 	bl	618 <__aeabi_f2d>
+    18bc:	4602      	mov	r2, r0
+    18be:	460b      	mov	r3, r1
+    18c0:	4648      	mov	r0, r9
+    18c2:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
+    18c6:	4788      	blx	r1
+    18c8:	6928      	ldr	r0, [r5, #16]
+    18ca:	f7fe fea5 	bl	618 <__aeabi_f2d>
+    18ce:	460b      	mov	r3, r1
+    18d0:	4602      	mov	r2, r0
+    18d2:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
+    18d6:	4650      	mov	r0, sl
+    18d8:	4788      	blx	r1
+    18da:	7d2b      	ldrb	r3, [r5, #20]
+    18dc:	2b04      	cmp	r3, #4
+    18de:	d82d      	bhi.n	193c <PrintInverterConfig+0x108>
+    18e0:	e8df f003 	tbb	[pc, r3]
+    18e4:	23200329 			; <UNDEFINED> instruction: 0x23200329
+    18e8:	49230026 	stmdbmi	r3!, {r1, r2, r5}
+    18ec:	4479      	add	r1, pc
+    18ee:	4823      	ldr	r0, [pc, #140]	; (197c <PrintInverterConfig+0x148>)
+    18f0:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    18f4:	4478      	add	r0, pc
+    18f6:	4798      	blx	r3
+    18f8:	7d2b      	ldrb	r3, [r5, #20]
+    18fa:	1e5a      	subs	r2, r3, #1
+    18fc:	2a02      	cmp	r2, #2
+    18fe:	d820      	bhi.n	1942 <PrintInverterConfig+0x10e>
+    1900:	481f      	ldr	r0, [pc, #124]	; (1980 <PrintInverterConfig+0x14c>)
+    1902:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    1906:	69a9      	ldr	r1, [r5, #24]
+    1908:	4478      	add	r0, pc
+    190a:	4798      	blx	r3
+    190c:	7d2b      	ldrb	r3, [r5, #20]
+    190e:	3b02      	subs	r3, #2
+    1910:	2b01      	cmp	r3, #1
+    1912:	d805      	bhi.n	1920 <PrintInverterConfig+0xec>
+    1914:	481b      	ldr	r0, [pc, #108]	; (1984 <PrintInverterConfig+0x150>)
+    1916:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    191a:	69e9      	ldr	r1, [r5, #28]
+    191c:	4478      	add	r0, pc
+    191e:	4798      	blx	r3
+    1920:	3518      	adds	r5, #24
+    1922:	e7bc      	b.n	189e <PrintInverterConfig+0x6a>
+    1924:	4918      	ldr	r1, [pc, #96]	; (1988 <PrintInverterConfig+0x154>)
+    1926:	4479      	add	r1, pc
+    1928:	e7e1      	b.n	18ee <PrintInverterConfig+0xba>
+    192a:	4918      	ldr	r1, [pc, #96]	; (198c <PrintInverterConfig+0x158>)
+    192c:	4479      	add	r1, pc
+    192e:	e7de      	b.n	18ee <PrintInverterConfig+0xba>
+    1930:	4917      	ldr	r1, [pc, #92]	; (1990 <PrintInverterConfig+0x15c>)
+    1932:	4479      	add	r1, pc
+    1934:	e7db      	b.n	18ee <PrintInverterConfig+0xba>
+    1936:	4917      	ldr	r1, [pc, #92]	; (1994 <PrintInverterConfig+0x160>)
+    1938:	4479      	add	r1, pc
+    193a:	e7d8      	b.n	18ee <PrintInverterConfig+0xba>
+    193c:	4916      	ldr	r1, [pc, #88]	; (1998 <PrintInverterConfig+0x164>)
+    193e:	4479      	add	r1, pc
+    1940:	e7d5      	b.n	18ee <PrintInverterConfig+0xba>
+    1942:	2b04      	cmp	r3, #4
+    1944:	d1ec      	bne.n	1920 <PrintInverterConfig+0xec>
+    1946:	4815      	ldr	r0, [pc, #84]	; (199c <PrintInverterConfig+0x168>)
+    1948:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    194c:	6a29      	ldr	r1, [r5, #32]
+    194e:	4478      	add	r0, pc
+    1950:	e7e5      	b.n	191e <PrintInverterConfig+0xea>
+    1952:	bf00      	nop
+    1954:	1000f800 	andne	pc, r0, r0, lsl #16
+    1958:	fffff2ed 			; <UNDEFINED> instruction: 0xfffff2ed
+    195c:	fffff2fb 			; <UNDEFINED> instruction: 0xfffff2fb
+    1960:	fffff326 			; <UNDEFINED> instruction: 0xfffff326
+    1964:	fffff336 			; <UNDEFINED> instruction: 0xfffff336
+    1968:	fffff2ee 			; <UNDEFINED> instruction: 0xfffff2ee
+    196c:	fffff304 			; <UNDEFINED> instruction: 0xfffff304
+    1970:	fffff30c 			; <UNDEFINED> instruction: 0xfffff30c
+    1974:	fffff310 			; <UNDEFINED> instruction: 0xfffff310
+    1978:	fffff024 			; <UNDEFINED> instruction: 0xfffff024
+    197c:	fffff2f2 			; <UNDEFINED> instruction: 0xfffff2f2
+    1980:	fffff2ef 			; <UNDEFINED> instruction: 0xfffff2ef
+    1984:	fffff2fd 			; <UNDEFINED> instruction: 0xfffff2fd
+    1988:	ffffefc7 			; <UNDEFINED> instruction: 0xffffefc7
+    198c:	ffffefcc 			; <UNDEFINED> instruction: 0xffffefcc
+    1990:	ffffefd2 			; <UNDEFINED> instruction: 0xffffefd2
+    1994:	fffff1e4 			; <UNDEFINED> instruction: 0xfffff1e4
+    1998:	ffffefa7 			; <UNDEFINED> instruction: 0xffffefa7
+    199c:	fffff2eb 			; <UNDEFINED> instruction: 0xfffff2eb
 
 Disassembly of section .text.get_enhanced_random:
 
-000019f0 <get_enhanced_random>:
-    19f0:	4a0d      	ldr	r2, [pc, #52]	; (1a28 <get_enhanced_random+0x38>)
-    19f2:	490e      	ldr	r1, [pc, #56]	; (1a2c <get_enhanced_random+0x3c>)
-    19f4:	447a      	add	r2, pc
-    19f6:	4479      	add	r1, pc
-    19f8:	8813      	ldrh	r3, [r2, #0]
-    19fa:	f831 0013 	ldrh.w	r0, [r1, r3, lsl #1]
-    19fe:	490c      	ldr	r1, [pc, #48]	; (1a30 <get_enhanced_random+0x40>)
-    1a00:	3301      	adds	r3, #1
-    1a02:	4479      	add	r1, pc
-    1a04:	b2db      	uxtb	r3, r3
-    1a06:	8013      	strh	r3, [r2, #0]
-    1a08:	880b      	ldrh	r3, [r1, #0]
-    1a0a:	08da      	lsrs	r2, r3, #3
-    1a0c:	ea82 0293 	eor.w	r2, r2, r3, lsr #2
-    1a10:	405a      	eors	r2, r3
-    1a12:	ea82 1253 	eor.w	r2, r2, r3, lsr #5
-    1a16:	f002 0201 	and.w	r2, r2, #1
-    1a1a:	085b      	lsrs	r3, r3, #1
-    1a1c:	ea43 33c2 	orr.w	r3, r3, r2, lsl #15
-    1a20:	800b      	strh	r3, [r1, #0]
-    1a22:	4058      	eors	r0, r3
-    1a24:	4770      	bx	lr
-    1a26:	bf00      	nop
-    1a28:	ffffe950 			; <UNDEFINED> instruction: 0xffffe950
-    1a2c:	fffff266 			; <UNDEFINED> instruction: 0xfffff266
-    1a30:	ffffe6d6 			; <UNDEFINED> instruction: 0xffffe6d6
+000019a0 <get_enhanced_random>:
+    19a0:	4a0d      	ldr	r2, [pc, #52]	; (19d8 <get_enhanced_random+0x38>)
+    19a2:	490e      	ldr	r1, [pc, #56]	; (19dc <get_enhanced_random+0x3c>)
+    19a4:	447a      	add	r2, pc
+    19a6:	4479      	add	r1, pc
+    19a8:	8813      	ldrh	r3, [r2, #0]
+    19aa:	f831 0013 	ldrh.w	r0, [r1, r3, lsl #1]
+    19ae:	490c      	ldr	r1, [pc, #48]	; (19e0 <get_enhanced_random+0x40>)
+    19b0:	3301      	adds	r3, #1
+    19b2:	4479      	add	r1, pc
+    19b4:	b2db      	uxtb	r3, r3
+    19b6:	8013      	strh	r3, [r2, #0]
+    19b8:	880b      	ldrh	r3, [r1, #0]
+    19ba:	08da      	lsrs	r2, r3, #3
+    19bc:	ea82 0293 	eor.w	r2, r2, r3, lsr #2
+    19c0:	405a      	eors	r2, r3
+    19c2:	ea82 1253 	eor.w	r2, r2, r3, lsr #5
+    19c6:	f002 0201 	and.w	r2, r2, #1
+    19ca:	085b      	lsrs	r3, r3, #1
+    19cc:	ea43 33c2 	orr.w	r3, r3, r2, lsl #15
+    19d0:	800b      	strh	r3, [r1, #0]
+    19d2:	4058      	eors	r0, r3
+    19d4:	4770      	bx	lr
+    19d6:	bf00      	nop
+    19d8:	ffffe9a0 			; <UNDEFINED> instruction: 0xffffe9a0
+    19dc:	fffff2b6 			; <UNDEFINED> instruction: 0xfffff2b6
+    19e0:	ffffe726 			; <UNDEFINED> instruction: 0xffffe726
 
 Disassembly of section .text.random_range:
 
-00001a34 <random_range>:
-    1a34:	b538      	push	{r3, r4, r5, lr}
-    1a36:	4605      	mov	r5, r0
-    1a38:	460c      	mov	r4, r1
-    1a3a:	f7ff ffd9 	bl	19f0 <get_enhanced_random>
-    1a3e:	1b61      	subs	r1, r4, r5
-    1a40:	3101      	adds	r1, #1
-    1a42:	fb90 f3f1 	sdiv	r3, r0, r1
-    1a46:	fb03 0011 	mls	r0, r3, r1, r0
-    1a4a:	4428      	add	r0, r5
-    1a4c:	bd38      	pop	{r3, r4, r5, pc}
+000019e4 <random_range>:
+    19e4:	b538      	push	{r3, r4, r5, lr}
+    19e6:	4605      	mov	r5, r0
+    19e8:	460c      	mov	r4, r1
+    19ea:	f7ff ffd9 	bl	19a0 <get_enhanced_random>
+    19ee:	1b61      	subs	r1, r4, r5
+    19f0:	3101      	adds	r1, #1
+    19f2:	fb90 f3f1 	sdiv	r3, r0, r1
+    19f6:	fb03 0011 	mls	r0, r3, r1, r0
+    19fa:	4428      	add	r0, r5
+    19fc:	bd38      	pop	{r3, r4, r5, pc}
 
 Disassembly of section .text.SPWMGenerator_Init:
 
-00001a50 <SPWMGenerator_Init>:
-    1a50:	4a05      	ldr	r2, [pc, #20]	; (1a68 <SPWMGenerator_Init+0x18>)
-    1a52:	6082      	str	r2, [r0, #8]
-    1a54:	4a05      	ldr	r2, [pc, #20]	; (1a6c <SPWMGenerator_Init+0x1c>)
-    1a56:	60c2      	str	r2, [r0, #12]
-    1a58:	2300      	movs	r3, #0
-    1a5a:	f04f 527e 	mov.w	r2, #1065353216	; 0x3f800000
-    1a5e:	6003      	str	r3, [r0, #0]
-    1a60:	6043      	str	r3, [r0, #4]
-    1a62:	6102      	str	r2, [r0, #16]
-    1a64:	6143      	str	r3, [r0, #20]
-    1a66:	4770      	bx	lr
-    1a68:	447a0000 	ldrbtmi	r0, [sl], #-0
-    1a6c:	42c80000 	sbcmi	r0, r8, #0
+00001a00 <SPWMGenerator_Init>:
+    1a00:	4a05      	ldr	r2, [pc, #20]	; (1a18 <SPWMGenerator_Init+0x18>)
+    1a02:	6082      	str	r2, [r0, #8]
+    1a04:	4a05      	ldr	r2, [pc, #20]	; (1a1c <SPWMGenerator_Init+0x1c>)
+    1a06:	60c2      	str	r2, [r0, #12]
+    1a08:	2300      	movs	r3, #0
+    1a0a:	f04f 527e 	mov.w	r2, #1065353216	; 0x3f800000
+    1a0e:	6003      	str	r3, [r0, #0]
+    1a10:	6043      	str	r3, [r0, #4]
+    1a12:	6102      	str	r2, [r0, #16]
+    1a14:	6143      	str	r3, [r0, #20]
+    1a16:	4770      	bx	lr
+    1a18:	447a0000 	ldrbtmi	r0, [sl], #-0
+    1a1c:	42c80000 	sbcmi	r0, r8, #0
 
 Disassembly of section .text.SPWMGenerator_GenerateSawtooth:
 
-00001a70 <SPWMGenerator_GenerateSawtooth>:
-    1a70:	ed9f 7a0b 	vldr	s14, [pc, #44]	; 1aa0 <SPWMGenerator_GenerateSawtooth+0x30>
-    1a74:	eec0 7a07 	vdiv.f32	s15, s0, s14
-    1a78:	b082      	sub	sp, #8
-    1a7a:	ed9f 7a0a 	vldr	s14, [pc, #40]	; 1aa4 <SPWMGenerator_GenerateSawtooth+0x34>
-    1a7e:	ee67 7a87 	vmul.f32	s15, s15, s14
-    1a82:	eef4 7a47 	vcmp.f32	s15, s14
-    1a86:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    1a8a:	bfc8      	it	gt
-    1a8c:	eef0 7a47 	vmovgt.f32	s15, s14
-    1a90:	eefd 7ae7 	vcvt.s32.f32	s15, s15
-    1a94:	edcd 7a01 	vstr	s15, [sp, #4]
-    1a98:	f99d 0004 	ldrsb.w	r0, [sp, #4]
-    1a9c:	b002      	add	sp, #8
-    1a9e:	4770      	bx	lr
-    1aa0:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
-    1aa4:	42fe0000 	rscsmi	r0, lr, #0
+00001a20 <SPWMGenerator_GenerateSawtooth>:
+    1a20:	ed9f 7a0b 	vldr	s14, [pc, #44]	; 1a50 <SPWMGenerator_GenerateSawtooth+0x30>
+    1a24:	eec0 7a07 	vdiv.f32	s15, s0, s14
+    1a28:	b082      	sub	sp, #8
+    1a2a:	ed9f 7a0a 	vldr	s14, [pc, #40]	; 1a54 <SPWMGenerator_GenerateSawtooth+0x34>
+    1a2e:	ee67 7a87 	vmul.f32	s15, s15, s14
+    1a32:	eef4 7a47 	vcmp.f32	s15, s14
+    1a36:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    1a3a:	bfc8      	it	gt
+    1a3c:	eef0 7a47 	vmovgt.f32	s15, s14
+    1a40:	eefd 7ae7 	vcvt.s32.f32	s15, s15
+    1a44:	edcd 7a01 	vstr	s15, [sp, #4]
+    1a48:	f99d 0004 	ldrsb.w	r0, [sp, #4]
+    1a4c:	b002      	add	sp, #8
+    1a4e:	4770      	bx	lr
+    1a50:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
+    1a54:	42fe0000 	rscsmi	r0, lr, #0
 
 Disassembly of section .text.SPWMGenerator_GenerateSamples:
 
-00001aa8 <SPWMGenerator_GenerateSamples>:
-    1aa8:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
-    1aac:	460f      	mov	r7, r1
-    1aae:	ed2d 8b02 	vpush	{d8}
-    1ab2:	4690      	mov	r8, r2
-    1ab4:	461d      	mov	r5, r3
-    1ab6:	4604      	mov	r4, r0
-    1ab8:	b920      	cbnz	r0, 1ac4 <SPWMGenerator_GenerateSamples+0x1c>
-    1aba:	2000      	movs	r0, #0
-    1abc:	ecbd 8b02 	vpop	{d8}
-    1ac0:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
-    1ac4:	2900      	cmp	r1, #0
-    1ac6:	d0f8      	beq.n	1aba <SPWMGenerator_GenerateSamples+0x12>
-    1ac8:	2b00      	cmp	r3, #0
-    1aca:	d0f6      	beq.n	1aba <SPWMGenerator_GenerateSamples+0x12>
-    1acc:	7a19      	ldrb	r1, [r3, #8]
-    1ace:	b929      	cbnz	r1, 1adc <SPWMGenerator_GenerateSamples+0x34>
-    1ad0:	ea22 72e2 	bic.w	r2, r2, r2, asr #31
-    1ad4:	4638      	mov	r0, r7
-    1ad6:	f7fe fdfb 	bl	6d0 <memset>
-    1ada:	e7ee      	b.n	1aba <SPWMGenerator_GenerateSamples+0x12>
-    1adc:	2901      	cmp	r1, #1
-    1ade:	d104      	bne.n	1aea <SPWMGenerator_GenerateSamples+0x42>
-    1ae0:	edd3 7a03 	vldr	s15, [r3, #12]
-    1ae4:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-    1ae8:	e020      	b.n	1b2c <SPWMGenerator_GenerateSamples+0x84>
-    1aea:	eddd 7a0a 	vldr	s15, [sp, #40]	; 0x28
-    1aee:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
-    1af2:	2902      	cmp	r1, #2
-    1af4:	eec0 6a07 	vdiv.f32	s13, s0, s14
-    1af8:	d123      	bne.n	1b42 <SPWMGenerator_GenerateSamples+0x9a>
-    1afa:	ed93 6a00 	vldr	s12, [r3]
-    1afe:	e9d3 2303 	ldrd	r2, r3, [r3, #12]
-    1b02:	1a9b      	subs	r3, r3, r2
-    1b04:	ee07 3a90 	vmov	s15, r3
-    1b08:	eef0 5a46 	vmov.f32	s11, s12
-    1b0c:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
-    1b10:	eed6 5aa0 	vfnms.f32	s11, s13, s1
-    1b14:	edd5 7a01 	vldr	s15, [r5, #4]
-    1b18:	ee77 7ac6 	vsub.f32	s15, s15, s12
-    1b1c:	eec5 6aa7 	vdiv.f32	s13, s11, s15
-    1b20:	ee07 2a90 	vmov	s15, r2
-    1b24:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-    1b28:	eee7 7a26 	vfma.f32	s15, s14, s13
-    1b2c:	edc4 7a02 	vstr	s15, [r4, #8]
-    1b30:	f8df 90cc 	ldr.w	r9, [pc, #204]	; 1c00 <SPWMGenerator_GenerateSamples+0x158>
-    1b34:	ed9f 8a2f 	vldr	s16, [pc, #188]	; 1bf4 <SPWMGenerator_GenerateSamples+0x14c>
-    1b38:	2600      	movs	r6, #0
-    1b3a:	4546      	cmp	r6, r8
-    1b3c:	db13      	blt.n	1b66 <SPWMGenerator_GenerateSamples+0xbe>
-    1b3e:	2001      	movs	r0, #1
-    1b40:	e7bc      	b.n	1abc <SPWMGenerator_GenerateSamples+0x14>
-    1b42:	2904      	cmp	r1, #4
-    1b44:	d106      	bne.n	1b54 <SPWMGenerator_GenerateSamples+0xac>
-    1b46:	edd3 7a05 	vldr	s15, [r3, #20]
-    1b4a:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-    1b4e:	ee67 7aa6 	vmul.f32	s15, s15, s13
-    1b52:	e7eb      	b.n	1b2c <SPWMGenerator_GenerateSamples+0x84>
-    1b54:	2903      	cmp	r1, #3
-    1b56:	d1eb      	bne.n	1b30 <SPWMGenerator_GenerateSamples+0x88>
-    1b58:	e9d3 0103 	ldrd	r0, r1, [r3, #12]
-    1b5c:	f7ff ff6a 	bl	1a34 <random_range>
-    1b60:	ee07 0a90 	vmov	s15, r0
-    1b64:	e7be      	b.n	1ae4 <SPWMGenerator_GenerateSamples+0x3c>
-    1b66:	4a24      	ldr	r2, [pc, #144]	; (1bf8 <SPWMGenerator_GenerateSamples+0x150>)
-    1b68:	fb09 f306 	mul.w	r3, r9, r6
-    1b6c:	ebb2 0f73 	cmp.w	r2, r3, ror #1
-    1b70:	d30c      	bcc.n	1b8c <SPWMGenerator_GenerateSamples+0xe4>
-    1b72:	7a2b      	ldrb	r3, [r5, #8]
-    1b74:	2b03      	cmp	r3, #3
-    1b76:	d109      	bne.n	1b8c <SPWMGenerator_GenerateSamples+0xe4>
-    1b78:	e9d5 0103 	ldrd	r0, r1, [r5, #12]
-    1b7c:	f7ff ff5a 	bl	1a34 <random_range>
-    1b80:	ee07 0a90 	vmov	s15, r0
-    1b84:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-    1b88:	edc4 7a02 	vstr	s15, [r4, #8]
-    1b8c:	edd4 7a03 	vldr	s15, [r4, #12]
-    1b90:	ed9f 6a1a 	vldr	s12, [pc, #104]	; 1bfc <SPWMGenerator_GenerateSamples+0x154>
-    1b94:	edd4 6a02 	vldr	s13, [r4, #8]
-    1b98:	ee67 7a88 	vmul.f32	s15, s15, s16
-    1b9c:	ee66 6a88 	vmul.f32	s13, s13, s16
-    1ba0:	ee87 7a86 	vdiv.f32	s14, s15, s12
-    1ba4:	edd4 7a01 	vldr	s15, [r4, #4]
-    1ba8:	ee37 7a27 	vadd.f32	s14, s14, s15
-    1bac:	eec6 7a86 	vdiv.f32	s15, s13, s12
-    1bb0:	edd4 6a00 	vldr	s13, [r4]
-    1bb4:	ed84 7a01 	vstr	s14, [r4, #4]
-    1bb8:	eeb4 7ac8 	vcmpe.f32	s14, s16
-    1bbc:	ee77 7aa6 	vadd.f32	s15, s15, s13
-    1bc0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    1bc4:	bfa8      	it	ge
-    1bc6:	ee37 7a48 	vsubge.f32	s14, s14, s16
-    1bca:	eef4 7ac8 	vcmpe.f32	s15, s16
-    1bce:	bfa8      	it	ge
-    1bd0:	ed84 7a01 	vstrge	s14, [r4, #4]
-    1bd4:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    1bd8:	edc4 7a00 	vstr	s15, [r4]
-    1bdc:	bfa4      	itt	ge
-    1bde:	ee77 7ac8 	vsubge.f32	s15, s15, s16
-    1be2:	edc4 7a00 	vstrge	s15, [r4]
-    1be6:	ed94 0a00 	vldr	s0, [r4]
-    1bea:	f7ff ff41 	bl	1a70 <SPWMGenerator_GenerateSawtooth>
-    1bee:	55b8      	strb	r0, [r7, r6]
-    1bf0:	3601      	adds	r6, #1
-    1bf2:	e7a2      	b.n	1b3a <SPWMGenerator_GenerateSamples+0x92>
-    1bf4:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
-    1bf8:	19999999 	ldmibne	r9, {r0, r3, r4, r7, r8, fp, ip, pc}
-    1bfc:	46c35000 	strbmi	r5, [r3], r0
-    1c00:	cccccccd 	stclgt	12, cr12, [ip], {205}	; 0xcd
+00001a58 <SPWMGenerator_GenerateSamples>:
+    1a58:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+    1a5c:	460f      	mov	r7, r1
+    1a5e:	ed2d 8b02 	vpush	{d8}
+    1a62:	4690      	mov	r8, r2
+    1a64:	461d      	mov	r5, r3
+    1a66:	4604      	mov	r4, r0
+    1a68:	b920      	cbnz	r0, 1a74 <SPWMGenerator_GenerateSamples+0x1c>
+    1a6a:	2000      	movs	r0, #0
+    1a6c:	ecbd 8b02 	vpop	{d8}
+    1a70:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+    1a74:	2900      	cmp	r1, #0
+    1a76:	d0f8      	beq.n	1a6a <SPWMGenerator_GenerateSamples+0x12>
+    1a78:	2b00      	cmp	r3, #0
+    1a7a:	d0f6      	beq.n	1a6a <SPWMGenerator_GenerateSamples+0x12>
+    1a7c:	7a19      	ldrb	r1, [r3, #8]
+    1a7e:	b929      	cbnz	r1, 1a8c <SPWMGenerator_GenerateSamples+0x34>
+    1a80:	ea22 72e2 	bic.w	r2, r2, r2, asr #31
+    1a84:	4638      	mov	r0, r7
+    1a86:	f7fe fe23 	bl	6d0 <memset>
+    1a8a:	e7ee      	b.n	1a6a <SPWMGenerator_GenerateSamples+0x12>
+    1a8c:	2901      	cmp	r1, #1
+    1a8e:	d104      	bne.n	1a9a <SPWMGenerator_GenerateSamples+0x42>
+    1a90:	edd3 7a03 	vldr	s15, [r3, #12]
+    1a94:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+    1a98:	e020      	b.n	1adc <SPWMGenerator_GenerateSamples+0x84>
+    1a9a:	eddd 7a0a 	vldr	s15, [sp, #40]	; 0x28
+    1a9e:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
+    1aa2:	2902      	cmp	r1, #2
+    1aa4:	eec0 6a07 	vdiv.f32	s13, s0, s14
+    1aa8:	d123      	bne.n	1af2 <SPWMGenerator_GenerateSamples+0x9a>
+    1aaa:	ed93 6a00 	vldr	s12, [r3]
+    1aae:	e9d3 2303 	ldrd	r2, r3, [r3, #12]
+    1ab2:	1a9b      	subs	r3, r3, r2
+    1ab4:	ee07 3a90 	vmov	s15, r3
+    1ab8:	eef0 5a46 	vmov.f32	s11, s12
+    1abc:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
+    1ac0:	eed6 5aa0 	vfnms.f32	s11, s13, s1
+    1ac4:	edd5 7a01 	vldr	s15, [r5, #4]
+    1ac8:	ee77 7ac6 	vsub.f32	s15, s15, s12
+    1acc:	eec5 6aa7 	vdiv.f32	s13, s11, s15
+    1ad0:	ee07 2a90 	vmov	s15, r2
+    1ad4:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+    1ad8:	eee7 7a26 	vfma.f32	s15, s14, s13
+    1adc:	edc4 7a02 	vstr	s15, [r4, #8]
+    1ae0:	f8df 90cc 	ldr.w	r9, [pc, #204]	; 1bb0 <SPWMGenerator_GenerateSamples+0x158>
+    1ae4:	ed9f 8a2f 	vldr	s16, [pc, #188]	; 1ba4 <SPWMGenerator_GenerateSamples+0x14c>
+    1ae8:	2600      	movs	r6, #0
+    1aea:	4546      	cmp	r6, r8
+    1aec:	db13      	blt.n	1b16 <SPWMGenerator_GenerateSamples+0xbe>
+    1aee:	2001      	movs	r0, #1
+    1af0:	e7bc      	b.n	1a6c <SPWMGenerator_GenerateSamples+0x14>
+    1af2:	2904      	cmp	r1, #4
+    1af4:	d106      	bne.n	1b04 <SPWMGenerator_GenerateSamples+0xac>
+    1af6:	edd3 7a05 	vldr	s15, [r3, #20]
+    1afa:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+    1afe:	ee67 7aa6 	vmul.f32	s15, s15, s13
+    1b02:	e7eb      	b.n	1adc <SPWMGenerator_GenerateSamples+0x84>
+    1b04:	2903      	cmp	r1, #3
+    1b06:	d1eb      	bne.n	1ae0 <SPWMGenerator_GenerateSamples+0x88>
+    1b08:	e9d3 0103 	ldrd	r0, r1, [r3, #12]
+    1b0c:	f7ff ff6a 	bl	19e4 <random_range>
+    1b10:	ee07 0a90 	vmov	s15, r0
+    1b14:	e7be      	b.n	1a94 <SPWMGenerator_GenerateSamples+0x3c>
+    1b16:	4a24      	ldr	r2, [pc, #144]	; (1ba8 <SPWMGenerator_GenerateSamples+0x150>)
+    1b18:	fb09 f306 	mul.w	r3, r9, r6
+    1b1c:	ebb2 0f73 	cmp.w	r2, r3, ror #1
+    1b20:	d30c      	bcc.n	1b3c <SPWMGenerator_GenerateSamples+0xe4>
+    1b22:	7a2b      	ldrb	r3, [r5, #8]
+    1b24:	2b03      	cmp	r3, #3
+    1b26:	d109      	bne.n	1b3c <SPWMGenerator_GenerateSamples+0xe4>
+    1b28:	e9d5 0103 	ldrd	r0, r1, [r5, #12]
+    1b2c:	f7ff ff5a 	bl	19e4 <random_range>
+    1b30:	ee07 0a90 	vmov	s15, r0
+    1b34:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+    1b38:	edc4 7a02 	vstr	s15, [r4, #8]
+    1b3c:	edd4 7a03 	vldr	s15, [r4, #12]
+    1b40:	ed9f 6a1a 	vldr	s12, [pc, #104]	; 1bac <SPWMGenerator_GenerateSamples+0x154>
+    1b44:	edd4 6a02 	vldr	s13, [r4, #8]
+    1b48:	ee67 7a88 	vmul.f32	s15, s15, s16
+    1b4c:	ee66 6a88 	vmul.f32	s13, s13, s16
+    1b50:	ee87 7a86 	vdiv.f32	s14, s15, s12
+    1b54:	edd4 7a01 	vldr	s15, [r4, #4]
+    1b58:	ee37 7a27 	vadd.f32	s14, s14, s15
+    1b5c:	eec6 7a86 	vdiv.f32	s15, s13, s12
+    1b60:	edd4 6a00 	vldr	s13, [r4]
+    1b64:	ed84 7a01 	vstr	s14, [r4, #4]
+    1b68:	eeb4 7ac8 	vcmpe.f32	s14, s16
+    1b6c:	ee77 7aa6 	vadd.f32	s15, s15, s13
+    1b70:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    1b74:	bfa8      	it	ge
+    1b76:	ee37 7a48 	vsubge.f32	s14, s14, s16
+    1b7a:	eef4 7ac8 	vcmpe.f32	s15, s16
+    1b7e:	bfa8      	it	ge
+    1b80:	ed84 7a01 	vstrge	s14, [r4, #4]
+    1b84:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    1b88:	edc4 7a00 	vstr	s15, [r4]
+    1b8c:	bfa4      	itt	ge
+    1b8e:	ee77 7ac8 	vsubge.f32	s15, s15, s16
+    1b92:	edc4 7a00 	vstrge	s15, [r4]
+    1b96:	ed94 0a00 	vldr	s0, [r4]
+    1b9a:	f7ff ff41 	bl	1a20 <SPWMGenerator_GenerateSawtooth>
+    1b9e:	55b8      	strb	r0, [r7, r6]
+    1ba0:	3601      	adds	r6, #1
+    1ba2:	e7a2      	b.n	1aea <SPWMGenerator_GenerateSamples+0x92>
+    1ba4:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
+    1ba8:	19999999 	ldmibne	r9, {r0, r3, r4, r7, r8, fp, ip, pc}
+    1bac:	46c35000 	strbmi	r5, [r3], r0
+    1bb0:	cccccccd 	stclgt	12, cr12, [ip], {205}	; 0xcd
 
 Disassembly of section .comment:
 
 00000000 <.comment>:
-   0:	3a434347 	bcc	10d0d24 <SPWMGenerator_GenerateSamples+0x10cf27c>
+   0:	3a434347 	bcc	10d0d24 <SPWMGenerator_GenerateSamples+0x10cf2cc>
    4:	35312820 	ldrcc	r2, [r1, #-2080]!	; 0xfffff7e0
    8:	2e30313a 	mrccs	1, 1, r3, cr0, cr10, {1}
    c:	30322d33 	eorscc	r2, r2, r3, lsr sp
@@ -2406,7 +2365,7 @@ Disassembly of section .debug_line:
   80:	2f2f2f34 	svccs	0x002f2f34
   84:	2f362122 	svccs	0x00362122
   88:	312e0903 			; <UNDEFINED> instruction: 0x312e0903
-  8c:	3d2f212f 	stfccs	f2, [pc, #-188]!	; ffffffd8 <SPWMGenerator_GenerateSamples+0xffffe530>
+  8c:	3d2f212f 	stfccs	f2, [pc, #-188]!	; ffffffd8 <SPWMGenerator_GenerateSamples+0xffffe580>
   90:	213d3d2f 	teqcs	sp, pc, lsr #26
   94:	2f212f2f 	svccs	0x00212f2f
   98:	323d2f21 	eorscc	r2, sp, #33, 30	; 0x84
@@ -2429,7 +2388,7 @@ Disassembly of section .debug_line:
   dc:	21212f24 			; <UNDEFINED> instruction: 0x21212f24
   e0:	2f2f2321 	svccs	0x002f2321
   e4:	244b4b2f 	strbcs	r4, [fp], #-2863	; 0xfffff4d1
-  e8:	4b2f2f2f 	blmi	bcbdac <SPWMGenerator_GenerateSamples+0xbca304>
+  e8:	4b2f2f2f 	blmi	bcbdac <SPWMGenerator_GenerateSamples+0xbca354>
   ec:	212f2421 			; <UNDEFINED> instruction: 0x212f2421
   f0:	212f2f25 			; <UNDEFINED> instruction: 0x212f2f25
   f4:	2421212f 	strtcs	r2, [r1], #-303	; 0xfffffed1
@@ -2457,7 +2416,7 @@ Disassembly of section .debug_line:
  14c:	2f222f2f 	svccs	0x00222f2f
  150:	212f2221 			; <UNDEFINED> instruction: 0x212f2221
  154:	2f26232f 	svccs	0x0026232f
- 158:	0b032f2f 	bleq	cbe1c <SPWMGenerator_GenerateSamples+0xca374>
+ 158:	0b032f2f 	bleq	cbe1c <SPWMGenerator_GenerateSamples+0xca3c4>
  15c:	22212f2e 	eorcs	r2, r1, #46, 30	; 0xb8
  160:	09032f26 	stmdbeq	r3, {r1, r2, r5, r8, r9, sl, fp, sp}
  164:	22212f20 	eorcs	r2, r1, #32, 30	; 0x80
@@ -2537,23 +2496,23 @@ Disassembly of section .debug_line:
  28c:	06070520 	streq	r0, [r7], -r0, lsr #10
  290:	13090520 	movwne	r0, #38176	; 0x9520
  294:	01060e05 	tsteq	r6, r5, lsl #28
- 298:	2b060905 	blcs	1826b4 <SPWMGenerator_GenerateSamples+0x180c0c>
+ 298:	2b060905 	blcs	1826b4 <SPWMGenerator_GenerateSamples+0x180c5c>
  29c:	05360305 	ldreq	r0, [r6, #-773]!	; 0xfffffcfb
  2a0:	05010606 	streq	r0, [r1, #-1542]	; 0xfffff9fa
  2a4:	2e750310 	mrccs	3, 3, r0, cr5, cr0, {0}
  2a8:	03060705 	movweq	r0, #26373	; 0x6705
  2ac:	0516200e 	ldreq	r2, [r6, #-14]
  2b0:	0501060e 	streq	r0, [r1, #-1550]	; 0xfffff9f2
- 2b4:	052f0607 	streq	r0, [pc, #-1543]!	; fffffcb5 <SPWMGenerator_GenerateSamples+0xffffe20d>
+ 2b4:	052f0607 	streq	r0, [pc, #-1543]!	; fffffcb5 <SPWMGenerator_GenerateSamples+0xffffe25d>
  2b8:	0517060d 	ldreq	r0, [r7, #-1549]	; 0xfffff9f3
  2bc:	07051b0e 	streq	r1, [r5, -lr, lsl #22]
  2c0:	14052f06 	strne	r2, [r5], #-3846	; 0xfffff0fa
  2c4:	160d0501 	strne	r0, [sp], -r1, lsl #10
- 2c8:	0b052006 	bleq	1482e8 <SPWMGenerator_GenerateSamples+0x146840>
- 2cc:	1b05ae06 	blne	16baec <SPWMGenerator_GenerateSamples+0x16a044>
- 2d0:	0b051306 	bleq	144ef0 <SPWMGenerator_GenerateSamples+0x143448>
- 2d4:	1b052f06 	blne	14bef4 <SPWMGenerator_GenerateSamples+0x14a44c>
- 2d8:	0b051306 	bleq	144ef8 <SPWMGenerator_GenerateSamples+0x143450>
+ 2c8:	0b052006 	bleq	1482e8 <SPWMGenerator_GenerateSamples+0x146890>
+ 2cc:	1b05ae06 	blne	16baec <SPWMGenerator_GenerateSamples+0x16a094>
+ 2d0:	0b051306 	bleq	144ef0 <SPWMGenerator_GenerateSamples+0x143498>
+ 2d4:	1b052f06 	blne	14bef4 <SPWMGenerator_GenerateSamples+0x14a49c>
+ 2d8:	0b051306 	bleq	144ef8 <SPWMGenerator_GenerateSamples+0x1434a0>
  2dc:	0d052f06 	stceq	15, cr2, [r5, #-24]	; 0xffffffe8
  2e0:	05017a03 	streq	r7, [r1, #-2563]	; 0xfffff5fd
  2e4:	05410618 	strbeq	r0, [r1, #-1560]	; 0xfffff9e8
@@ -2566,7 +2525,7 @@ Disassembly of section .debug_line:
  300:	0f0d052f 	svceq	0x000d052f
  304:	09053106 	stmdbeq	r5, {r1, r2, r8, ip, sp}
  308:	01063606 	tsteq	r6, r6, lsl #12
- 30c:	5a031005 	bpl	c4328 <SPWMGenerator_GenerateSamples+0xc2880>
+ 30c:	5a031005 	bpl	c4328 <SPWMGenerator_GenerateSamples+0xc28d0>
  310:	06050520 	streq	r0, [r5], -r0, lsr #10
  314:	052e2703 	streq	r2, [lr, #-1795]!	; 0xfffff8fd
  318:	0501060a 	streq	r0, [r1, #-1546]	; 0xfffff9f6
@@ -2648,7 +2607,7 @@ Disassembly of section .debug_info:
   ec:	14000000 	strne	r0, [r0], #-0
   f0:	00000000 	andeq	r0, r0, r0
   f4:	0a000000 	beq	fc <Conf+0x4>
-  f8:	2a010073 	bcs	402cc <SPWMGenerator_GenerateSamples+0x3e824>
+  f8:	2a010073 	bcs	402cc <SPWMGenerator_GenerateSamples+0x3e874>
   fc:	00008009 	andeq	r8, r0, r9
  100:	0000a600 	andeq	sl, r0, r0, lsl #12
  104:	00009000 	andeq	r9, r0, r0
@@ -2680,7 +2639,7 @@ Disassembly of section .debug_abbrev:
 00000000 <.debug_abbrev>:
    0:	10001101 	andne	r1, r0, r1, lsl #2
    4:	12011106 	andne	r1, r1, #-2147483647	; 0x80000001
-   8:	1b0e0301 	blne	380c14 <SPWMGenerator_GenerateSamples+0x37f16c>
+   8:	1b0e0301 	blne	380c14 <SPWMGenerator_GenerateSamples+0x37f1bc>
    c:	130e250e 	movwne	r2, #58638	; 0xe50e
   10:	00000005 	andeq	r0, r0, r5
   14:	25011101 	strcs	r1, [r1, #-257]	; 0xfffffeff
@@ -2688,43 +2647,43 @@ Disassembly of section .debug_abbrev:
   1c:	110e1b0e 	tstne	lr, lr, lsl #22
   20:	10061201 	andne	r1, r6, r1, lsl #4
   24:	02000017 	andeq	r0, r0, #23
-  28:	0b0b0024 	bleq	2c00c0 <SPWMGenerator_GenerateSamples+0x2be618>
+  28:	0b0b0024 	bleq	2c00c0 <SPWMGenerator_GenerateSamples+0x2be668>
   2c:	08030b3e 	stmdaeq	r3, {r1, r2, r3, r4, r5, r8, r9, fp}
   30:	16030000 	strne	r0, [r3], -r0
-  34:	3a0e0300 	bcc	380c3c <SPWMGenerator_GenerateSamples+0x37f194>
+  34:	3a0e0300 	bcc	380c3c <SPWMGenerator_GenerateSamples+0x37f1e4>
   38:	390b3b0b 	stmdbcc	fp, {r0, r1, r3, r8, r9, fp, ip, sp}
   3c:	0013490b 	andseq	r4, r3, fp, lsl #18
   40:	00240400 	eoreq	r0, r4, r0, lsl #8
-  44:	0b3e0b0b 	bleq	f82c78 <SPWMGenerator_GenerateSamples+0xf811d0>
+  44:	0b3e0b0b 	bleq	f82c78 <SPWMGenerator_GenerateSamples+0xf81220>
   48:	00000e03 	andeq	r0, r0, r3, lsl #28
-  4c:	0b000f05 	bleq	3c68 <SPWMGenerator_GenerateSamples+0x21c0>
+  4c:	0b000f05 	bleq	3c68 <SPWMGenerator_GenerateSamples+0x2210>
   50:	0600000b 	streq	r0, [r0], -fp
-  54:	0b0b000f 	bleq	2c0098 <SPWMGenerator_GenerateSamples+0x2be5f0>
+  54:	0b0b000f 	bleq	2c0098 <SPWMGenerator_GenerateSamples+0x2be640>
   58:	00001349 	andeq	r1, r0, r9, asr #6
   5c:	3f012e07 	svccc	0x00012e07
-  60:	3a0e0319 	bcc	380ccc <SPWMGenerator_GenerateSamples+0x37f224>
+  60:	3a0e0319 	bcc	380ccc <SPWMGenerator_GenerateSamples+0x37f274>
   64:	390b3b0b 	stmdbcc	fp, {r0, r1, r3, r8, r9, fp, ip, sp}
   68:	4919270b 	ldmdbmi	r9, {r0, r1, r3, r8, r9, sl, sp}
   6c:	12011113 	andne	r1, r1, #-1073741820	; 0xc0000004
   70:	97184006 	ldrls	r4, [r8, -r6]
   74:	13011942 	movwne	r1, #6466	; 0x1942
   78:	05080000 	streq	r0, [r8, #-0]
-  7c:	3a080300 	bcc	200c84 <SPWMGenerator_GenerateSamples+0x1ff1dc>
+  7c:	3a080300 	bcc	200c84 <SPWMGenerator_GenerateSamples+0x1ff22c>
   80:	390b3b0b 	stmdbcc	fp, {r0, r1, r3, r8, r9, fp, ip, sp}
   84:	0213490b 	andseq	r4, r3, #180224	; 0x2c000
   88:	09000018 	stmdbeq	r0, {r3, r4}
   8c:	08030005 	stmdaeq	r3, {r0, r2}
-  90:	0b3b0b3a 	bleq	ec2d80 <SPWMGenerator_GenerateSamples+0xec12d8>
+  90:	0b3b0b3a 	bleq	ec2d80 <SPWMGenerator_GenerateSamples+0xec1328>
   94:	13490b39 	movtne	r0, #39737	; 0x9b39
   98:	42b71702 	adcsmi	r1, r7, #524288	; 0x80000
   9c:	0a000017 	beq	100 <Conf+0x8>
   a0:	08030034 	stmdaeq	r3, {r2, r4, r5}
-  a4:	0b3b0b3a 	bleq	ec2d94 <SPWMGenerator_GenerateSamples+0xec12ec>
+  a4:	0b3b0b3a 	bleq	ec2d94 <SPWMGenerator_GenerateSamples+0xec133c>
   a8:	13490b39 	movtne	r0, #39737	; 0x9b39
   ac:	42b71702 	adcsmi	r1, r7, #524288	; 0x80000
   b0:	0b000017 	bleq	114 <Conf+0x1c>
   b4:	0e030034 	mcreq	0, 0, r0, cr3, cr4, {1}
-  b8:	0b3b0b3a 	bleq	ec2da8 <SPWMGenerator_GenerateSamples+0xec1300>
+  b8:	0b3b0b3a 	bleq	ec2da8 <SPWMGenerator_GenerateSamples+0xec1350>
   bc:	13490b39 	movtne	r0, #39737	; 0x9b39
   c0:	42b71702 	adcsmi	r1, r7, #524288	; 0x80000
   c4:	00000017 	andeq	r0, r0, r7, lsl r0
@@ -2785,7 +2744,7 @@ Disassembly of section .debug_str:
   80:	2f696261 	svccs	0x00696261
   84:	6d756874 	ldclvs	8, cr6, [r5, #-464]!	; 0xfffffe30
   88:	37762f62 	ldrbcc	r2, [r6, -r2, ror #30]!
-  8c:	2b6d2d65 	blcs	1b4b628 <SPWMGenerator_GenerateSamples+0x1b49b80>
+  8c:	2b6d2d65 	blcs	1b4b628 <SPWMGenerator_GenerateSamples+0x1b49bd0>
   90:	682f7066 	stmdavs	pc!, {r1, r2, r5, r6, ip, sp, lr}	; <UNPREDICTABLE>
   94:	2f647261 	svccs	0x00647261
   98:	6762696c 	strbvs	r6, [r2, -ip, ror #18]!
@@ -2796,7 +2755,7 @@ Disassembly of section .debug_str:
   ac:	20676e6f 	rsbcs	r6, r7, pc, ror #28
   b0:	676e6f6c 	strbvs	r6, [lr, -ip, ror #30]!
   b4:	746e6920 	strbtvc	r6, [lr], #-2336	; 0xfffff6e0
-  b8:	7a697300 	bvc	1a5ccc0 <SPWMGenerator_GenerateSamples+0x1a5b218>
+  b8:	7a697300 	bvc	1a5ccc0 <SPWMGenerator_GenerateSamples+0x1a5b268>
   bc:	00745f65 	rsbseq	r5, r4, r5, ror #30
   c0:	676e6f6c 	strbvs	r6, [lr, -ip, ror #30]!
   c4:	6e6f6c20 	cdpvs	12, 6, cr6, cr15, cr0, {1}
@@ -2904,7 +2863,7 @@ Disassembly of section .debug_frame:
   1c:	00000282 	andeq	r0, r0, r2, lsl #5
   20:	0c0e470a 	stceq	7, cr4, [lr], {10}
   24:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  28:	3a03018e 	bcc	c0668 <SPWMGenerator_GenerateSamples+0xbebc0>
+  28:	3a03018e 	bcc	c0668 <SPWMGenerator_GenerateSamples+0xbec10>
   2c:	00000b01 	andeq	r0, r0, r1, lsl #22
   30:	00000018 	andeq	r0, r0, r8, lsl r0
   34:	00000000 	andeq	r0, r0, r0
@@ -2912,21 +2871,21 @@ Disassembly of section .debug_frame:
   3c:	0000001e 	andeq	r0, r0, lr, lsl r0
   40:	0c0e460a 	stceq	6, cr4, [lr], {10}
   44:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  48:	0b49018e 	bleq	1240688 <SPWMGenerator_GenerateSamples+0x123ebe0>
+  48:	0b49018e 	bleq	1240688 <SPWMGenerator_GenerateSamples+0x123ec30>
   4c:	00000018 	andeq	r0, r0, r8, lsl r0
   50:	00000000 	andeq	r0, r0, r0
   54:	000005f4 	strdeq	r0, [r0], -r4
   58:	00000022 	andeq	r0, r0, r2, lsr #32
   5c:	0c0e460a 	stceq	6, cr4, [lr], {10}
   60:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  64:	0b4b018e 	bleq	12c06a4 <SPWMGenerator_GenerateSamples+0x12bebfc>
+  64:	0b4b018e 	bleq	12c06a4 <SPWMGenerator_GenerateSamples+0x12bec4c>
   68:	00000018 	andeq	r0, r0, r8, lsl r0
   6c:	00000000 	andeq	r0, r0, r0
   70:	00000618 	andeq	r0, r0, r8, lsl r6
   74:	00000042 	andeq	r0, r0, r2, asr #32
   78:	0c0e5a0a 			; <UNDEFINED> instruction: 0x0c0e5a0a
   7c:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  80:	0b47018e 	bleq	11c06c0 <SPWMGenerator_GenerateSamples+0x11bec18>
+  80:	0b47018e 	bleq	11c06c0 <SPWMGenerator_GenerateSamples+0x11bec68>
   84:	00000024 	andeq	r0, r0, r4, lsr #32
   88:	00000000 	andeq	r0, r0, r0
   8c:	0000065c 	andeq	r0, r0, ip, asr r6
@@ -2936,7 +2895,7 @@ Disassembly of section .debug_frame:
   9c:	43018e02 	movwmi	r8, #7682	; 0x1e02
   a0:	0c0e450b 	cfstr32eq	mvfx4, [lr], {11}
   a4:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  a8:	0b68018e 	bleq	1a006e8 <SPWMGenerator_GenerateSamples+0x19fec40>
+  a8:	0b68018e 	bleq	1a006e8 <SPWMGenerator_GenerateSamples+0x19fec90>
   ac:	0000000c 	andeq	r0, r0, ip
   b0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
   b4:	7c020001 	stcvc	0, cr0, [r2], {1}

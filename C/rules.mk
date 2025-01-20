@@ -1,4 +1,3 @@
-
 CC = arm-none-eabi-gcc
 LD = arm-none-eabi-gcc
 OBJDUMP = arm-none-eabi-objdump
@@ -52,17 +51,17 @@ LDFLAGS = -nostartfiles -static -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mcpu=cortex-
 LDFLAGS += -lm -Wl,--gc-sections,--undefined=init
 LDFLAGS += -T $(VESC_C_LIB_PATH)/link.ld
 
-.PHONY: default all clean
+.PHONY: default all clean FORCE
 
 default: $(TARGET)
 all: default
 
-%.so: %.c
+%.so: %.c FORCE
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PRECIOUS: $(TARGET) $(OBJECTS)
+FORCE:
 
-$(TARGET): $(OBJECTS)
+$(TARGET): $(OBJECTS) FORCE
 	$(LD) $(OBJECTS) $(LDFLAGS) -o $@.elf
 	$(OBJDUMP) -D $@.elf > $@.list
 	$(OBJCOPY) -O binary $@.elf $@.bin --gap-fill 0x00
@@ -70,4 +69,3 @@ $(TARGET): $(OBJECTS)
 
 clean:
 	rm -f $(OBJECTS) $(TARGET).elf $(TARGET).list $(TARGET).lisp $(TARGET).bin
-
