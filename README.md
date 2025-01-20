@@ -239,3 +239,7 @@ This project is licensed under the **GPLv3 License**. See the [LICENSE.md](LICEN
 ---
 
 Enjoy simulating inverter sounds on your VESC! If you have any questions or run into issues, feel free to open an issue on GitHub.
+
+## Contact
+
+If you have questions or need assistance, you can find me over at [my website](https://tliao.net).
