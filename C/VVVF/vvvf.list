@@ -1568,12 +1568,12 @@ Disassembly of section .text.update_spwm_settings:
 000013e4 <update_spwm_settings>:
     13e4:	b530      	push	{r4, r5, lr}
     13e6:	4b26      	ldr	r3, [pc, #152]	; (1480 <update_spwm_settings+0x9c>)
-    13e8:	ed9f 2a22 	vldr	s4, [pc, #136]	; 1474 <update_spwm_settings+0x90>
-    13ec:	eddf 1a22 	vldr	s3, [pc, #136]	; 1478 <update_spwm_settings+0x94>
+    13e8:	eddf 1a22 	vldr	s3, [pc, #136]	; 1474 <update_spwm_settings+0x90>
+    13ec:	ed9f 1a22 	vldr	s2, [pc, #136]	; 1478 <update_spwm_settings+0x94>
     13f0:	447b      	add	r3, pc
     13f2:	ed93 0a00 	vldr	s0, [r3]
     13f6:	b087      	sub	sp, #28
-    13f8:	eeb3 1a0e 	vmov.f32	s2, #62	; 0x41f00000  30.0
+    13f8:	eeb7 2a00 	vmov.f32	s4, #112	; 0x3f800000  1.0
     13fc:	eef0 0a08 	vmov.f32	s1, #8	; 0x40400000  3.0
     1400:	f7ff ffde 	bl	13c0 <map_value>
     1404:	eeb5 0ac0 	vcmpe.f32	s0, #0.0
@@ -1617,9 +1617,9 @@ Disassembly of section .text.update_spwm_settings:
     146e:	2200      	movs	r2, #0
     1470:	601a      	str	r2, [r3, #0]
     1472:	e7d0      	b.n	1416 <update_spwm_settings+0x32>
-    1474:	3e99999a 			; <UNDEFINED> instruction: 0x3e99999a
-    1478:	3d4ccccd 	stclcc	12, cr12, [ip, #-820]	; 0xfffffccc
-    147c:	3ca3d70a 	stccc	7, cr13, [r3], #40	; 0x28
+    1474:	3d4ccccd 	stclcc	12, cr12, [ip, #-820]	; 0xfffffccc
+    1478:	42c80000 	sbcmi	r0, r8, #0
+    147c:	3cf5c28f 	lfmcc	f4, 3, [r5], #572	; 0x23c
     1480:	ffffef24 			; <UNDEFINED> instruction: 0xffffef24
     1484:	ffffee7c 			; <UNDEFINED> instruction: 0xffffee7c
     1488:	ffffee6c 			; <UNDEFINED> instruction: 0xffffee6c
@@ -1876,22 +1876,22 @@ Disassembly of section .text.InitializeConfiguration:
     16fe:	f7ff ff89 	bl	1614 <AddSPWM_AsyncFixed>
     1702:	eef0 0a68 	vmov.f32	s1, s17
     1706:	4620      	mov	r0, r4
-    1708:	2208      	movs	r2, #8
+    1708:	220c      	movs	r2, #12
     170a:	eeb3 0a04 	vmov.f32	s0, #52	; 0x41a00000  20.0
     170e:	2103      	movs	r1, #3
     1710:	f7ff ffae 	bl	1670 <AddSPWM_Sync>
-    1714:	2204      	movs	r2, #4
-    1716:	eef0 0a48 	vmov.f32	s1, s16
-    171a:	eeb0 0a68 	vmov.f32	s0, s17
-    171e:	4611      	mov	r1, r2
-    1720:	4620      	mov	r0, r4
+    1714:	eef0 0a48 	vmov.f32	s1, s16
+    1718:	eeb0 0a68 	vmov.f32	s0, s17
+    171c:	4620      	mov	r0, r4
+    171e:	2206      	movs	r2, #6
+    1720:	2104      	movs	r1, #4
     1722:	f7ff ffa5 	bl	1670 <AddSPWM_Sync>
     1726:	eeb0 0a48 	vmov.f32	s0, s16
     172a:	ecbd 8b02 	vpop	{d8}
     172e:	4620      	mov	r0, r4
     1730:	eddf 0a08 	vldr	s1, [pc, #32]	; 1754 <InitializeConfiguration+0xb8>
     1734:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
-    1738:	2202      	movs	r2, #2
+    1738:	2204      	movs	r2, #4
     173a:	2105      	movs	r1, #5
     173c:	f7ff bf98 	b.w	1670 <AddSPWM_Sync>
     1740:	42c80000 	sbcmi	r0, r8, #0
