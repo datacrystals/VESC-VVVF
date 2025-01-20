@@ -104,7 +104,7 @@ static void update_spwm_settings() {
 	if (amplitude < 0.) {
 		amplitude = 0.;
 	}
-	amplitude += INVERTER_AMPLITUDE_BASE;
+	// amplitude += INVERTER_AMPLITUDE_BASE;
 
     // VESC_IF->printf("Inverter Carrier Frequency: %f\n", carrier_frequency);
 	// carrier_frequency = 2000.f + inverter_hz;
