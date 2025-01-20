@@ -100,11 +100,11 @@ SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM) {
         return defaultRange; // Return an empty range if the config is invalid
     }
 
-    // Calculate the speed in km/h using the rpmToSpeedRatio, ensure it's positive
+    // Calculate the speed in km/h using the rpmToSpeedRatio
     float speedKmh = _MotorRPM * _Source->rpmToSpeedRatio;
-    if (speedKmh < 0.) {
-        speedKmh = -speedKmh;
-    }
+    // if (speedKmh < 0.) {
+    //     speedKmh = -speedKmh;
+    // }
 
     // Cap the speed to the maximum allowed speed
     if (speedKmh > _Source->maxSpeed) {
@@ -127,9 +127,6 @@ SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM) {
     // If no range matches, return the default range
     return defaultRange;
 }
-
-
-#include <stdio.h> // For printf (if not using VESC_IF->printf)
 
 void PrintInverterConfig(const InverterConfig* config) {
     if (!config) {

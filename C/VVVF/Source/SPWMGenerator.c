@@ -75,16 +75,16 @@ void SPWMGenerator_Init(SPWMGenerator* generator) {
     generator->Amplitude = 0.0f;           // Default amplitude
 }
 
-// Generate SPWM samples
-void SPWMGenerator_GenerateSamples(SPWMGenerator* generator, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float HzToKmhFactor) {
-    if (!generator || !buffer || !speedRange) return;
+// Generate SPWM samples, this function returns true/false indicating if the inverter should be enabled or not
+int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float HzToKmhFactor) {
+    if (!generator || !buffer || !speedRange) return false;
 
     // Firstly check if disabled, if so, set audio to none
     if (speedRange->spwm.type == SPWM_TYPE_NONE) {
         for (int i = 0; i < bufferLength; i++) {
             buffer[i] = 0;
         }
-        return;
+        return false;
     }
 
     // Convert command frequency to speed
@@ -142,6 +142,8 @@ void SPWMGenerator_GenerateSamples(SPWMGenerator* generator, int8_t* buffer, int
         //     buffer[i] = 0;
         // }
     }
+
+    return true;
 }
 
 // Map a value from one range to another

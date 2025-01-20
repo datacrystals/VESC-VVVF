@@ -49,6 +49,7 @@ static int active_hz_index = 0; // Index of current sample to be replaced
 static float inverter_current = 0.; // Number of phase amps pushed into the motor from the vesc
 static float inverter_hz = 0.; // Current freqency of the inverter in hz
 static int motor_poles = 0; // Number of poles of the motor
+static int inverter_enabled = false; // Enable or disable the inverter doing stuff
 
 static InverterConfig Conf = {0}; // Configuration of the inverter from the json file
 static SpeedRange ActiveSpeedRange = {0}; // Currently active speed range that should be used for motor sound generation
@@ -127,7 +128,7 @@ static void generator_loop(void *arg) {
         if (!generator_thread_data.running) break;
 
         // Generate SPWM samples
-        SPWMGenerator_GenerateSamples(&generator, buffers[producer_index], BUFFER_LENGTH, &ActiveSpeedRange, inverter_hz, motor_poles, Conf.rpmToSpeedRatio);
+        inverter_enabled = SPWMGenerator_GenerateSamples(&generator, buffers[producer_index], BUFFER_LENGTH, &ActiveSpeedRange, inverter_hz, motor_poles, Conf.rpmToSpeedRatio);
 
         // Mark the buffer as ready for consumption
         buffer_ready_for_consumption[producer_index] = true;
@@ -162,7 +163,9 @@ static void playback_loop(void *arg) {
         }
 
         // Play the samples from the current buffer
-        VESC_IF->foc_play_audio_samples(buffers[consumer_index], BUFFER_LENGTH, sample_rate, amplitude);
+        if (inverter_enabled) {
+            VESC_IF->foc_play_audio_samples(buffers[consumer_index], BUFFER_LENGTH, sample_rate, amplitude);
+        }
         samples_consumed += BUFFER_LENGTH;
 
         // TEMPORARY FIX!!!!!
