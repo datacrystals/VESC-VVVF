@@ -93,17 +93,35 @@ float map_value(float value, float in_min, float in_max, float out_min, float ou
     }
 
     // Map the value from the input range to the output range
-    return out_min + ((value - in_min) / (in_max - in_min)) * (out_max - out_min);
+    float val = out_min + ((value - in_min) / (in_max - in_min)) * (out_max - out_min);
+
+    // Clamp value to start and end
+    if (val < out_min) {
+        val = out_min;
+    } else if (val > out_max) {
+        val = out_max;
+    }
+
+    return val;
 }
 
 // Code to update the amplitude and other functions from the provided rpm and current)
 static void update_spwm_settings() {
 	
-	// Define amplitude based on current
+    // Calculate current speed
+    float CurrentSpeed_KMH = (inverter_hz / (float)motor_poles) * Conf.rpmToSpeedRatio;
+
+
+	// Define amplitude based on current, speed
 	amplitude = map_value(inverter_current, min_current, max_current, min_sound_voltage, max_sound_voltage);
-	if (amplitude < 0.) {
-		amplitude = 0.;
-	}
+    float AmplitudeScaleFactor = map_value(
+        CurrentSpeed_KMH, 
+        INVERTER_AMPLITUDE_SPEED_RAMP_START_KMH,
+        INVERTER_AMPLITUDE_SPEED_RAMP_END_KMH,
+        INVERTER_AMPLITUDE_SPEED_SCALAR_START,
+        INVERTER_AMPLITUDE_SPEED_SCALAR_END
+    );
+    amplitude = amplitude * AmplitudeScaleFactor;
 	// amplitude += INVERTER_AMPLITUDE_BASE;
 
     // VESC_IF->printf("Inverter Carrier Frequency: %f\n", carrier_frequency);
