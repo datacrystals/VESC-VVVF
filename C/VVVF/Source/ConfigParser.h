@@ -4,16 +4,14 @@
 #include <stdint.h>
 #include "Parameters.h"
 
-// Define an enum for SPWM types
 typedef enum {
     SPWM_TYPE_NONE,          // Output disabled
     SPWM_TYPE_FIXED_ASYNC,   // Fixed frequency asynchronous SPWM
     SPWM_TYPE_RAMP_ASYNC,    // Ramp frequency asynchronous SPWM
-    SPWM_TYPE_RSPWM,         // Resonant SPWM
+    SPWM_TYPE_RSPWM,         // Random SPWM
     SPWM_TYPE_SYNC           // Synchronous SPWM
 } SPWMType;
 
-// Define a struct for the SPWM configuration
 typedef struct {
     SPWMType type;           // Type of SPWM (fixed, ramp, RSPWM, sync)
     int carrierFrequencyStart; // Starting carrier frequency for a ramp, if not a ramp, we default to this
@@ -21,11 +19,16 @@ typedef struct {
     int numPulses;           // Number of pulses for synchronous SPWM (only used for SPWM_TYPE_SYNC)
 } SPWMConfig;
 
-// Define a struct for each speed range
+typedef struct {
+    SPWMConfig acceleration; // SPWM configuration for acceleration
+    SPWMConfig coasting;     // SPWM configuration for coasting
+    SPWMConfig deceleration; // SPWM configuration for deceleration
+} SPWMBehaviorConfig;
+
 typedef struct {
     float minSpeed;            // Minimum speed in km/h
     float maxSpeed;            // Maximum speed in km/h
-    SPWMConfig spwm;         // SPWM configuration for this speed range
+    SPWMBehaviorConfig spwm;   // SPWM configuration for this speed range
 } SpeedRange;
 
 // Define the main configuration struct
@@ -37,15 +40,31 @@ typedef struct {
     int speedRangeCount;     // Number of valid speed ranges
 } InverterConfig;
 
+// Add a new enum to track the state of the rotor
+typedef enum {
+    ROTOR_STATE_ACCELERATING,
+    ROTOR_STATE_COASTING,
+    ROTOR_STATE_DECELERATING
+} RotorState;
+
+
 // Function to parse JSON and populate the InverterConfig struct
 void InitializeConfiguration(InverterConfig* _Config);
 SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _MotorCurrent);
 void PrintInverterConfig(const InverterConfig* config);
+void PrintSPWMConfig(const SPWMConfig* spwm);
 
 // NOTE: THE SPEED RANGE VALUES *MUST* BE IN ASCENDING ORDER (Low index = closer to 0 speed, higher = higher speed)
-void AddSPWM_AsyncFixed(InverterConfig* _Source, int _Index, float _MinSpeed, float _MaxSpeed, int _CarrierFreq);
-void AddSPWM_AsyncRamp(InverterConfig* _Source, int _Index, float _MinSpeed, float _MaxSpeed, int _CarrierFreqStart, int _CarrierFreqEnd);
-void AddSPWM_RSPWM(InverterConfig* _Source, int _Index, float _MinSpeed, float _MaxSpeed, int _CarrierMin, int _CarrierMax);
-void AddSPWM_Sync(InverterConfig* _Source, int _Index, float _MinSpeed, float _MaxSpeed, int _NumPulses);
+SPWMConfig AddSPWM_AsyncFixed(int _Carrier);
+SPWMConfig AddSPWM_AsyncRamp(int _CarrierFreqStart, int _CarrierFreqEnd);
+SPWMConfig AddSPWM_RSPWM(int _CarrierMin, int _CarrierMax);
+SPWMConfig AddSPWM_Sync(int _NumPulses);
+SPWMConfig AddSPWM_Disabled();
+
+void SetSPWM_Acceleration(InverterConfig* _Source, int _Index, SPWMConfig config);
+void SetSPWM_Coasting(InverterConfig* _Source, int _Index, SPWMConfig config);
+void SetSPWM_Deceleration(InverterConfig* _Source, int _Index, SPWMConfig config);
+void SetSpeedRangeSpeed(InverterConfig* _Source, int _Index, float minSpeed, float maxSpeed);
+
 
 #endif // INVERTER_CONFIG_H

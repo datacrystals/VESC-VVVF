@@ -14,140 +14,210 @@ float wheel_diameter_to_kmh_factor(float diameter_mm) {
     return (float)(3.14159265535 * diameter_mm * mm_to_km * minutes_to_hours);
 }
 
-void AddSPWM_AsyncFixed(InverterConfig* _Source, int _Index, float _SpeedStart, float _SpeedEnd, int _Carrier) {
-    if (_Index >= MAX_SPEED_RANGES) {
-        return;
-    }
-
-    _Source->speedRanges[_Index].spwm.type = SPWM_TYPE_FIXED_ASYNC;
-    _Source->speedRanges[_Index].spwm.carrierFrequencyStart = _Carrier;
-    _Source->speedRanges[_Index].spwm.carrierFrequencyEnd = _Carrier; // Same as start for fixed
-    _Source->speedRanges[_Index].minSpeed = _SpeedStart;
-    _Source->speedRanges[_Index].maxSpeed = _SpeedEnd;
-    _Source->speedRangeCount++;
+    SPWMConfig AddSPWM_AsyncFixed(int _Carrier) {
+    SPWMConfig config = {SPWM_TYPE_FIXED_ASYNC, _Carrier, _Carrier, 0};
+    return config;
 }
 
-void AddSPWM_AsyncRamp(InverterConfig* _Source, int _Index, float _MinSpeed, float _MaxSpeed, int _CarrierFreqStart, int _CarrierFreqEnd) {
-    if (_Index >= MAX_SPEED_RANGES) {
-        return;
-    }
-
-    _Source->speedRanges[_Index].spwm.type = SPWM_TYPE_RAMP_ASYNC;
-    _Source->speedRanges[_Index].spwm.carrierFrequencyStart = _CarrierFreqStart;
-    _Source->speedRanges[_Index].spwm.carrierFrequencyEnd = _CarrierFreqEnd;
-    _Source->speedRanges[_Index].minSpeed = _MinSpeed;
-    _Source->speedRanges[_Index].maxSpeed = _MaxSpeed;
-    _Source->speedRangeCount++;
+SPWMConfig AddSPWM_AsyncRamp(int _CarrierFreqStart, int _CarrierFreqEnd) {
+    SPWMConfig config = {SPWM_TYPE_RAMP_ASYNC, _CarrierFreqStart, _CarrierFreqEnd, 0};
+    return config;
 }
 
-void AddSPWM_RSPWM(InverterConfig* _Source, int _Index, float _MinSpeed, float _MaxSpeed, int _CarrierMin, int _CarrierMax) {
-    if (_Index >= MAX_SPEED_RANGES) {
-        return;
-    }
-
-    _Source->speedRanges[_Index].spwm.type = SPWM_TYPE_RSPWM;
-    _Source->speedRanges[_Index].spwm.carrierFrequencyStart = _CarrierMin;
-    _Source->speedRanges[_Index].spwm.carrierFrequencyEnd = _CarrierMax;
-    _Source->speedRanges[_Index].minSpeed = _MinSpeed;
-    _Source->speedRanges[_Index].maxSpeed = _MaxSpeed;
-    _Source->speedRangeCount++;
+SPWMConfig AddSPWM_RSPWM(int _CarrierMin, int _CarrierMax) {
+    SPWMConfig config = {SPWM_TYPE_RSPWM, _CarrierMin, _CarrierMax, 0};
+    return config;
 }
 
-void AddSPWM_Sync(InverterConfig* _Source, int _Index, float _MinSpeed, float _MaxSpeed, int _NumPulses) {
-    if (_Index >= MAX_SPEED_RANGES) {
-        return;
-    }
+SPWMConfig AddSPWM_Sync(int _NumPulses) {
+    SPWMConfig config = {SPWM_TYPE_SYNC, 0, 0, _NumPulses};
+    return config;
+}
 
-    _Source->speedRanges[_Index].spwm.type = SPWM_TYPE_SYNC;
-    _Source->speedRanges[_Index].spwm.numPulses = _NumPulses;
-    _Source->speedRanges[_Index].minSpeed = _MinSpeed;
-    _Source->speedRanges[_Index].maxSpeed = _MaxSpeed;
-    _Source->speedRangeCount++;
+SPWMConfig AddSPWM_Disabled() {
+    SPWMConfig config = {SPWM_TYPE_NONE, 0, 0, 0};
+    return config;
+}
+
+
+void SetSPWM_Acceleration(InverterConfig* _Source, int _Index, SPWMConfig config) {
+    if (_Index >= MAX_SPEED_RANGES) return;
+    _Source->speedRanges[_Index].spwm.acceleration = config;
+}
+
+void SetSPWM_Coasting(InverterConfig* _Source, int _Index, SPWMConfig config) {
+    if (_Index >= MAX_SPEED_RANGES) return;
+    _Source->speedRanges[_Index].spwm.coasting = config;
+}
+
+void SetSPWM_Deceleration(InverterConfig* _Source, int _Index, SPWMConfig config) {
+    if (_Index >= MAX_SPEED_RANGES) return;
+    _Source->speedRanges[_Index].spwm.deceleration = config;
+}
+
+void SetSpeedRangeSpeed(InverterConfig* _Source, int _Index, float minSpeed, float maxSpeed) {
+    if (_Index >= MAX_SPEED_RANGES) return;
+    _Source->speedRanges[_Index].minSpeed = minSpeed;
+    _Source->speedRanges[_Index].maxSpeed = maxSpeed;
+    _Source->speedRangeCount += 1;
 }
 
 void InitializeConfiguration(InverterConfig* _Config) {
-
     // Setup basic parameters
     _Config->maxSpeed = MAX_SPEED_KMH; // km/h
     _Config->rpmToSpeedRatio = wheel_diameter_to_kmh_factor(WHEEL_DIAMETER_MM);
     _Config->zeroSpeedCutoffMargin = ZERO_CUTOFF_MARGIN_KMH;
 
     // Now add ranges
-    // // AddSPWM_RSPWM(_Config, 0, 0., 22., 4000, 6000); // RSPWM from 10-20km/h @ 2khz-3khz carrier
-    // // AddSPWM_AsyncFixed(_Config, 0, 0., 3.0, 1000); // Async SPWM from 0-5km/h @ 1khz carrier
-    // AddSPWM_AsyncRamp (_Config, 0, 0.0, 4, 250, 500); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
-    // AddSPWM_AsyncFixed(_Config, 1, 4, 7, 500); // Async SPWM from 0-5km/h @ 1khz carrier
-    // AddSPWM_AsyncRamp (_Config, 2, 7., 7.5, 500, 300); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
-    // // AddSPWM_AsyncFixed(_Config, 2, 6., 9.0, 3000); // Async SPWM from 0-5km/h @ 1khz carrier
-    // // AddSPWM_AsyncFixed(_Config, 3, 9., 12.0, 4000); // Async SPWM from 0-5km/h @ 1khz carrier
-    // // AddSPWM_AsyncFixed(_Config, 4, 12., 15.0, 5000); // Async SPWM from 0-5km/h @ 1khz carrier
-    // // AddSPWM_AsyncRamp (_Config, 1, 10.0, 13.0, 1000, 2000); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
-    // // AddSPWM_AsyncFixed(_Config, 2, 13.0, 20., 2000); // Async SPWM from 0-5km/h @ 1khz carrier
-    // AddSPWM_Sync      (_Config, 3, 7.5, 12., 7); // Sync SPWM from 20-30km/h with 4 pulses
-    // AddSPWM_Sync      (_Config, 4, 12., 18., 5); // Sync SPWM from 20-30km/h with 4 pulses
-    // AddSPWM_Sync      (_Config, 5, 18., 22., 3); // Sync SPWM from 20-30km/h with 4 pulses
-    // AddSPWM_Sync      (_Config, 6, 22., 27., 1); // Sync SPWM from 20-30km/h with 4 pulses
-    // // AddSPWM_Sync      (_Config, 3, 55., 9999., 4); // Sync SPWM from 20-30km/h with 4 pulses
+    SPWMConfig config;
 
-    AddSPWM_AsyncFixed(_Config, 0, 0., 4., 1235);
-    AddSPWM_AsyncFixed(_Config, 1, 4., 8., 1190);
-    AddSPWM_AsyncFixed(_Config, 2, 8., 10., 1210);
-    AddSPWM_AsyncFixed(_Config, 3, 10., 14., 1235);
-    AddSPWM_AsyncFixed(_Config, 4, 14., 16., 1460);
-    AddSPWM_AsyncFixed(_Config, 5, 16., 19., 1210);
-    AddSPWM_AsyncFixed(_Config, 6, 19., 999., 1230);
-    
 
-    // Low-speed range: Smooth and subtle ramp-up
-    // AddSPWM_AsyncRamp (_Config, 0, 0.0, 3.0, 500, 500); // Async SPWM from 0-3 km/h @ 200Hz-500Hz carrier
-    // AddSPWM_AsyncFixed(_Config, 1, 3.0, 5.0, 500);      // Async SPWM from 3-5 km/h @ 500Hz carrier
+    // Range 0: -1.0 km/h to 5.0 km/h
+    config = AddSPWM_AsyncRamp(250, 500); // Ramp from 250 Hz to 500 Hz
+    SetSPWM_Acceleration(_Config, 0, config);
+    SetSPWM_Coasting(_Config, 0, config);
+    SetSPWM_Deceleration(_Config, 0, config);
+    SetSpeedRangeSpeed(_Config, 0, -1.0f, 5.0f);
 
-    // // Mid-speed range: Gradual increase in pitch and intensity
-    // AddSPWM_AsyncRamp (_Config, 2, 5.0, 6.0, 500, 1000); // Async SPWM from 5-8 km/h @ 500Hz-1kHz carrier
-    // AddSPWM_AsyncFixed(_Config, 3, 6.0, 10.0, 1000);     // Async SPWM from 8-10 km/h @ 1kHz carrier
+    // Range 1: 5.0 km/h to 20.0 km/h
+    config = AddSPWM_AsyncFixed(500); // Fixed at 500 Hz
+    SetSPWM_Acceleration(_Config, 1, config);
+    SetSPWM_Coasting(_Config, 1, config);
+    SetSPWM_Deceleration(_Config, 1, config);
+    SetSpeedRangeSpeed(_Config, 1, 5.0f, 20.0f);
 
-    // // Transition to synchronous modulation for a sharper, more defined sound
-    // AddSPWM_Sync      (_Config, 4, 10.0, 15.0, 7); // Sync SPWM from 10-15 km/h with 7 pulses
-    // AddSPWM_Sync      (_Config, 5, 15.0, 20.0, 5); // Sync SPWM from 15-20 km/h with 5 pulses
+    // Range 2: 20.0 km/h to 21.0 km/h
+    config = AddSPWM_AsyncRamp(500, 300); // Ramp from 500 Hz to 300 Hz
+    SetSPWM_Acceleration(_Config, 2, config);
+    SetSPWM_Coasting(_Config, 2, config);
+    config = AddSPWM_AsyncFixed(500); // Fixed at 500 Hz for braking
+    SetSPWM_Deceleration(_Config, 2, config);
+    SetSpeedRangeSpeed(_Config, 2, 20.0f, 21.0f);
 
-    // // High-speed range: Aggressive and fast modulation
-    // AddSPWM_Sync      (_Config, 6, 20.0, 25.0, 3); // Sync SPWM from 20-25 km/h with 3 pulses
-    // AddSPWM_Sync      (_Config, 7, 25.0, 30.0, 1); // Sync SPWM from 25-30 km/h with 1 pulse
+    // Range 3: 21.0 km/h to 27.0 km/h
+    config = AddSPWM_Sync(11); // Sync with 11 pulses
+    SetSPWM_Acceleration(_Config, 3, config);
+    SetSPWM_Coasting(_Config, 3, config);
+    SetSPWM_Deceleration(_Config, 3, config);
+    SetSpeedRangeSpeed(_Config, 3, 21.0f, 27.0f);
 
-    // // Ultra-high-speed range: Smooth and consistent high-frequency sound
-    // AddSPWM_Sync      (_Config, 8, 30.0, 9999.0, 1); // Sync SPWM for speeds above 30 km/h with 1 pulse
+    // Range 4: 27.0 km/h to 40.0 km/h
+    config = AddSPWM_Sync(7); // Sync with 7 pulses
+    SetSPWM_Acceleration(_Config, 4, config);
+    SetSPWM_Coasting(_Config, 4, config);
+    SetSPWM_Deceleration(_Config, 4, config);
+    SetSpeedRangeSpeed(_Config, 4, 27.0f, 40.0f);
 
+    // Range 5: 40.0 km/h to 48.0 km/h
+    config = AddSPWM_Sync(3); // Sync with 3 pulses, no wide pulse
+    SetSPWM_Acceleration(_Config, 5, config);
+    SetSPWM_Coasting(_Config, 5, config);
+    SetSPWM_Deceleration(_Config, 5, config);
+    SetSpeedRangeSpeed(_Config, 5, 40.0f, 48.0f);
+
+    // Range 6: 48.0 km/h to 55.0 km/h
+    config = AddSPWM_Sync(3); // Sync with 3 pulses, wide pulse enabled
+    // config.modulationIndex = 1.1f; // Modulation index for W3P mode
+    SetSPWM_Acceleration(_Config, 6, config);
+    SetSPWM_Coasting(_Config, 6, config);
+    SetSPWM_Deceleration(_Config, 6, config);
+    SetSpeedRangeSpeed(_Config, 6, 48.0f, 55.0f);
+
+    // Range 7: 55.0 km/h to 150.0 km/h
+    config = AddSPWM_Sync(1); // Sync with 1 pulse, no wide pulse
+    SetSPWM_Acceleration(_Config, 7, config);
+    config = AddSPWM_Sync(3); // Sync with 3 pulses, wide pulse enabled
+    // config.modulationIndex = 1.15f; // Modulation index for W3P mode
+    SetSPWM_Coasting(_Config, 7, config);
+    config = AddSPWM_Sync(1); // Sync with 1 pulse, no wide pulse
+    SetSPWM_Deceleration(_Config, 7, config);
+    SetSpeedRangeSpeed(_Config, 7, 55.0f, 150.0f);
+
+    // // Range 0: 0.0 km/h to 4.0 km/h
+    // config = AddSPWM_AsyncFixed(1235);
+    // SetSPWM_Acceleration(_Config, 0, config);
+    // SetSPWM_Coasting(_Config, 0, config);
+    // SetSPWM_Deceleration(_Config, 0, AddSPWM_AsyncRamp(1000,2000));
+    // SetSpeedRangeSpeed(_Config, 0, 0.0f, 4.0f);
+
+    // // Range 1: 4.0 km/h to 8.0 km/h
+    // config = AddSPWM_AsyncFixed(1190);
+    // SetSPWM_Acceleration(_Config, 1, config);
+    // SetSPWM_Coasting(_Config, 1, config);
+    // SetSPWM_Deceleration(_Config, 1, config);
+    // SetSpeedRangeSpeed(_Config, 1, 4.0f, 8.0f);
+
+    // // Range 2: 8.0 km/h to 10.0 km/h
+    // config = AddSPWM_AsyncFixed(1210);
+    // SetSPWM_Acceleration(_Config, 2, config);
+    // SetSPWM_Coasting(_Config, 2, config);
+    // SetSPWM_Deceleration(_Config, 2, config);
+    // SetSpeedRangeSpeed(_Config, 2, 8.0f, 10.0f);
+
+    // // Range 3: 10.0 km/h to 14.0 km/h
+    // config = AddSPWM_AsyncFixed(1235);
+    // SetSPWM_Acceleration(_Config, 3, config);
+    // SetSPWM_Coasting(_Config, 3, config);
+    // SetSPWM_Deceleration(_Config, 3, config);
+    // SetSpeedRangeSpeed(_Config, 3, 10.0f, 14.0f);
+
+    // // Range 4: 14.0 km/h to 16.0 km/h
+    // config = AddSPWM_AsyncFixed(1460);
+    // SetSPWM_Acceleration(_Config, 4, config);
+    // SetSPWM_Coasting(_Config, 4, config);
+    // SetSPWM_Deceleration(_Config, 4, config);
+    // SetSpeedRangeSpeed(_Config, 4, 14.0f, 16.0f);
+
+    // // Range 5: 16.0 km/h to 19.0 km/h
+    // config = AddSPWM_AsyncFixed(1210);
+    // SetSPWM_Acceleration(_Config, 5, config);
+    // SetSPWM_Coasting(_Config, 5, config);
+    // SetSPWM_Deceleration(_Config, 5, config);
+    // SetSpeedRangeSpeed(_Config, 5, 16.0f, 19.0f);
+
+    // // Range 6: 19.0 km/h to 999.0 km/h
+    // config = AddSPWM_AsyncFixed(1230);
+    // SetSPWM_Acceleration(_Config, 6, config);
+    // SetSPWM_Coasting(_Config, 6, config);
+    // SetSPWM_Deceleration(_Config, 6, config);
+    // SetSpeedRangeSpeed(_Config, 6, 19.0f, 999.0f);
 
 }
 
 
 SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _MotorCurrent) {
-
     SpeedRange defaultRange = {0}; // Default range if no match is found
     defaultRange.minSpeed = 0;
-    defaultRange.maxSpeed = 99999; 
-    defaultRange.spwm.type = SPWM_TYPE_NONE;
-    defaultRange.spwm.carrierFrequencyStart = 0;
-    defaultRange.spwm.carrierFrequencyEnd = 0;
-    defaultRange.spwm.numPulses = 0;
+    defaultRange.maxSpeed = 99999;
+    defaultRange.spwm.acceleration.type = SPWM_TYPE_NONE;
+    defaultRange.spwm.acceleration.carrierFrequencyStart = 0;
+    defaultRange.spwm.acceleration.carrierFrequencyEnd = 0;
+    defaultRange.spwm.acceleration.numPulses = 0;
+
+    defaultRange.spwm.coasting.type = SPWM_TYPE_NONE;
+    defaultRange.spwm.coasting.carrierFrequencyStart = 0;
+    defaultRange.spwm.coasting.carrierFrequencyEnd = 0;
+    defaultRange.spwm.coasting.numPulses = 0;
+
+    defaultRange.spwm.deceleration.type = SPWM_TYPE_NONE;
+    defaultRange.spwm.deceleration.carrierFrequencyStart = 0;
+    defaultRange.spwm.deceleration.carrierFrequencyEnd = 0;
+    defaultRange.spwm.deceleration.numPulses = 0;
 
     if (_Source == NULL || _Source->speedRangeCount == 0) {
-        // VESC_IF->printf("Error! Invalid Config")    ;
         return defaultRange; // Return an empty range if the config is invalid
     }
 
     // Calculate the speed in km/h using the rpmToSpeedRatio
     float speedKmh = _MotorRPM * _Source->rpmToSpeedRatio;
-    // if (speedKmh < 0.) {
-    //     speedKmh = -speedKmh;
-    // }
 
     // Cap the speed to the maximum allowed speed
     if (speedKmh > _Source->maxSpeed) {
         speedKmh = _Source->maxSpeed;
     }
 
-    if (speedKmh < _Source->zeroSpeedCutoffMargin && _MotorCurrent < 3.) {
+    // If the speed is below the cutoff margin and the current is low, return the default range (disabled)
+    if (speedKmh < _Source->zeroSpeedCutoffMargin && _MotorCurrent < 3.0f) {
         return defaultRange;
     }
 
@@ -156,8 +226,9 @@ SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _M
         // We put in extra logic to ensure that the code works even for negative values
         float BottomSpeed = _Source->speedRanges[i].minSpeed;
         if (i == 0) {
-            BottomSpeed -= 1.;
+            BottomSpeed -= 1.0f; // Allow some margin for the first range
         }
+
         if (speedKmh >= BottomSpeed && speedKmh <= _Source->speedRanges[i].maxSpeed) {
             return _Source->speedRanges[i]; // Return the matching speed range
         }
@@ -166,6 +237,7 @@ SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _M
     // If no range matches, return the default range
     return defaultRange;
 }
+
 
 void PrintInverterConfig(const InverterConfig* config) {
     if (!config) {
@@ -186,35 +258,47 @@ void PrintInverterConfig(const InverterConfig* config) {
         VESC_IF->printf("  Min Speed: %f km/h\n", (double)range->minSpeed);
         VESC_IF->printf("  Max Speed: %f km/h\n", (double)range->maxSpeed);
 
-        // Print SPWM configuration
-        const SPWMConfig* spwm = &range->spwm;
-        const char* spwmTypeStr = "Unknown";
-        switch (spwm->type) {
-            case SPWM_TYPE_FIXED_ASYNC:
-                spwmTypeStr = "Fixed Async";
-                break;
-            case SPWM_TYPE_RAMP_ASYNC:
-                spwmTypeStr = "Ramp Async";
-                break;
-            case SPWM_TYPE_RSPWM:
-                spwmTypeStr = "Random SPWM";
-                break;
-            case SPWM_TYPE_SYNC:
-                spwmTypeStr = "Synchronous";
-                break;
-            case SPWM_TYPE_NONE:
-                spwmTypeStr = "Output Disabled (all 0s)";
-                break;
-        }
-        VESC_IF->printf("  SPWM Type: %s\n", spwmTypeStr);
+        // Print SPWM configuration for acceleration
+        VESC_IF->printf("  Acceleration SPWM Configuration:\n");
+        PrintSPWMConfig(&range->spwm.acceleration);
 
-        if (spwm->type == SPWM_TYPE_FIXED_ASYNC || spwm->type == SPWM_TYPE_RAMP_ASYNC || spwm->type == SPWM_TYPE_RSPWM) {
-            VESC_IF->printf("  Carrier Frequency Start: %d Hz\n", spwm->carrierFrequencyStart);
-            if (spwm->type == SPWM_TYPE_RAMP_ASYNC || spwm->type == SPWM_TYPE_RSPWM) {
-                VESC_IF->printf("  Carrier Frequency End: %d Hz\n", spwm->carrierFrequencyEnd);
-            }
-        } else if (spwm->type == SPWM_TYPE_SYNC) {
-            VESC_IF->printf("  Number of Pulses: %d\n", spwm->numPulses);
+        // Print SPWM configuration for coasting
+        VESC_IF->printf("  Coasting SPWM Configuration:\n");
+        PrintSPWMConfig(&range->spwm.coasting);
+
+        // Print SPWM configuration for deceleration
+        VESC_IF->printf("  Deceleration SPWM Configuration:\n");
+        PrintSPWMConfig(&range->spwm.deceleration);
+    }
+}
+
+void PrintSPWMConfig(const SPWMConfig* spwm) {
+    const char* spwmTypeStr = "Unknown";
+    switch (spwm->type) {
+        case SPWM_TYPE_FIXED_ASYNC:
+            spwmTypeStr = "Fixed Async";
+            break;
+        case SPWM_TYPE_RAMP_ASYNC:
+            spwmTypeStr = "Ramp Async";
+            break;
+        case SPWM_TYPE_RSPWM:
+            spwmTypeStr = "Random SPWM";
+            break;
+        case SPWM_TYPE_SYNC:
+            spwmTypeStr = "Synchronous";
+            break;
+        case SPWM_TYPE_NONE:
+            spwmTypeStr = "Output Disabled (all 0s)";
+            break;
+    }
+    VESC_IF->printf("    SPWM Type: %s\n", spwmTypeStr);
+
+    if (spwm->type == SPWM_TYPE_FIXED_ASYNC || spwm->type == SPWM_TYPE_RAMP_ASYNC || spwm->type == SPWM_TYPE_RSPWM) {
+        VESC_IF->printf("    Carrier Frequency Start: %d Hz\n", spwm->carrierFrequencyStart);
+        if (spwm->type == SPWM_TYPE_RAMP_ASYNC || spwm->type == SPWM_TYPE_RSPWM) {
+            VESC_IF->printf("    Carrier Frequency End: %d Hz\n", spwm->carrierFrequencyEnd);
         }
+    } else if (spwm->type == SPWM_TYPE_SYNC) {
+        VESC_IF->printf("    Number of Pulses: %d\n", spwm->numPulses);
     }
 }

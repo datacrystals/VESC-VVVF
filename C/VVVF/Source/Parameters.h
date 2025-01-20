@@ -18,3 +18,6 @@
 #define INVERTER_AMPLITUDE_SPEED_RAMP_END_KMH 40.0
 #define INVERTER_AMPLITUDE_SPEED_SCALAR_START 1.0
 #define INVERTER_AMPLITUDE_SPEED_SCALAR_END 3.0
+
+#define COASTING_RPM_THRESHOLD 0.1 // RPM threshold to consider the rotor as coasting
+#define RPM_SAMPLE_COUNT 5        // Number of RPM samples to consider for state determination

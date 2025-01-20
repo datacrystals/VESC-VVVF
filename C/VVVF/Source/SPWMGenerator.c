@@ -75,12 +75,13 @@ void SPWMGenerator_Init(SPWMGenerator* generator) {
     generator->Amplitude = 0.0f;           // Default amplitude
 }
 
-// Generate SPWM samples, this function returns true/false indicating if the inverter should be enabled or not
-int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float HzToKmhFactor) {
+
+
+int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorState, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float HzToKmhFactor) {
     if (!generator || !buffer || !speedRange) return false;
 
     // Firstly check if disabled, if so, set audio to none
-    if (speedRange->spwm.type == SPWM_TYPE_NONE) {
+    if (speedRange->spwm.acceleration.type == SPWM_TYPE_NONE) {
         for (int i = 0; i < bufferLength; i++) {
             buffer[i] = 0;
         }
@@ -90,35 +91,35 @@ int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, int8_t* buffer, int 
     // Convert command frequency to speed
     float speedKmh = (CommandHZ / (float)NumPoles) * HzToKmhFactor;
 
+    // Update carrier frequency based on the active speed range and rotor state
+    const SPWMConfig* spwm_config = NULL;
+    switch (_RotorState) {
+        case ROTOR_STATE_ACCELERATING:
+            spwm_config = &speedRange->spwm.acceleration;
+            break;
+        case ROTOR_STATE_COASTING:
+            spwm_config = &speedRange->spwm.coasting;
+            break;
+        case ROTOR_STATE_DECELERATING:
+            spwm_config = &speedRange->spwm.deceleration;
+            break;
+    }
 
-    // Update carrier frequency based on the active speed range
-    if (speedRange->spwm.type == SPWM_TYPE_FIXED_ASYNC) {
-        generator->CarrierFrequency = speedRange->spwm.carrierFrequencyStart;
-        // VESC_IF->printf("Fixed %.1f\n", generator->CarrierFrequency);
-    } else if (speedRange->spwm.type == SPWM_TYPE_RAMP_ASYNC) {
-        // Linear interpolation for ramp mode
-        float speedRatio = (speedKmh - speedRange->minSpeed) / (speedRange->maxSpeed - speedRange->minSpeed);
-        generator->CarrierFrequency = speedRange->spwm.carrierFrequencyStart + (speedRange->spwm.carrierFrequencyEnd - speedRange->spwm.carrierFrequencyStart) * speedRatio;
-        // VESC_IF->printf("Ramp %.1f\n", generator->CarrierFrequency);
-    } else if (speedRange->spwm.type == SPWM_TYPE_SYNC) {
-        generator->CarrierFrequency = (CommandHZ / (float)NumPoles) * speedRange->spwm.numPulses;
-        // VESC_IF->printf("Sync %.1f\n", generator->CarrierFrequency);
-    } else if (speedRange->spwm.type == SPWM_TYPE_RSPWM) {
-        generator->CarrierFrequency = random_range(speedRange->spwm.carrierFrequencyStart, speedRange->spwm.carrierFrequencyEnd);
-        // VESC_IF->printf("Random %.1f\n", generator->CarrierFrequency);
+    if (spwm_config) {
+        if (spwm_config->type == SPWM_TYPE_FIXED_ASYNC) {
+            generator->CarrierFrequency = spwm_config->carrierFrequencyStart;
+        } else if (spwm_config->type == SPWM_TYPE_RAMP_ASYNC) {
+            float speedRatio = (speedKmh - speedRange->minSpeed) / (speedRange->maxSpeed - speedRange->minSpeed);
+            generator->CarrierFrequency = spwm_config->carrierFrequencyStart + (spwm_config->carrierFrequencyEnd - spwm_config->carrierFrequencyStart) * speedRatio;
+        } else if (spwm_config->type == SPWM_TYPE_SYNC) {
+            generator->CarrierFrequency = (CommandHZ / (float)NumPoles) * spwm_config->numPulses;
+        } else if (spwm_config->type == SPWM_TYPE_RSPWM) {
+            generator->CarrierFrequency = random_range(spwm_config->carrierFrequencyStart, spwm_config->carrierFrequencyEnd);
+        }
     }
 
     // Generate SPWM samples
     for (int i = 0; i < bufferLength; i++) {
-
-        // Some modes require updating carrier constantly
-        if (i % 10 == 0) {
-             if (speedRange->spwm.type == SPWM_TYPE_RSPWM) {
-                // lookup_index = (lookup_index + i) % 256;
-                generator->CarrierFrequency = random_range(speedRange->spwm.carrierFrequencyStart, speedRange->spwm.carrierFrequencyEnd);
-            }
-        }
-
         // Update phases
         generator->CommandPhase += (TWO_PI * generator->CommandFrequency) / SAMPLE_RATE;
         generator->CarrierPhase += (TWO_PI * generator->CarrierFrequency) / SAMPLE_RATE;
@@ -128,23 +129,14 @@ int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, int8_t* buffer, int 
         if (generator->CarrierPhase >= TWO_PI) generator->CarrierPhase -= TWO_PI;
 
         // Generate command and carrier signals
-        // int8_t command = SPWMGenerator_GenerateSin(generator->CommandPhase);
         int8_t carrier = SPWMGenerator_GenerateSawtooth(generator->CarrierPhase);
-
         buffer[i] = carrier;
-
-        // // SPWM logic
-        // if (command > 0 && command > carrier) {
-        //     buffer[i] = INT8_SCALE;
-        // } else if (command < 0 && command < -carrier) {
-        //     buffer[i] = -INT8_SCALE;
-        // } else {
-        //     buffer[i] = 0;
-        // }
     }
 
     return true;
 }
+
+
 
 // Map a value from one range to another
 float SPWMGenerator_MapValue(float value, float inMin, float inMax, float outMin, float outMax) {
