@@ -72,115 +72,115 @@ void InitializeConfiguration(InverterConfig* _Config) {
     SPWMConfig config;
 
 
-    // Range 0: -1.0 km/h to 5.0 km/h
-    config = AddSPWM_AsyncRamp(250, 500); // Ramp from 250 Hz to 500 Hz
-    SetSPWM_Acceleration(_Config, 0, config);
-    SetSPWM_Coasting(_Config, 0, config);
-    SetSPWM_Deceleration(_Config, 0, config);
-    SetSpeedRangeSpeed(_Config, 0, -1.0f, 5.0f);
-
-    // Range 1: 5.0 km/h to 20.0 km/h
-    config = AddSPWM_AsyncFixed(500); // Fixed at 500 Hz
-    SetSPWM_Acceleration(_Config, 1, config);
-    SetSPWM_Coasting(_Config, 1, config);
-    SetSPWM_Deceleration(_Config, 1, config);
-    SetSpeedRangeSpeed(_Config, 1, 5.0f, 20.0f);
-
-    // Range 2: 20.0 km/h to 21.0 km/h
-    config = AddSPWM_AsyncRamp(500, 300); // Ramp from 500 Hz to 300 Hz
-    SetSPWM_Acceleration(_Config, 2, config);
-    SetSPWM_Coasting(_Config, 2, config);
-    config = AddSPWM_AsyncFixed(500); // Fixed at 500 Hz for braking
-    SetSPWM_Deceleration(_Config, 2, config);
-    SetSpeedRangeSpeed(_Config, 2, 20.0f, 21.0f);
-
-    // Range 3: 21.0 km/h to 27.0 km/h
-    config = AddSPWM_Sync(11); // Sync with 11 pulses
-    SetSPWM_Acceleration(_Config, 3, config);
-    SetSPWM_Coasting(_Config, 3, config);
-    SetSPWM_Deceleration(_Config, 3, config);
-    SetSpeedRangeSpeed(_Config, 3, 21.0f, 27.0f);
-
-    // Range 4: 27.0 km/h to 40.0 km/h
-    config = AddSPWM_Sync(7); // Sync with 7 pulses
-    SetSPWM_Acceleration(_Config, 4, config);
-    SetSPWM_Coasting(_Config, 4, config);
-    SetSPWM_Deceleration(_Config, 4, config);
-    SetSpeedRangeSpeed(_Config, 4, 27.0f, 40.0f);
-
-    // Range 5: 40.0 km/h to 48.0 km/h
-    config = AddSPWM_Sync(3); // Sync with 3 pulses, no wide pulse
-    SetSPWM_Acceleration(_Config, 5, config);
-    SetSPWM_Coasting(_Config, 5, config);
-    SetSPWM_Deceleration(_Config, 5, config);
-    SetSpeedRangeSpeed(_Config, 5, 40.0f, 48.0f);
-
-    // Range 6: 48.0 km/h to 55.0 km/h
-    config = AddSPWM_Sync(3); // Sync with 3 pulses, wide pulse enabled
-    // config.modulationIndex = 1.1f; // Modulation index for W3P mode
-    SetSPWM_Acceleration(_Config, 6, config);
-    SetSPWM_Coasting(_Config, 6, config);
-    SetSPWM_Deceleration(_Config, 6, config);
-    SetSpeedRangeSpeed(_Config, 6, 48.0f, 55.0f);
-
-    // Range 7: 55.0 km/h to 150.0 km/h
-    config = AddSPWM_Sync(1); // Sync with 1 pulse, no wide pulse
-    SetSPWM_Acceleration(_Config, 7, config);
-    config = AddSPWM_Sync(3); // Sync with 3 pulses, wide pulse enabled
-    // config.modulationIndex = 1.15f; // Modulation index for W3P mode
-    SetSPWM_Coasting(_Config, 7, config);
-    config = AddSPWM_Sync(1); // Sync with 1 pulse, no wide pulse
-    SetSPWM_Deceleration(_Config, 7, config);
-    SetSpeedRangeSpeed(_Config, 7, 55.0f, 150.0f);
-
-    // // Range 0: 0.0 km/h to 4.0 km/h
-    // config = AddSPWM_AsyncFixed(1235);
+    // // Range 0: -1.0 km/h to 5.0 km/h
+    // config = AddSPWM_AsyncRamp(250, 500); // Ramp from 250 Hz to 500 Hz
     // SetSPWM_Acceleration(_Config, 0, config);
     // SetSPWM_Coasting(_Config, 0, config);
-    // SetSPWM_Deceleration(_Config, 0, AddSPWM_AsyncRamp(1000,2000));
-    // SetSpeedRangeSpeed(_Config, 0, 0.0f, 4.0f);
+    // SetSPWM_Deceleration(_Config, 0, config);
+    // SetSpeedRangeSpeed(_Config, 0, -1.0f, 5.0f);
 
-    // // Range 1: 4.0 km/h to 8.0 km/h
-    // config = AddSPWM_AsyncFixed(1190);
+    // // Range 1: 5.0 km/h to 20.0 km/h
+    // config = AddSPWM_AsyncFixed(500); // Fixed at 500 Hz
     // SetSPWM_Acceleration(_Config, 1, config);
     // SetSPWM_Coasting(_Config, 1, config);
     // SetSPWM_Deceleration(_Config, 1, config);
-    // SetSpeedRangeSpeed(_Config, 1, 4.0f, 8.0f);
+    // SetSpeedRangeSpeed(_Config, 1, 5.0f, 20.0f);
 
-    // // Range 2: 8.0 km/h to 10.0 km/h
-    // config = AddSPWM_AsyncFixed(1210);
+    // // Range 2: 20.0 km/h to 21.0 km/h
+    // config = AddSPWM_AsyncRamp(500, 300); // Ramp from 500 Hz to 300 Hz
     // SetSPWM_Acceleration(_Config, 2, config);
     // SetSPWM_Coasting(_Config, 2, config);
+    // config = AddSPWM_AsyncFixed(500); // Fixed at 500 Hz for braking
     // SetSPWM_Deceleration(_Config, 2, config);
-    // SetSpeedRangeSpeed(_Config, 2, 8.0f, 10.0f);
+    // SetSpeedRangeSpeed(_Config, 2, 20.0f, 21.0f);
 
-    // // Range 3: 10.0 km/h to 14.0 km/h
-    // config = AddSPWM_AsyncFixed(1235);
+    // // Range 3: 21.0 km/h to 27.0 km/h
+    // config = AddSPWM_Sync(11); // Sync with 11 pulses
     // SetSPWM_Acceleration(_Config, 3, config);
     // SetSPWM_Coasting(_Config, 3, config);
     // SetSPWM_Deceleration(_Config, 3, config);
-    // SetSpeedRangeSpeed(_Config, 3, 10.0f, 14.0f);
+    // SetSpeedRangeSpeed(_Config, 3, 21.0f, 27.0f);
 
-    // // Range 4: 14.0 km/h to 16.0 km/h
-    // config = AddSPWM_AsyncFixed(1460);
+    // // Range 4: 27.0 km/h to 40.0 km/h
+    // config = AddSPWM_Sync(7); // Sync with 7 pulses
     // SetSPWM_Acceleration(_Config, 4, config);
     // SetSPWM_Coasting(_Config, 4, config);
     // SetSPWM_Deceleration(_Config, 4, config);
-    // SetSpeedRangeSpeed(_Config, 4, 14.0f, 16.0f);
+    // SetSpeedRangeSpeed(_Config, 4, 27.0f, 40.0f);
 
-    // // Range 5: 16.0 km/h to 19.0 km/h
-    // config = AddSPWM_AsyncFixed(1210);
+    // // Range 5: 40.0 km/h to 48.0 km/h
+    // config = AddSPWM_Sync(3); // Sync with 3 pulses, no wide pulse
     // SetSPWM_Acceleration(_Config, 5, config);
     // SetSPWM_Coasting(_Config, 5, config);
     // SetSPWM_Deceleration(_Config, 5, config);
-    // SetSpeedRangeSpeed(_Config, 5, 16.0f, 19.0f);
+    // SetSpeedRangeSpeed(_Config, 5, 40.0f, 48.0f);
 
-    // // Range 6: 19.0 km/h to 999.0 km/h
-    // config = AddSPWM_AsyncFixed(1230);
+    // // Range 6: 48.0 km/h to 55.0 km/h
+    // config = AddSPWM_Sync(3); // Sync with 3 pulses, wide pulse enabled
+    // // config.modulationIndex = 1.1f; // Modulation index for W3P mode
     // SetSPWM_Acceleration(_Config, 6, config);
     // SetSPWM_Coasting(_Config, 6, config);
     // SetSPWM_Deceleration(_Config, 6, config);
-    // SetSpeedRangeSpeed(_Config, 6, 19.0f, 999.0f);
+    // SetSpeedRangeSpeed(_Config, 6, 48.0f, 55.0f);
+
+    // // Range 7: 55.0 km/h to 150.0 km/h
+    // config = AddSPWM_Sync(1); // Sync with 1 pulse, no wide pulse
+    // SetSPWM_Acceleration(_Config, 7, config);
+    // config = AddSPWM_Sync(3); // Sync with 3 pulses, wide pulse enabled
+    // // config.modulationIndex = 1.15f; // Modulation index for W3P mode
+    // SetSPWM_Coasting(_Config, 7, config);
+    // config = AddSPWM_Sync(1); // Sync with 1 pulse, no wide pulse
+    // SetSPWM_Deceleration(_Config, 7, config);
+    // SetSpeedRangeSpeed(_Config, 7, 55.0f, 150.0f);
+
+    // Range 0: 0.0 km/h to 4.0 km/h
+    config = AddSPWM_AsyncFixed(1235);
+    SetSPWM_Acceleration(_Config, 0, config);
+    SetSPWM_Coasting(_Config, 0, config);
+    SetSPWM_Deceleration(_Config, 0, AddSPWM_AsyncRamp(1000,2000));
+    SetSpeedRangeSpeed(_Config, 0, 0.0f, 4.0f);
+
+    // Range 1: 4.0 km/h to 8.0 km/h
+    config = AddSPWM_AsyncFixed(1190);
+    SetSPWM_Acceleration(_Config, 1, config);
+    SetSPWM_Coasting(_Config, 1, config);
+    SetSPWM_Deceleration(_Config, 1, config);
+    SetSpeedRangeSpeed(_Config, 1, 4.0f, 8.0f);
+
+    // Range 2: 8.0 km/h to 10.0 km/h
+    config = AddSPWM_AsyncFixed(1210);
+    SetSPWM_Acceleration(_Config, 2, config);
+    SetSPWM_Coasting(_Config, 2, config);
+    SetSPWM_Deceleration(_Config, 2, config);
+    SetSpeedRangeSpeed(_Config, 2, 8.0f, 10.0f);
+
+    // Range 3: 10.0 km/h to 14.0 km/h
+    config = AddSPWM_AsyncFixed(1235);
+    SetSPWM_Acceleration(_Config, 3, config);
+    SetSPWM_Coasting(_Config, 3, config);
+    SetSPWM_Deceleration(_Config, 3, config);
+    SetSpeedRangeSpeed(_Config, 3, 10.0f, 14.0f);
+
+    // Range 4: 14.0 km/h to 16.0 km/h
+    config = AddSPWM_AsyncFixed(1460);
+    SetSPWM_Acceleration(_Config, 4, config);
+    SetSPWM_Coasting(_Config, 4, config);
+    SetSPWM_Deceleration(_Config, 4, config);
+    SetSpeedRangeSpeed(_Config, 4, 14.0f, 16.0f);
+
+    // Range 5: 16.0 km/h to 19.0 km/h
+    config = AddSPWM_AsyncFixed(1210);
+    SetSPWM_Acceleration(_Config, 5, config);
+    SetSPWM_Coasting(_Config, 5, config);
+    SetSPWM_Deceleration(_Config, 5, config);
+    SetSpeedRangeSpeed(_Config, 5, 16.0f, 19.0f);
+
+    // Range 6: 19.0 km/h to 999.0 km/h
+    config = AddSPWM_AsyncFixed(1230);
+    SetSPWM_Acceleration(_Config, 6, config);
+    SetSPWM_Coasting(_Config, 6, config);
+    SetSPWM_Deceleration(_Config, 6, config);
+    SetSpeedRangeSpeed(_Config, 6, 19.0f, 999.0f);
 
 }
 
