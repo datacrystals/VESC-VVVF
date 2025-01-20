@@ -84,7 +84,6 @@ static thread_data generator_thread_data;
 static thread_data playback_thread_data;
 
 
-
 // Function to map a value from one range to another
 float map_value(float value, float in_min, float in_max, float out_min, float out_max) {
     // Ensure the input range is not zero to avoid division by zero
@@ -92,22 +91,18 @@ float map_value(float value, float in_min, float in_max, float out_min, float ou
         return out_min;  // If input range is zero, return the minimum output value
     }
 
+    // Clamp the input value to the input range
+    if (value < in_min) {
+        return out_min;  // If value is below in_min, clamp to out_min
+    } else if (value > in_max) {
+        return out_max;  // If value is above in_max, clamp to out_max
+    }
+
     // Map the value from the input range to the output range
     float val = out_min + ((value - in_min) / (in_max - in_min)) * (out_max - out_min);
 
-    // Clamp value to start and end
-    if (val < out_min) {
-        val = out_min;
-    } else if (val > out_max) {
-        val = out_max;
-    }
-
     return val;
 }
-
-
-
-
 
 
 // Function to update the rotor state based on the last n RPM values
@@ -156,6 +151,7 @@ static void update_spwm_settings() {
         INVERTER_AMPLITUDE_SPEED_SCALAR_END
     );
     amplitude += INVERTER_AMPLITUDE_BASE;
+    // VESC_IF->printf("Amplitude Scale Value: %.1f.\n", AmplitudeScaleFactor);
     amplitude = amplitude * AmplitudeScaleFactor;
 
     // Get the active speed range
