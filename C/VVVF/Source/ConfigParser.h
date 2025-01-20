@@ -32,13 +32,14 @@ typedef struct {
 typedef struct {
     float rpmToSpeedRatio;   // Used to convert from the motor's rpm to the speed in km/h
     float maxSpeed;            // Maximum speed - any value above this will be capped to the max speed in km/h
+    float zeroSpeedCutoffMargin; // How close it should be to 0 kmh before cutting off
     SpeedRange speedRanges[MAX_SPEED_RANGES]; // Array of speed ranges
     int speedRangeCount;     // Number of valid speed ranges
 } InverterConfig;
 
 // Function to parse JSON and populate the InverterConfig struct
 void InitializeConfiguration(InverterConfig* _Config);
-SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM);
+SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _MotorCurrent);
 void PrintInverterConfig(const InverterConfig* config);
 
 // NOTE: THE SPEED RANGE VALUES *MUST* BE IN ASCENDING ORDER (Low index = closer to 0 speed, higher = higher speed)

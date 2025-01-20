@@ -53,12 +53,13 @@ static int inverter_enabled = false; // Enable or disable the inverter doing stu
 
 static InverterConfig Conf = {0}; // Configuration of the inverter from the json file
 static SpeedRange ActiveSpeedRange = {0}; // Currently active speed range that should be used for motor sound generation
+static SPWMGenerator generator;
 
 // Motor Sound Config
-static float min_current = 3.0f; // Amperes - defines linear ramp min current
-static float max_current = 10.0f; // Amperes - defines linear ramp max current
-static float min_sound_voltage = 0.05; // Volts - defines linear ramp min voltage
-static float max_sound_voltage = 0.1;//0.3; // Volts - defines linear ramp max voltage
+static float min_current = INVERTER_CURRENT_RAMP_START; // Amperes - defines linear ramp min current
+static float max_current = INVERTER_CURRENT_RAMP_END; // Amperes - defines linear ramp max current
+static float min_sound_voltage = INVERTER_AMPLITUDE_RAMP_START; // Volts - defines linear ramp min voltage
+static float max_sound_voltage = INVERTER_AMPLITUDE_RAMP_END; // Volts - defines linear ramp max voltage
 
 // SPWM variables
 // static float carrier_phase = 0.0f; // Phase of the current carrier sin wave
@@ -103,12 +104,12 @@ static void update_spwm_settings() {
 	if (amplitude < 0.) {
 		amplitude = 0.;
 	}
-	amplitude += 0.02;
+	amplitude += INVERTER_AMPLITUDE_BASE;
 
     // VESC_IF->printf("Inverter Carrier Frequency: %f\n", carrier_frequency);
 	// carrier_frequency = 2000.f + inverter_hz;
 
-    ActiveSpeedRange = GetSpeedRangeAtRPM(&Conf, inverter_hz / (float)motor_poles);
+    ActiveSpeedRange = GetSpeedRangeAtRPM(&Conf, inverter_hz / (float)motor_poles, inverter_current);
 
 }
 
@@ -116,7 +117,6 @@ static void update_spwm_settings() {
 static void generator_loop(void *arg) {
     (void)arg;
 
-    SPWMGenerator generator;
     SPWMGenerator_Init(&generator);
 
     while (generator_thread_data.running) {
@@ -236,7 +236,7 @@ static void print_stats(void) {
                 break;
         }
         VESC_IF->printf("SPWM Mode: %s, Carrier Frequency: %.1f Hz\n",
-                        spwm_mode_str, (double)ActiveSpeedRange.spwm.carrierFrequencyStart);
+                        spwm_mode_str, (double)generator.CarrierFrequency);
     }
 }
 

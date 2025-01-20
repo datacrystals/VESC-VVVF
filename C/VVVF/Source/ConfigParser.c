@@ -70,22 +70,21 @@ void InitializeConfiguration(InverterConfig* _Config) {
     // Setup basic parameters
     _Config->maxSpeed = MAX_SPEED_KMH; // km/h
     _Config->rpmToSpeedRatio = wheel_diameter_to_kmh_factor(WHEEL_DIAMETER_MM);
+    _Config->zeroSpeedCutoffMargin = ZERO_CUTOFF_MARGIN_KMH;
 
     // Now add ranges
     // AddSPWM_RSPWM(_Config, 0, 0., 4., 1000, 10000); // RSPWM from 10-20km/h @ 2khz-3khz carrier
-    AddSPWM_AsyncFixed(_Config, 0, 0.3, 4.0, 1000); // Async SPWM from 0-5km/h @ 1khz carrier
-    AddSPWM_AsyncRamp (_Config, 1, 4.0, 7.0, 1000, 2000); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
-    AddSPWM_AsyncFixed(_Config, 2, 7.0, 11., 2000); // Async SPWM from 0-5km/h @ 1khz carrier
-    AddSPWM_Sync      (_Config, 3, 11., 16., 16); // Sync SPWM from 20-30km/h with 4 pulses
-    AddSPWM_Sync      (_Config, 4, 16., 22., 8); // Sync SPWM from 20-30km/h with 4 pulses
-    AddSPWM_Sync      (_Config, 5, 22., 28., 4); // Sync SPWM from 20-30km/h with 4 pulses
-    AddSPWM_Sync      (_Config, 6, 28., 32., 2); // Sync SPWM from 20-30km/h with 4 pulses
-    AddSPWM_Sync      (_Config, 7, 32., 9999., 1); // Sync SPWM from 20-30km/h with 4 pulses
+    AddSPWM_AsyncFixed(_Config, 0, 0., 10.0, 1000); // Async SPWM from 0-5km/h @ 1khz carrier
+    AddSPWM_AsyncRamp (_Config, 1, 10.0, 13.0, 1000, 2000); // Async SPWM from 5-10km/h @ 1khz-2khz carrier
+    AddSPWM_AsyncFixed(_Config, 2, 13.0, 20., 2000); // Async SPWM from 0-5km/h @ 1khz carrier
+    AddSPWM_Sync      (_Config, 3, 20., 32., 8); // Sync SPWM from 20-30km/h with 4 pulses
+    AddSPWM_Sync      (_Config, 4, 32., 55., 4); // Sync SPWM from 20-30km/h with 4 pulses
+    AddSPWM_Sync      (_Config, 5, 55., 9999., 2); // Sync SPWM from 20-30km/h with 4 pulses
 
 }
 
 
-SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM) {
+SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _MotorCurrent) {
 
     SpeedRange defaultRange = {0}; // Default range if no match is found
     defaultRange.minSpeed = 0;
@@ -111,14 +110,17 @@ SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM) {
         speedKmh = _Source->maxSpeed;
     }
 
+    if (speedKmh < _Source->zeroSpeedCutoffMargin && _MotorCurrent < 3.) {
+        return defaultRange;
+    }
+
     // Iterate through the speed ranges to find the appropriate range
     for (int i = 0; i < _Source->speedRangeCount; i++) {
-        
         // We put in extra logic to ensure that the code works even for negative values
         float BottomSpeed = _Source->speedRanges[i].minSpeed;
-        // if (i == 0) {
-        //     BottomSpeed -= 1.;
-        // }
+        if (i == 0) {
+            BottomSpeed -= 1.;
+        }
         if (speedKmh >= BottomSpeed && speedKmh <= _Source->speedRanges[i].maxSpeed) {
             return _Source->speedRanges[i]; // Return the matching speed range
         }
