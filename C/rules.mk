@@ -41,6 +41,9 @@ CFLAGS += -fdata-sections -ffunction-sections
 CFLAGS += -DIS_VESC_LIB
 CFLAGS += $(USE_OPT)
 
+# Add the ThirdParty Include Dirs
+CFLAGS += $(INCLUDE_PATHS)
+
 ifeq ($(USE_STLIB),yes)
 	CFLAGS += -DUSE_STLIB -I$(STLIB_PATH)/inc
 endif

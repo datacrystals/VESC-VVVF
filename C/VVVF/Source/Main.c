@@ -1,6 +1,11 @@
 #include "vesc_c_if.h"
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
+
+#include "ConfigParser.h"
+#include "SPWMGenerator.h"
+#include "Parameters.h"
 
 // TODO:
 // Low Pass filter on amplitude (we don't want *any* sharp changes in amplitude, that makes the motor lose tracking)
@@ -16,11 +21,11 @@ HEADER
 #define SINE_TABLE_SIZE 100
 #define INT8_SCALE 127
 #define TWO_PI 6.28318530718f
-#define BUFFER_LENGTH 400
+#define BUFFER_LENGTH 250
 #define SAMPLE_RATE_WARNING_THRESHOLD 1.2f
 #define SAWTOOTH_MAX 127        // Maximum value for the sawtooth (int8 range: 0-127)
 #define NUM_BUFFERS 3
-#define NUM_MOTOR_STAT_SAMPLES 20
+#define NUM_MOTOR_STAT_SAMPLES 10
 
 // SPWM modes
 #define SPWM_MODE_FIXED 0
@@ -28,27 +33,13 @@ HEADER
 #define SPWM_MODE_SYNC 2
 
 
-// Sine lookup table
-static const int8_t sineLookupTable[SINE_TABLE_SIZE] = {
-    64, 76, 88, 100, 111, 123, 134, 145, 156, 166,
-    176, 186, 195, 203, 211, 219, 225, 231, 237, 242,
-    246, 249, 252, 253, 255, 255, 255, 253, 252, 249,
-    246, 242, 237, 231, 225, 219, 211, 203, 195, 186,
-    176, 166, 156, 145, 134, 123, 111, 100, 88, 76,
-    64, 52, 40, 28, 17, 5, -6, -17, -28, -38,
-    -48, -58, -67, -75, -83, -91, -97, -103, -109, -114,
-    -118, -121, -124, -125, -127, -127, -127, -125, -124, -121,
-    -118, -114, -109, -103, -97, -91, -83, -75, -67, -58,
-    -48, -38, -28, -17, -6, 5, 17, 28, 40, 52
-};
-
 // Global variables
 static int8_t *buffers[NUM_BUFFERS];  // Array of pointers to buffers allocated on the heap
 static bool buffer_ready_for_consumption[NUM_BUFFERS];  // Flags to indicate if a buffer is ready for consumption
 static int producer_index = 0;  // Index of the buffer currently being filled by the producer
 static int consumer_index = 0;  // Index of the buffer currently being consumed by the consumer
 static float amplitude = 0.0f;
-static float sample_rate = 25000.0f;
+static float sample_rate = SAMPLE_RATE;
 
 static float current_samples[NUM_MOTOR_STAT_SAMPLES]; // Array of last n current values used to average them
 static int active_current_index = 0; // Index of current sample to be replaced
@@ -59,19 +50,18 @@ static float inverter_current = 0.; // Number of phase amps pushed into the moto
 static float inverter_hz = 0.; // Current freqency of the inverter in hz
 static int motor_poles = 0; // Number of poles of the motor
 
+static InverterConfig Conf = {0}; // Configuration of the inverter from the json file
+static SpeedRange ActiveSpeedRange = {0}; // Currently active speed range that should be used for motor sound generation
+
 // Motor Sound Config
 static float min_current = 3.0f; // Amperes - defines linear ramp min current
 static float max_current = 10.0f; // Amperes - defines linear ramp max current
 static float min_sound_voltage = 0.05; // Volts - defines linear ramp min voltage
-static float max_sound_voltage = 0.3; // Volts - defines linear ramp max voltage
+static float max_sound_voltage = 0.1;//0.3; // Volts - defines linear ramp max voltage
 
 // SPWM variables
-static float carrier_phase = 0.0f; // Phase of the current carrier sin wave
-static float command_phase = 0.0f; // Phase of the current command sin wave
-static float carrier_frequency = 2000.0f;  // Example carrier frequency
-static float command_frequency = 1.0f;   // Example command frequency
-static float modulation_index = 1.0f;       // Modulation index for wide pulse mode
-static int spwm_mode = SPWM_MODE_FIXED;     // SPWM mode (fixed, ramp, sync)
+// static float carrier_phase = 0.0f; // Phase of the current carrier sin wave
+// static float command_phase = 0.0f; // Phase of the current command sin wave
 
 
 // Statistics
@@ -91,70 +81,6 @@ typedef struct {
 static thread_data generator_thread_data;
 static thread_data playback_thread_data;
 
-
-// Wrapping helper function 
-static inline float wrap_phase(float input_phase) {
-	if (input_phase >= TWO_PI) {
-        input_phase -= TWO_PI;
-	}
-	return input_phase;
-}
-
-// Custom sine function using the lookup table
-static inline int8_t generate_sin(float phase) {
-    int index = (int)(phase * SINE_TABLE_SIZE / TWO_PI) % SINE_TABLE_SIZE;
-    if (index < 0) index += SINE_TABLE_SIZE;
-    return sineLookupTable[index];
-}
-
-// Function to generate a sawtooth waveform in int8 range (0-127)
-static int8_t generate_sawtooth(float phase_offset) {
-
-    // Generate the sawtooth value
-    // The sawtooth waveform is a linear ramp from 0 to 127 based on the phase
-    float sawtooth_value = (phase_offset / TWO_PI) * SAWTOOTH_MAX;
-
-	if (sawtooth_value > SAWTOOTH_MAX) {
-		sawtooth_value = SAWTOOTH_MAX;
-	}
-
-    // Cast to int8 and return
-    return (int8_t)sawtooth_value;
-}
-
-
-// Function to generate SPWM samples
-static void generate_spwm(int8_t *buffer, float command_frequency, float carrier_frequency) {
-
-
-    for (int i = 0; i < BUFFER_LENGTH; i++) {
-
-		// Update phase offsets of both carrier and command based on frequency and sample rate
-		command_phase += (TWO_PI * command_frequency) / sample_rate;
-    	carrier_phase += (TWO_PI * carrier_frequency) / sample_rate;
-
-        // Now generate the carrier and command based on the current phase
-        int8_t command = generate_sin(command_phase);
-        int8_t carrier = generate_sawtooth(carrier_phase);
-
-        // SPWM logic
-        int8_t output;
-        if (command > 0 && command > carrier) {
-            output = 127;
-        } else if (command < 0 && command < -carrier) {
-            output = -127;
-        } else {
-            output = 0;
-        }
-
-        // Set output value
-        buffer[i] = carrier;
-
-        // Wrap the phases at 2*pi
-        command_phase = wrap_phase(command_phase);
-        carrier_phase = wrap_phase(carrier_phase);
-    }
-}
 
 
 // Function to map a value from one range to another
@@ -176,11 +102,12 @@ static void update_spwm_settings() {
 	if (amplitude < 0.) {
 		amplitude = 0.;
 	}
-	amplitude += 0.05;
+	amplitude += 0.02;
 
-	carrier_frequency = 1000.f;
+    // VESC_IF->printf("Inverter Carrier Frequency: %f\n", carrier_frequency);
+	// carrier_frequency = 2000.f + inverter_hz;
 
-
+    ActiveSpeedRange = GetSpeedRangeAtRPM(&Conf, inverter_hz / (float)motor_poles);
 
 }
 
@@ -188,18 +115,19 @@ static void update_spwm_settings() {
 static void generator_loop(void *arg) {
     (void)arg;
 
+    SPWMGenerator generator;
+    SPWMGenerator_Init(&generator);
+
     while (generator_thread_data.running) {
-        // Wait until the current buffer is ready to be written to (i.e., not being consumed)
+        // Wait until the current buffer is ready to be written to
         while (buffer_ready_for_consumption[producer_index] && generator_thread_data.running) {
-            VESC_IF->sleep_ms(1);  // Sleep briefly to avoid busy-waiting
+            VESC_IF->sleep_ms(1);
         }
 
-        if (!generator_thread_data.running) {
-            break;
-        }
+        if (!generator_thread_data.running) break;
 
-        // Generate SPWM samples in the current buffer
-        generate_spwm(buffers[producer_index], command_frequency, carrier_frequency);
+        // Generate SPWM samples
+        SPWMGenerator_GenerateSamples(&generator, buffers[producer_index], BUFFER_LENGTH, &ActiveSpeedRange, inverter_hz, motor_poles, Conf.rpmToSpeedRatio);
 
         // Mark the buffer as ready for consumption
         buffer_ready_for_consumption[producer_index] = true;
@@ -207,7 +135,7 @@ static void generator_loop(void *arg) {
         // Update statistics
         samples_generated += BUFFER_LENGTH;
 
-        // Move to the next buffer in a circular manner
+        // Move to the next buffer
         producer_index = (producer_index + 1) % NUM_BUFFERS;
     }
 
@@ -256,25 +184,56 @@ static void playback_loop(void *arg) {
 static void print_stats(void) {
     float current_time = VESC_IF->system_time();
     if (current_time - last_time >= 1.0f) {
+        // Calculate samples generated and consumed per second
         uint32_t samples_per_second = samples_generated - last_samples_generated;
         uint32_t samples_consumed_per_second = samples_consumed - last_samples_comsumed;
         last_samples_generated = samples_generated;
         last_samples_comsumed = samples_consumed;
         last_time = current_time;
 
+        // Calculate actual sample rates
         float actual_sample_rate = (float)samples_per_second;
         float sample_consume_rate = (float)samples_consumed_per_second;
 
+        // Print warning if the sample rate is too high
         if (actual_sample_rate > sample_rate * SAMPLE_RATE_WARNING_THRESHOLD) {
             VESC_IF->printf("WARNING: Sample rate too high! Actual: %.1f, Expected: %.1f\n",
                             (double)actual_sample_rate, (double)sample_rate);
         }
 
+        // Print sample generation and consumption rates
         VESC_IF->printf("(Generated samples/s: %.1f) (Consumed samples/s: %.1f)\n",
                         (double)actual_sample_rate, (double)sample_consume_rate);
 
-		VESC_IF->printf("Command Frequency: %.1f, Carrier Frequency: %.1f", (double) command_frequency, carrier_frequency);
+        // Calculate the current speed in km/h
+        float current_speed_kmh = inverter_hz / (float)motor_poles * Conf.rpmToSpeedRatio;
 
+        // Print the current speed and active speed range
+        VESC_IF->printf("Current Speed: %.1f km/h\n", (double)current_speed_kmh);
+        VESC_IF->printf("Active Speed Range: %d km/h to %d km/h\n",
+                        (double)ActiveSpeedRange.minSpeed, (double)ActiveSpeedRange.maxSpeed);
+
+        // Print SPWM mode and carrier frequency
+        const char* spwm_mode_str = "Unknown";
+        switch (ActiveSpeedRange.spwm.type) {
+            case SPWM_TYPE_FIXED_ASYNC:
+                spwm_mode_str = "Fixed Async";
+                break;
+            case SPWM_TYPE_RAMP_ASYNC:
+                spwm_mode_str = "Ramp Async";
+                break;
+            case SPWM_TYPE_RSPWM:
+                spwm_mode_str = "Random SPWM";
+                break;
+            case SPWM_TYPE_SYNC:
+                spwm_mode_str = "Synchronous";
+                break;
+            case SPWM_TYPE_NONE:
+                spwm_mode_str = "Disabled";
+                break;
+        }
+        VESC_IF->printf("SPWM Mode: %s, Carrier Frequency: %.1f Hz\n",
+                        spwm_mode_str, (double)ActiveSpeedRange.spwm.carrierFrequencyStart);
     }
 }
 
@@ -397,6 +356,7 @@ static lbm_value ext_set_motor_poles(lbm_value *args, lbm_uint argn) {
 }
 
 static lbm_value ext_get_stats(lbm_value *args, lbm_uint argn) {
+    (void)args;
     if (argn != 0) {
         return VESC_IF->lbm_enc_sym_eerror;
     }
@@ -434,6 +394,10 @@ static void stop(void *arg) {
 INIT_FUN(lib_info *info) {
     INIT_START
 
+    // Load the config
+    InitializeConfiguration(&Conf);
+    PrintInverterConfig(&Conf);
+
     generator_thread_data.running = false;
     playback_thread_data.running = false;
 
@@ -443,6 +407,9 @@ INIT_FUN(lib_info *info) {
     VESC_IF->lbm_add_extension("ext-set-motor-current", ext_set_motor_current);
     VESC_IF->lbm_add_extension("ext-set-motor-hz", ext_set_motor_hz);
     VESC_IF->lbm_add_extension("ext-set-motor-poles", ext_set_motor_poles);
+
+
+
 
     info->stop_fun = stop;
     info->arg = NULL;
