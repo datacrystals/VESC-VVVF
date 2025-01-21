@@ -18,11 +18,8 @@ HEADER
 #define SINE_TABLE_SIZE 100
 #define INT8_SCALE 127
 #define TWO_PI 6.28318530718f
-#define BUFFER_LENGTH 250
-#define SAMPLE_RATE_WARNING_THRESHOLD 1.2f
 #define SAWTOOTH_MAX 127        // Maximum value for the sawtooth (int8 range: 0-127)
-#define NUM_BUFFERS 3
-#define NUM_MOTOR_STAT_SAMPLES 10
+
 
 // SPWM modes
 #define SPWM_MODE_FIXED 0
