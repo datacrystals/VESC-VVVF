@@ -174,6 +174,7 @@ static void update_spwm_settings() {
     // Update the generator with the selected SPWM configuration
     if (spwm_config) {
         generator.CarrierFrequency = spwm_config->carrierFrequencyStart;
+        generator.CommandFrequency = (inverter_hz / (float)motor_poles);
         generator.ModulationIndex = 1.0f; // Adjust as needed
     }
 }

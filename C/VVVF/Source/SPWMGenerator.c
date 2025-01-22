@@ -77,6 +77,18 @@ void SPWMGenerator_Init(SPWMGenerator* generator) {
 }
 
 
+int CommandCarrierLogic(int8_t _Command, int8_t _Carrier) {
+
+    int8_t Output = 0;
+    
+    // Code that limits the output to be based on command, so peaks are capped at the command
+    if (_Carrier > 0) {
+        Output = _Command;
+    } else {
+        Output = -_Command;
+    }
+
+}
 
 int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorState, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float Speed_kmh) {
     if (!generator || !buffer || !speedRange) return false;
@@ -131,7 +143,10 @@ int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorSta
 
         // Generate command and carrier signals
         // int8_t carrier = SPWMGenerator_GenerateSawtooth(generator->CarrierPhase);
+        int8_t command = SPWMGenerator_GenerateSin(generator->CommandPhase);
         int8_t carrier = GeneratePulse(generator->CarrierPhase, 0.02);
+        (void)command;
+        // int8_t output = CommandCarrierLogic(command, carrier);
         buffer[i] = carrier;
     }
 
