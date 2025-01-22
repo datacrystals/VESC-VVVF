@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PULSE_PATTERN_H
+#define PULSE_PATTERN_H
 
 #include "stdint.h"
 
@@ -9,10 +10,13 @@ int8_t GeneratePulse(float phase, float dutyCycle);
 int8_t GenerateSawtooth(float phase, float dutyCycle);
 
 // Sine wave generator
-int8_t GenerateSine(float phase, float dutyCycle);
+// int8_t GenerateSine(float phase, float dutyCycle);
 
 // Square wave generator
 int8_t GenerateSquare(float phase, float dutyCycle);
 
 // Triangle wave generator
 int8_t GenerateTriangle(float phase, float dutyCycle);
+
+
+#endif

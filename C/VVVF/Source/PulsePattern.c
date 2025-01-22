@@ -29,21 +29,24 @@ int8_t GeneratePulse(float phase, float dutyCycle) {
 
 // Sawtooth wave generator
 int8_t GenerateSawtooth(float phase, float dutyCycle) {
+    (void)dutyCycle;
     return (int8_t)((phase / TWO_PI) * 2 * PULSE_MAX - PULSE_MAX);
 }
 
 // Sine wave generator
-int8_t GenerateSine(float phase, float dutyCycle) {
-    return (int8_t)(sinf(phase) * PULSE_MAX);
-}
+// int8_t GenerateSine(float phase, float dutyCycle) {
+//     return (int8_t)(sinf(phase) * PULSE_MAX);
+// }
 
 // Square wave generator
 int8_t GenerateSquare(float phase, float dutyCycle) {
+    (void)dutyCycle;
     return (phase < TWO_PI / 2) ? PULSE_MAX : -PULSE_MAX;
 }
 
 // Triangle wave generator
 int8_t GenerateTriangle(float phase, float dutyCycle) {
+    (void)dutyCycle;
     float value = (phase < TWO_PI / 2) ?
                   (phase / (TWO_PI / 2)) * PULSE_MAX :
                   (1.0f - (phase - TWO_PI / 2) / (TWO_PI / 2)) * PULSE_MAX;
