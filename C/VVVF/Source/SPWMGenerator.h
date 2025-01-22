@@ -26,7 +26,7 @@ typedef struct {
 
 // Function Prototypes
 void SPWMGenerator_Init(SPWMGenerator* generator);
-int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorState, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float HzToKmhFactor);
+int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorState, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float Speed_kmh);
 float SPWMGenerator_MapValue(float value, float inMin, float inMax, float outMin, float outMax);
 int8_t SPWMGenerator_GenerateSin(float phase);
 int8_t SPWMGenerator_GenerateSawtooth(float phase);

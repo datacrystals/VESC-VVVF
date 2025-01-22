@@ -1,4 +1,3 @@
-#define WHEEL_DIAMETER_MM 550
 #define MAX_SPEED_KMH 100
 
 #define MAX_SPEED_RANGES 16

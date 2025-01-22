@@ -136,7 +136,7 @@ static void update_rotor_state(float current_rpm) {
 
 static void update_spwm_settings() {
     // Calculate current speed
-    float CurrentSpeed_KMH = (inverter_hz / (float)motor_poles) * Conf.rpmToSpeedRatio;
+    // float CurrentSpeed_KMH = (inverter_hz / (float)motor_poles) * Conf.rpmToSpeedRatio;
 
     // Update the rotor state based on the current RPM
     update_rotor_state(inverter_hz / (float)motor_poles);
@@ -144,7 +144,7 @@ static void update_spwm_settings() {
     // Define amplitude based on current, speed
     amplitude = map_value(inverter_current, min_current, max_current, min_sound_voltage, max_sound_voltage);
     float AmplitudeScaleFactor = map_value(
-        CurrentSpeed_KMH, 
+        speed_kmh, 
         INVERTER_AMPLITUDE_SPEED_RAMP_START_KMH,
         INVERTER_AMPLITUDE_SPEED_RAMP_END_KMH,
         INVERTER_AMPLITUDE_SPEED_SCALAR_START,
@@ -194,7 +194,7 @@ static void generator_loop(void *arg) {
         if (!generator_thread_data.running) break;
 
         // Generate SPWM samples
-        inverter_enabled = SPWMGenerator_GenerateSamples(&generator, rotor_state, buffers[producer_index], BUFFER_LENGTH, &ActiveSpeedRange, inverter_hz, motor_poles, Conf.rpmToSpeedRatio);
+        inverter_enabled = SPWMGenerator_GenerateSamples(&generator, rotor_state, buffers[producer_index], BUFFER_LENGTH, &ActiveSpeedRange, inverter_hz, motor_poles, speed_kmh);
 
         // Mark the buffer as ready for consumption
         buffer_ready_for_consumption[producer_index] = true;
@@ -274,10 +274,10 @@ static void print_stats(void) {
                         (double)actual_sample_rate, (double)sample_consume_rate);
 
         // Calculate the current speed in km/h
-        float current_speed_kmh = inverter_hz / (float)motor_poles * Conf.rpmToSpeedRatio;
+        // float current_speed_kmh = inverter_hz / (float)motor_poles * Conf.rpmToSpeedRatio;
 
         // Print the current speed and active speed range
-        VESC_IF->printf("Current Speed: %.1f km/h\n", (double)current_speed_kmh);
+        VESC_IF->printf("Current Speed: %.1f km/h\n", (double)speed_kmh);
         VESC_IF->printf("Active Speed Range: %f km/h to %f km/h\n",
                         (double)ActiveSpeedRange.minSpeed, (double)ActiveSpeedRange.maxSpeed);
 

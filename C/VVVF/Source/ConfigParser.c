@@ -65,7 +65,7 @@ void SetSpeedRangeSpeed(InverterConfig* _Source, int _Index, float minSpeed, flo
 void InitializeConfiguration(InverterConfig* _Config) {
     // Setup basic parameters
     _Config->maxSpeed = MAX_SPEED_KMH; // km/h
-    _Config->rpmToSpeedRatio = wheel_diameter_to_kmh_factor(WHEEL_DIAMETER_MM);
+    // _Config->rpmToSpeedRatio = wheel_diameter_to_kmh_factor(WHEEL_DIAMETER_MM);
     _Config->zeroSpeedCutoffMargin = ZERO_CUTOFF_MARGIN_KMH;
 
     // Now add ranges
@@ -266,7 +266,7 @@ void PrintInverterConfig(const InverterConfig* config) {
 
     // Print basic configuration
     VESC_IF->printf("Inverter Configuration:\n");
-    VESC_IF->printf("  RPM to Speed Ratio: %.6f\n", (double)config->rpmToSpeedRatio);
+    // VESC_IF->printf("  RPM to Speed Ratio: %.6f\n", (double)config->rpmToSpeedRatio);
     VESC_IF->printf("  Max Speed: %f km/h\n", (double)config->maxSpeed);
     VESC_IF->printf("  Number of Speed Ranges: %d\n", config->speedRangeCount);
 

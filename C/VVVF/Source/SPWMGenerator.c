@@ -77,7 +77,7 @@ void SPWMGenerator_Init(SPWMGenerator* generator) {
 
 
 
-int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorState, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float HzToKmhFactor) {
+int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorState, int8_t* buffer, int bufferLength, const SpeedRange* speedRange, float CommandHZ, int NumPoles, float Speed_kmh) {
     if (!generator || !buffer || !speedRange) return false;
 
     // Firstly check if disabled, if so, set audio to none
@@ -89,7 +89,7 @@ int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorSta
     }
 
     // Convert command frequency to speed
-    float speedKmh = (CommandHZ / (float)NumPoles) * HzToKmhFactor;
+    float speedKmh = Speed_kmh;
 
     // Update carrier frequency based on the active speed range and rotor state
     const SPWMConfig* spwm_config = NULL;

@@ -33,7 +33,7 @@ typedef struct {
 
 // Define the main configuration struct
 typedef struct {
-    float rpmToSpeedRatio;   // Used to convert from the motor's rpm to the speed in km/h
+    // float rpmToSpeedRatio;   // Used to convert from the motor's rpm to the speed in km/h
     float maxSpeed;            // Maximum speed - any value above this will be capped to the max speed in km/h
     float zeroSpeedCutoffMargin; // How close it should be to 0 kmh before cutting off
     SpeedRange speedRanges[MAX_SPEED_RANGES]; // Array of speed ranges
