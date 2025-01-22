@@ -228,7 +228,7 @@ SpeedRange GetSpeedRangeAtSpeed(InverterConfig* _Source, float _Speed, float _Mo
     }
 
     // Calculate the speed in km/h using the rpmToSpeedRatio
-    float speedKmh = speedKmh;
+    float speedKmh = _Speed;
 
     // Cap the speed to the maximum allowed speed
     if (speedKmh > _Source->maxSpeed) {
