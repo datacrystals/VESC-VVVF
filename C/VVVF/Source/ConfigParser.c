@@ -204,7 +204,7 @@ void InitializeConfiguration(InverterConfig* _Config) {
 }
 
 
-SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _MotorCurrent) {
+SpeedRange GetSpeedRangeAtSpeed(InverterConfig* _Source, float _Speed, float _MotorCurrent) {
     SpeedRange defaultRange = {0}; // Default range if no match is found
     defaultRange.minSpeed = 0;
     defaultRange.maxSpeed = 99999;
@@ -228,7 +228,7 @@ SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _M
     }
 
     // Calculate the speed in km/h using the rpmToSpeedRatio
-    float speedKmh = _MotorRPM * _Source->rpmToSpeedRatio;
+    float speedKmh = speedKmh;
 
     // Cap the speed to the maximum allowed speed
     if (speedKmh > _Source->maxSpeed) {

@@ -7,19 +7,22 @@
 ;; define motor current and rpm globally so it shows up in the vesc debugger with the values when polling
 (def motor-current 0)
 (def motor-rpm 0)
-
+(def speed-kmh 0)
+(def motor-poles (conf-get 'si-motor-poles))
 
 ;; Function to update amplitude and command frequency
 (defun update-audio-parameters ()
   (progn
     (def motor-current (abs (get-current)))
     (def motor-rpm (get-rpm))
+    (def speed-kmh (* (get-speed) 3.6)) ; Get speed returns the value in meters/second, so we convert to km/h
 
     
     ; (ext-set-amplitude amplitude)
-    (ext-set-motor-current (+ 0 motor-current))
-    (ext-set-motor-hz (+ 0 motor-rpm))
-    (ext-set-motor-poles 14) ; I think i'ts 14 for a qs205 but idk for sure...
+    (ext-set-motor-current motor-current)
+    (ext-set-motor-hz motor-rpm)
+    (ext-set-motor-poles motor-poles)
+    (ext-set-speed-kmh speed-kmh)
   )
 
 )

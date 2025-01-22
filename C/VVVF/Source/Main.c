@@ -33,6 +33,7 @@ static bool buffer_ready_for_consumption[NUM_BUFFERS];  // Flags to indicate if 
 static int producer_index = 0;  // Index of the buffer currently being filled by the producer
 static int consumer_index = 0;  // Index of the buffer currently being consumed by the consumer
 static float amplitude = 0.0f;
+static float speed_kmh = 0.0f;
 static float sample_rate = SAMPLE_RATE;
 
 static float current_samples[NUM_MOTOR_STAT_SAMPLES]; // Array of last n current values used to average them
@@ -41,6 +42,8 @@ static float hz_samples[NUM_MOTOR_STAT_SAMPLES]; // Array of last n hz values us
 static int active_hz_index = 0; // Index of current sample to be replaced
 static float rpm_samples[RPM_SAMPLE_COUNT];
 static int active_rpm_index = 0;
+static float speed_samples[RPM_SAMPLE_COUNT];
+static int active_speed_index = 0;
 
 static float inverter_current = 0.; // Number of phase amps pushed into the motor from the vesc
 static float inverter_hz = 0.; // Current freqency of the inverter in hz
@@ -152,7 +155,7 @@ static void update_spwm_settings() {
     amplitude = amplitude * AmplitudeScaleFactor;
 
     // Get the active speed range
-    ActiveSpeedRange = GetSpeedRangeAtRPM(&Conf, inverter_hz / (float)motor_poles, inverter_current);
+    ActiveSpeedRange = GetSpeedRangeAtSpeed(&Conf, speed_kmh, inverter_current);
 
     // Select the appropriate SPWM configuration based on the rotor state
     SPWMConfig* spwm_config = NULL;
@@ -436,6 +439,32 @@ static lbm_value ext_set_motor_hz(lbm_value *args, lbm_uint argn) {
     return VESC_IF->lbm_enc_sym_true;
 }
 
+
+static lbm_value ext_set_speed_kmh(lbm_value *args, lbm_uint argn) {
+    if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
+        return VESC_IF->lbm_enc_sym_eerror;
+    }
+
+	float speed_kmh = VESC_IF->lbm_dec_as_float(args[0]);
+
+	// Update array of samples with new value, update current value pointer
+	speed_samples[active_speed_index] = speed_kmh;
+	active_speed_index = (active_speed_index + 1) % NUM_MOTOR_STAT_SAMPLES;
+
+	// Now calculate average over the array, and use that as the actual amplitude
+	float total = 0;
+	for (unsigned int i = 0; i < NUM_MOTOR_STAT_SAMPLES; i++) {
+		total += speed_samples[i];
+	}
+	speed_kmh = total / NUM_MOTOR_STAT_SAMPLES;
+
+	update_spwm_settings();
+
+    return VESC_IF->lbm_enc_sym_true;
+}
+
+
+
 static lbm_value ext_set_motor_poles(lbm_value *args, lbm_uint argn) {
     if (argn != 1 || !VESC_IF->lbm_is_number(args[0])) {
         return VESC_IF->lbm_enc_sym_eerror;
@@ -500,6 +529,7 @@ INIT_FUN(lib_info *info) {
     VESC_IF->lbm_add_extension("ext-set-motor-current", ext_set_motor_current);
     VESC_IF->lbm_add_extension("ext-set-motor-hz", ext_set_motor_hz);
     VESC_IF->lbm_add_extension("ext-set-motor-poles", ext_set_motor_poles);
+    VESC_IF->lbm_add_extension("ext-set-speed-kmh", ext_set_speed_kmh);
 
 
 

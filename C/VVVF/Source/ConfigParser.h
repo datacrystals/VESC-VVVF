@@ -50,7 +50,7 @@ typedef enum {
 
 // Function to parse JSON and populate the InverterConfig struct
 void InitializeConfiguration(InverterConfig* _Config);
-SpeedRange GetSpeedRangeAtRPM(InverterConfig* _Source, float _MotorRPM, float _MotorCurrent);
+SpeedRange GetSpeedRangeAtSpeed(InverterConfig* _Source, float _MotorRPM, float _MotorCurrent);
 void PrintInverterConfig(const InverterConfig* config);
 void PrintSPWMConfig(const SPWMConfig* spwm);
 
