@@ -1,4 +1,5 @@
 #include "SPWMGenerator.h"
+#include "PulsePattern.h"
 #include "vesc_c_if.h"
 #include <math.h>
 
@@ -129,7 +130,8 @@ int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorSta
         if (generator->CarrierPhase >= TWO_PI) generator->CarrierPhase -= TWO_PI;
 
         // Generate command and carrier signals
-        int8_t carrier = SPWMGenerator_GenerateSawtooth(generator->CarrierPhase);
+        // int8_t carrier = SPWMGenerator_GenerateSawtooth(generator->CarrierPhase);
+        int8_t carrier = GeneratePulse(generator->CarrierPhase, 0.02);
         buffer[i] = carrier;
     }
 
