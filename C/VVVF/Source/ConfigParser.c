@@ -72,18 +72,18 @@ void InitializeConfiguration(InverterConfig* _Config) {
     SPWMConfig config;
 
     // Range 0: -1.0 km/h to 5.0 km/h
-    config = AddSPWM_AsyncFixed(2000);
+    config = AddSPWM_AsyncFixed(3000);
     SetSPWM_Acceleration(_Config, 0, config);
     SetSPWM_Coasting(_Config, 0, config);
     SetSPWM_Deceleration(_Config, 0, config);
-    SetSpeedRangeSpeed(_Config, 0, -1.0f, 31.0f);
+    SetSpeedRangeSpeed(_Config, 0, -1.0f, 5.0f);
 
 
-    // config = AddSPWM_AsyncFixed(2000);
-    // SetSPWM_Acceleration(_Config, 1, config);
-    // SetSPWM_Coasting(_Config, 1, config);
-    // SetSPWM_Deceleration(_Config, 1, config);
-    // SetSpeedRangeSpeed(_Config, 1, 8.0f, 14.0f);
+    config = AddSPWM_AsyncFixed(4000);
+    SetSPWM_Acceleration(_Config, 1, config);
+    SetSPWM_Coasting(_Config, 1, config);
+    SetSPWM_Deceleration(_Config, 1, config);
+    SetSpeedRangeSpeed(_Config, 1, 5.0f, 31.0f);
 
 
     // config = AddSPWM_AsyncFixed(4000);

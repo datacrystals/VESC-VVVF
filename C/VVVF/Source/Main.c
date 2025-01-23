@@ -446,10 +446,10 @@ static lbm_value ext_set_speed_kmh(lbm_value *args, lbm_uint argn) {
         return VESC_IF->lbm_enc_sym_eerror;
     }
 
-	float speed_kmh = VESC_IF->lbm_dec_as_float(args[0]);
+	float current_speed_kmh = VESC_IF->lbm_dec_as_float(args[0]);
 
 	// Update array of samples with new value, update current value pointer
-	speed_samples[active_speed_index] = speed_kmh;
+	speed_samples[active_speed_index] = current_speed_kmh;
 	active_speed_index = (active_speed_index + 1) % NUM_MOTOR_STAT_SAMPLES;
 
 	// Now calculate average over the array, and use that as the actual amplitude
@@ -458,6 +458,7 @@ static lbm_value ext_set_speed_kmh(lbm_value *args, lbm_uint argn) {
 		total += speed_samples[i];
 	}
 	speed_kmh = total / NUM_MOTOR_STAT_SAMPLES;
+    // VESC_IF->printf("Speed = %.1f\n", speed_kmh);
 
 	update_spwm_settings();
 
