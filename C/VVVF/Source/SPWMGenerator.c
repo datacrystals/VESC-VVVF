@@ -77,7 +77,7 @@ void SPWMGenerator_Init(SPWMGenerator* generator) {
 }
 
 
-int CommandCarrierLogic(int8_t _Command, int8_t _Carrier) {
+int8_t CommandCarrierLogic(int8_t _Command, int8_t _Carrier) {
 
     int8_t Output = 0;
     
@@ -87,6 +87,8 @@ int CommandCarrierLogic(int8_t _Command, int8_t _Carrier) {
     } else {
         Output = -_Command;
     }
+
+    return Output;
 
 }
 
@@ -144,7 +146,7 @@ int SPWMGenerator_GenerateSamples(SPWMGenerator* generator, RotorState _RotorSta
         // Generate command and carrier signals
         // int8_t carrier = SPWMGenerator_GenerateSawtooth(generator->CarrierPhase);
         int8_t command = SPWMGenerator_GenerateSin(generator->CommandPhase);
-        int8_t carrier = GeneratePulse(generator->CarrierPhase, 0.02);
+        int8_t carrier = GenerateTriangle(generator->CarrierPhase, 0.02);
         (void)command;
         // int8_t output = CommandCarrierLogic(command, carrier);
         buffer[i] = carrier;
