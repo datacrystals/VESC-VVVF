@@ -91,7 +91,7 @@ Item {
             GaugeBar {
                 id: powerGauge
                 title: "TrPower"
-                value: 2.5
+                value: 0
                 minValue: 0
                 maxValue: 4
                 unit: "kW"
@@ -115,7 +115,7 @@ Item {
             GaugeBar {
                 id: throttleGauge
                 title: "TrEffort"
-                value: 40
+                value: 0
                 minValue: 0
                 maxValue: 100
                 unit: "%"
