@@ -50,6 +50,7 @@ Item {
                 valueColor: "#00FF00" // Bright green
                 tickmarkStepSize: 20
                 minorTickmarkCount: 4
+                gaugeWidth: 150 // Set the width of the gauge
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
@@ -72,6 +73,7 @@ Item {
                 valueColor: "#FFFF00" // Bright yellow
                 tickmarkStepSize: 40
                 minorTickmarkCount: 4
+                gaugeWidth: 150 // Set the width of the gauge
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
@@ -94,6 +96,7 @@ Item {
                 valueColor: "#FF0000" // Bright red
                 tickmarkStepSize: 1
                 minorTickmarkCount: 3
+                gaugeWidth: 150 // Set the width of the gauge
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
@@ -116,6 +119,7 @@ Item {
                 valueColor: "#00FFFF" // Bright cyan
                 tickmarkStepSize: 20
                 minorTickmarkCount: 4
+                gaugeWidth: 150 // Set the width of the gauge
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }

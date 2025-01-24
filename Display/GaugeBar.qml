@@ -18,6 +18,7 @@ Item {
     property bool bold: true
     property int tickmarkStepSize: 20
     property int minorTickmarkCount: 4
+    property int gaugeWidth: 100 // New property to control gauge width
 
     ColumnLayout {
         anchors.fill: parent
@@ -36,19 +37,25 @@ Item {
         }
 
         // Gauge
-        Gauge {
-            id: gauge
+        Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            orientation: Qt.Vertical
-            minimumValue: root.minValue
-            maximumValue: root.maxValue
-            value: root.value
-            tickmarkStepSize: root.tickmarkStepSize
-            minorTickmarkCount: root.minorTickmarkCount
-            tickmarkAlignment: Qt.AlignRight
-            formatValue: function(value) {
-                return value.toFixed(1); // Display value with 1 decimal place
+            Layout.preferredWidth: root.gaugeWidth // Set the width of the gauge
+            color: "transparent"
+
+            Gauge {
+                id: gauge
+                anchors.fill: parent
+                orientation: Qt.Vertical
+                minimumValue: root.minValue
+                maximumValue: root.maxValue
+                value: root.value
+                tickmarkStepSize: root.tickmarkStepSize
+                minorTickmarkCount: root.minorTickmarkCount
+                tickmarkAlignment: Qt.AlignRight
+                formatValue: function(value) {
+                    return value.toFixed(1); // Display value with 1 decimal place
+                }
             }
         }
 
