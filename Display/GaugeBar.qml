@@ -1,7 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
-import QtQuick.Extras 1.4 // Import for Gauge
 
 Item {
     id: root
@@ -16,9 +15,15 @@ Item {
     property int valueFontSize: 28
     property int unitFontSize: 14
     property bool bold: true
-    property int tickmarkStepSize: 20
+    property real tickmarkStepSize: 20.0 // Changed to real for floating-point values
     property int minorTickmarkCount: 4
-    property int gaugeWidth: 100 // New property to control gauge width
+    property int gaugeWidth: 150 // New property to control gauge width
+    property int barWidth: 40 // New property to control the width of the vertical bar
+    property int bottomMargin: 15 // Default bottom margin set to 15
+    property int topMargin: 10 // New property to control the margin at the top of the gauge
+
+    // Calculate the total width from the arrow to the labels
+    property real totalWidth: arrowCanvas.width + gaugeBackground.width + 20 // Arrow + Bar + Label spacing
 
     ColumnLayout {
         anchors.fill: parent
@@ -34,27 +39,112 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             Layout.fillWidth: true
             Layout.preferredHeight: 30
+            Layout.topMargin: root.topMargin // Apply top margin to the title
         }
 
         // Gauge
-        Rectangle {
+        Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.preferredWidth: root.gaugeWidth // Set the width of the gauge
-            color: "transparent"
+            Layout.preferredWidth: root.totalWidth // Set the width of the gauge based on totalWidth
+            Layout.topMargin: root.topMargin // Apply top margin to the gauge
+            Layout.alignment: Qt.AlignHCenter // Center the gauge horizontally
 
-            Gauge {
-                id: gauge
-                anchors.fill: parent
-                orientation: Qt.Vertical
-                minimumValue: root.minValue
-                maximumValue: root.maxValue
-                value: root.value
-                tickmarkStepSize: root.tickmarkStepSize
-                minorTickmarkCount: root.minorTickmarkCount
-                tickmarkAlignment: Qt.AlignRight
-                formatValue: function(value) {
-                    return value.toFixed(1); // Display value with 1 decimal place
+            // Background of the gauge
+            Rectangle {
+                id: gaugeBackground
+                width: root.barWidth
+                height: parent.height - root.bottomMargin - root.topMargin // Account for top and bottom margins
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: root.bottomMargin // Apply bottom margin here
+                color: "transparent"
+                border.color: "white"
+                border.width: 1
+
+                // Vertical bar representing the gauge value
+                Rectangle {
+                    anchors.bottom: parent.bottom
+                    width: parent.width
+                    height: (root.value - root.minValue) / (root.maxValue - root.minValue) * parent.height
+                    color: root.valueColor
+                    radius: 3 // Rounded corners for the bar
+                }
+            }
+
+            // Triangular arrow pointing to the value (on the left side of the bar)
+            Canvas {
+                id: arrowCanvas
+                width: 20 // 2x bigger (20 pixels wide)
+                height: 20
+                anchors.right: gaugeBackground.left // Position to the left of the bar
+                anchors.rightMargin: 0 // Move the arrow left so its rightmost tip touches the bar
+                anchors.verticalCenter: gaugeBackground.bottom
+                anchors.verticalCenterOffset: -(root.value - root.minValue) / (root.maxValue - root.minValue) * gaugeBackground.height
+
+                onPaint: {
+                    var ctx = getContext("2d");
+                    ctx.reset();
+                    ctx.beginPath();
+                    ctx.moveTo(width, height / 2); // Start at the right middle
+                    ctx.lineTo(0, 0); // Draw to the top left
+                    ctx.lineTo(0, height); // Draw to the bottom left
+                    ctx.closePath();
+                    ctx.fillStyle = root.valueColor; // Use the same color as the bar
+                    ctx.fill();
+                }
+            }
+
+            // Tick marks (positioned to the right of the bar)
+            Repeater {
+                model: Math.floor((root.maxValue - root.minValue) / root.tickmarkStepSize) + 1
+
+                Rectangle {
+                    width: 10
+                    height: 1
+                    color: "white"
+                    anchors.bottom: gaugeBackground.bottom
+                    anchors.bottomMargin: (index * root.tickmarkStepSize / (root.maxValue - root.minValue)) * gaugeBackground.height
+                    anchors.left: gaugeBackground.right // Align to the right of the bar
+                    anchors.leftMargin: 5 // Space between bar and tick marks
+                }
+            }
+
+            // Minor tick marks (positioned to the right of the bar)
+            Repeater {
+                model: Math.floor((root.maxValue - root.minValue) / (root.tickmarkStepSize / root.minorTickmarkCount)) + 1
+
+                Rectangle {
+                    width: 5
+                    height: 1
+                    color: "white"
+                    anchors.bottom: gaugeBackground.bottom
+                    anchors.bottomMargin: (index * (root.tickmarkStepSize / root.minorTickmarkCount) / (root.maxValue - root.minValue)) * gaugeBackground.height
+                    anchors.left: gaugeBackground.right // Align to the right of the bar
+                    anchors.leftMargin: 5 // Space between bar and minor tick marks
+                }
+            }
+
+            // Labels (positioned to the right of the bar, centered vertically on the tick marks)
+            Repeater {
+                model: Math.floor((root.maxValue - root.minValue) / root.tickmarkStepSize) + 1
+
+                Text {
+                    text: {
+                        var value = root.minValue + index * root.tickmarkStepSize;
+                        // Show decimals only if the value requires it
+                        if (value % 1 !== 0) {
+                            return value.toFixed(1); // Show 1 decimal place
+                        } else {
+                            return value.toFixed(0); // Show no decimals
+                        }
+                    }
+                    color: "white"
+                    font.pixelSize: 12
+                    anchors.verticalCenter: gaugeBackground.bottom // Center vertically on the tick mark
+                    anchors.verticalCenterOffset: -(index * root.tickmarkStepSize / (root.maxValue - root.minValue)) * gaugeBackground.height
+                    anchors.left: gaugeBackground.right
+                    anchors.leftMargin: 20 // Space between bar and labels
                 }
             }
         }
@@ -74,7 +164,7 @@ Item {
             Layout.alignment: Qt.AlignHCenter // Center the content
 
             Text {
-                text: gauge.value.toFixed(1).padStart(5, '0') // 000.0 format
+                text: root.value.toFixed(1).padStart(5, '0') // 000.0 format
                 color: root.valueColor
                 font.family: "Monospace"
                 font.pixelSize: root.valueFontSize

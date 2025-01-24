@@ -48,9 +48,10 @@ Item {
                 maxValue: 100
                 unit: VescIf.useImperialUnits() ? "mph" : "km/h"
                 valueColor: "#00FF00" // Bright green
-                tickmarkStepSize: 20
+                tickmarkStepSize: 10
                 minorTickmarkCount: 4
                 gaugeWidth: 150 // Set the width of the gauge
+                barWidth: 40 // Set the width of the vertical bar (2x wider)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
@@ -65,15 +66,16 @@ Item {
             // Phase Current Gauge
             GaugeBar {
                 id: phaseAmpsGauge
-                title: "PhCur"
+                title: "PhCurrent"
                 value: 0
                 minValue: 0
                 maxValue: 200
                 unit: "A"
                 valueColor: "#FFFF00" // Bright yellow
-                tickmarkStepSize: 40
+                tickmarkStepSize: 25
                 minorTickmarkCount: 4
                 gaugeWidth: 150 // Set the width of the gauge
+                barWidth: 40 // Set the width of the vertical bar (2x wider)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
@@ -88,15 +90,16 @@ Item {
             // Tractive Power Gauge
             GaugeBar {
                 id: powerGauge
-                title: "TrPwr"
-                value: 0
+                title: "TrPower"
+                value: 2.5
                 minValue: 0
                 maxValue: 4
                 unit: "kW"
                 valueColor: "#FF0000" // Bright red
-                tickmarkStepSize: 1
-                minorTickmarkCount: 3
+                tickmarkStepSize: 0.5
+                minorTickmarkCount: 4
                 gaugeWidth: 150 // Set the width of the gauge
+                barWidth: 40 // Set the width of the vertical bar (2x wider)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
@@ -111,15 +114,16 @@ Item {
             // Requested Tractive Effort Gauge
             GaugeBar {
                 id: throttleGauge
-                title: "MtrDty"
-                value: 0
+                title: "TrEffort"
+                value: 40
                 minValue: 0
                 maxValue: 100
                 unit: "%"
                 valueColor: "#00FFFF" // Bright cyan
-                tickmarkStepSize: 20
+                tickmarkStepSize: 10
                 minorTickmarkCount: 4
                 gaugeWidth: 150 // Set the width of the gauge
+                barWidth: 40 // Set the width of the vertical bar (2x wider)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }
