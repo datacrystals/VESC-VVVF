@@ -40,70 +40,18 @@ Item {
             spacing: 0 // No spacing between gauges, as we'll add dividers manually
 
             // Speed Gauge
-            ColumnLayout {
+            GaugeBar {
+                id: speedGauge
+                title: "Velocity"
+                value: 0
+                minValue: 0
+                maxValue: 100
+                unit: VescIf.useImperialUnits() ? "mph" : "km/h"
+                valueColor: "#00FF00" // Bright green
+                tickmarkStepSize: 20
+                minorTickmarkCount: 4
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                spacing: 0
-
-                Text {
-                    text: "Velocity"
-                    color: "white"
-                    font.pixelSize: 20
-                    font.bold: true // Bold text
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignHCenter
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 30
-                }
-
-                Gauge {
-                    id: speedGauge
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.alignment: Qt.AlignCenter // Center the gauge
-                    orientation: Qt.Vertical
-                    minimumValue: 0
-                    maximumValue: 100
-                    value: 0 // Initial value
-                    tickmarkStepSize: 20
-                    minorTickmarkCount: 4
-                    tickmarkAlignment: Qt.AlignRight
-                    formatValue: function(value) {
-                        return value.toFixed(1); // Display value with 1 decimal place
-                    }
-                }
-
-                // Grey horizontal line
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 2
-                    color: "grey"
-                }
-
-                // Decimal value and unit label for Speed
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 60
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter // Center the content
-
-                    Text {
-                        text: speedGauge.value.toFixed(1).padStart(5, '0') // 000.0 format
-                        color: "#00FF00" // Bright green
-                        font.family: "Monospace"
-                        font.pixelSize: 28 // Increased font size
-                        font.bold: true // Bold text
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: VescIf.useImperialUnits() ? "mph" : "km/h"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 14
-                        font.bold: true // Bold text
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
             }
 
             // White divider line
@@ -114,70 +62,18 @@ Item {
             }
 
             // Phase Current Gauge
-            ColumnLayout {
+            GaugeBar {
+                id: phaseAmpsGauge
+                title: "PhCur"
+                value: 0
+                minValue: 0
+                maxValue: 200
+                unit: "A"
+                valueColor: "#FFFF00" // Bright yellow
+                tickmarkStepSize: 40
+                minorTickmarkCount: 4
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                spacing: 0
-
-                Text {
-                    text: "PhCur"
-                    color: "white"
-                    font.pixelSize: 20
-                    font.bold: true // Bold text
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignHCenter
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 30
-                }
-
-                Gauge {
-                    id: phaseAmpsGauge
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.alignment: Qt.AlignCenter // Center the gauge
-                    orientation: Qt.Vertical
-                    minimumValue: 0
-                    maximumValue: 200
-                    value: 0 // Initial value
-                    tickmarkStepSize: 40
-                    minorTickmarkCount: 4
-                    tickmarkAlignment: Qt.AlignRight
-                    formatValue: function(value) {
-                        return value.toFixed(1); // Display value with 1 decimal place
-                    }
-                }
-
-                // Grey horizontal line
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 2
-                    color: "grey"
-                }
-
-                // Decimal value and unit label for Phase Current
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 60
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter // Center the content
-
-                    Text {
-                        text: phaseAmpsGauge.value.toFixed(1).padStart(5, '0') // 000.0 format
-                        color: "#FFFF00" // Bright yellow
-                        font.family: "Monospace"
-                        font.pixelSize: 28 // Increased font size
-                        font.bold: true // Bold text
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: "A"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 14
-                        font.bold: true // Bold text
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
             }
 
             // White divider line
@@ -188,70 +84,18 @@ Item {
             }
 
             // Tractive Power Gauge
-            ColumnLayout {
+            GaugeBar {
+                id: powerGauge
+                title: "TrPwr"
+                value: 0
+                minValue: 0
+                maxValue: 4
+                unit: "kW"
+                valueColor: "#FF0000" // Bright red
+                tickmarkStepSize: 1
+                minorTickmarkCount: 3
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                spacing: 0
-
-                Text {
-                    text: "TrPwr"
-                    color: "white"
-                    font.pixelSize: 20
-                    font.bold: true // Bold text
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignHCenter
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 30
-                }
-
-                Gauge {
-                    id: powerGauge
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.alignment: Qt.AlignCenter // Center the gauge
-                    orientation: Qt.Vertical
-                    minimumValue: 0
-                    maximumValue: 4
-                    value: 0 // Initial value, centered at 0
-                    tickmarkStepSize: 1
-                    minorTickmarkCount: 3
-                    tickmarkAlignment: Qt.AlignRight
-                    formatValue: function(value) {
-                        return value.toFixed(2); // Display value with 2 decimal places
-                    }
-                }
-
-                // Grey horizontal line
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 2
-                    color: "grey"
-                }
-
-                // Decimal value and unit label for Tractive Power
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 60
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter // Center the content
-
-                    Text {
-                        text: powerGauge.value.toFixed(1).padStart(4, '0') // 00.00 format
-                        color: "#FF0000" // Bright red
-                        font.family: "Monospace"
-                        font.pixelSize: 28 // Increased font size
-                        font.bold: true // Bold text
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: "kW"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 14
-                        font.bold: true // Bold text
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
             }
 
             // White divider line
@@ -262,75 +106,23 @@ Item {
             }
 
             // Requested Tractive Effort Gauge
-            ColumnLayout {
+            GaugeBar {
+                id: throttleGauge
+                title: "MtrDty"
+                value: 0
+                minValue: 0
+                maxValue: 100
+                unit: "%"
+                valueColor: "#00FFFF" // Bright cyan
+                tickmarkStepSize: 20
+                minorTickmarkCount: 4
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                spacing: 0
-
-                Text {
-                    text: "MtrDty"
-                    color: "white"
-                    font.pixelSize: 20
-                    font.bold: true // Bold text
-                    elide: Text.ElideRight
-                    horizontalAlignment: Text.AlignHCenter
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 30
-                }
-
-                Gauge {
-                    id: throttleGauge
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.alignment: Qt.AlignCenter // Center the gauge
-                    orientation: Qt.Vertical
-                    minimumValue: 0
-                    maximumValue: 100
-                    value: 0 // Initial value
-                    tickmarkStepSize: 20
-                    minorTickmarkCount: 4
-                    tickmarkAlignment: Qt.AlignRight
-                    formatValue: function(value) {
-                        return value.toFixed(1); // Display value with 1 decimal place
-                    }
-                }
-
-                // Grey horizontal line
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 2
-                    color: "grey"
-                }
-
-                // Decimal value and unit label for Requested Tractive Effort
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 60
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter // Center the content
-
-                    Text {
-                        text: throttleGauge.value.toFixed(1).padStart(5, '0') // 000.0 format
-                        color: "#00FFFF" // Bright cyan
-                        font.family: "Monospace"
-                        font.pixelSize: 28 // Increased font size
-                        font.bold: true // Bold text
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: "%"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 14
-                        font.bold: true // Bold text
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
             }
         }
     }
 
-     // Bottom grid layout for additional data
+    // Bottom grid layout for additional data
     GridLayout {
         id: bottomGrid
         anchors.top: container.bottom
@@ -343,267 +135,63 @@ Item {
         rowSpacing: 0 // Remove spacing between rows
 
         // Motor Temperature
-        Rectangle {
+        TitledDecimalDisplay {
+            id: motorTempDisplay
+            label: "Motor Temp"
+            unit: "°C"
+            value: "00.0"
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: "transparent"
-            border.color: "white"
-            border.width: 1
-
-            ColumnLayout {
-                anchors.centerIn: parent
-                spacing: 5
-
-                Text {
-                    text: "Motor Temp"
-                    color: "white"
-                    font.pixelSize: 16
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                RowLayout {
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter
-
-                    Text {
-                        id: motorTempValue
-                        text: "00.0"
-                        color: "white"
-                        font.pixelSize: 24
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: "°C"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 16
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-            }
         }
 
         // Inverter Temperature
-        Rectangle {
+        TitledDecimalDisplay {
+            id: inverterTempDisplay
+            label: "Inverter Temp"
+            unit: "°C"
+            value: "00.0"
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: "transparent"
-            border.color: "white"
-            border.width: 1
-
-            ColumnLayout {
-                anchors.centerIn: parent
-                spacing: 5
-
-                Text {
-                    text: "Inverter Temp"
-                    color: "white"
-                    font.pixelSize: 16
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                RowLayout {
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter
-
-                    Text {
-                        id: inverterTempValue
-                        text: "00.0"
-                        color: "white"
-                        font.pixelSize: 24
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: "°C"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 16
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-            }
         }
 
         // Efficiency (Wh/mi)
-        Rectangle {
+        TitledDecimalDisplay {
+            id: efficiencyDisplay
+            label: "Efficiency"
+            unit: VescIf.useImperialUnits() ? "Wh/mi" : "Wh/km"
+            value: "00.0"
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: "transparent"
-            border.color: "white"
-            border.width: 1
-
-            ColumnLayout {
-                anchors.centerIn: parent
-                spacing: 5
-
-                Text {
-                    text: "Efficiency"
-                    color: "white"
-                    font.pixelSize: 16
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                RowLayout {
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter
-
-                    Text {
-                        id: efficiencyValue
-                        text: "00.0"
-                        color: "white"
-                        font.pixelSize: 24
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: VescIf.useImperialUnits() ? "Wh/mi" : "Wh/km"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 16
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-            }
         }
 
         // Traction Battery Volts
-        Rectangle {
+        TitledDecimalDisplay {
+            id: batteryVoltsDisplay
+            label: "Battery Volts"
+            unit: "V"
+            value: "00.0"
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: "transparent"
-            border.color: "white"
-            border.width: 1
-
-            ColumnLayout {
-                anchors.centerIn: parent
-                spacing: 5
-
-                Text {
-                    text: "Battery Volts"
-                    color: "white"
-                    font.pixelSize: 16
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                RowLayout {
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter
-
-                    Text {
-                        id: batteryVoltsValue
-                        text: "00.0"
-                        color: "white"
-                        font.pixelSize: 24
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: "V"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 16
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-            }
         }
 
         // Used Amp Hours
-        Rectangle {
+        TitledDecimalDisplay {
+            id: usedAhDisplay
+            label: "Used Ah"
+            unit: "Ah"
+            value: "00.0"
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: "transparent"
-            border.color: "white"
-            border.width: 1
-
-            ColumnLayout {
-                anchors.centerIn: parent
-                spacing: 5
-
-                Text {
-                    text: "Used Ah"
-                    color: "white"
-                    font.pixelSize: 16
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                RowLayout {
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter
-
-                    Text {
-                        id: usedAhValue
-                        text: "00.0"
-                        color: "white"
-                        font.pixelSize: 24
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: "Ah"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 16
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-            }
         }
 
         // Distance
-        Rectangle {
+        TitledDecimalDisplay {
+            id: distanceDisplay
+            label: "Distance"
+            unit: VescIf.useImperialUnits() ? "mi" : "km"
+            value: "00.0"
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: "transparent"
-            border.color: "white"
-            border.width: 1
-
-            ColumnLayout {
-                anchors.centerIn: parent
-                spacing: 5
-
-                Text {
-                    text: "Distance"
-                    color: "white"
-                    font.pixelSize: 16
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                }
-
-                RowLayout {
-                    spacing: 5
-                    Layout.alignment: Qt.AlignHCenter
-
-                    Text {
-                        id: distanceValue
-                        text: "00.0"
-                        color: "white"
-                        font.pixelSize: 24
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        text: VescIf.useImperialUnits() ? "mi" : "km"
-                        color: unitColor // Neon indigo
-                        font.pixelSize: 16
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-            }
         }
     }
 
@@ -619,36 +207,33 @@ Item {
     }
 
     Connections {
-    target: mCommands
+        target: mCommands
 
+        function onValuesSetupReceived(values, mask) {
+            // Setup Imperial/Metric
+            var useImperial = VescIf.useImperialUnits()
+            var impFact = useImperial ? 0.621371192 : 1.0
 
-    function onValuesSetupReceived(values, mask) {
+            // Use speed directly from values.speed instead of RPM
+            speedGauge.value = values.speed * 3.6 * impFact; // Convert m/s to km/h or mi/h
+            phaseAmpsGauge.value = values.current_motor; // Example: Phase current
+            powerGauge.value = (values.current_in * values.v_in) / 1000; // Convert to kW
+            throttleGauge.value = values.duty_now * 100; // Example: Throttle (assuming duty cycle is 0-1)
 
-        // Setup Imperial/Metric
-        var useImperial = VescIf.useImperialUnits()
-        var impFact = useImperial ? 0.621371192 : 1.0
+            // Update bottom grid values
+            motorTempDisplay.value = values.temp_motor.toFixed(1);
+            inverterTempDisplay.value = values.temp_mos.toFixed(1);
+            batteryVoltsDisplay.value = values.v_in.toFixed(1);
+            usedAhDisplay.value = values.amp_hours.toFixed(1);
 
-        // Use speed directly from values.speed instead of RPM
-        speedGauge.value = values.speed * 3.6 * impFact; // Convert m/s to km/h or mi/h
-        phaseAmpsGauge.value = values.current_motor; // Example: Phase current
-        powerGauge.value = (values.current_in * values.v_in) / 1000; // Convert to kW
-        throttleGauge.value = values.duty_now * 100; // Example: Throttle (assuming duty cycle is 0-1)
+            // Update odometer (distance) from values.odometer
+            distanceDisplay.value = ((values.odometer * impFact) / 1000.0).toFixed(1); // Convert meters to km or mi
 
-        // Update bottom grid values
-        motorTempValue.text = values.temp_motor.toFixed(1);
-        inverterTempValue.text = values.temp_mos.toFixed(1);
-        batteryVoltsValue.text = values.v_in.toFixed(1);
-        usedAhValue.text = values.amp_hours.toFixed(1);
-
-        // Update odometer (distance) from values.odometer
-        distanceValue.text = ((values.odometer * impFact) / 1000.0).toFixed(1); // Convert meters to km or mi
-
-        // Calcualte efficiency
-        var alpha = 0.05
-        var efficiencyNow = Math.max( Math.min(values.current_in * values.v_in/Math.max(values.speed * 3.6 * impFact, 1e-6) , 60) , -60)
-        efficiency_lpf = (1.0 - alpha) * efficiency_lpf + alpha *  efficiencyNow
-        efficiencyValue.text = efficiency_lpf.toFixed(1);
+            // Calculate efficiency
+            var alpha = 0.05
+            var efficiencyNow = Math.max(Math.min(values.current_in * values.v_in / Math.max(values.speed * 3.6 * impFact, 1e-6), 60), -60)
+            efficiency_lpf = (1.0 - alpha) * efficiency_lpf + alpha * efficiencyNow
+            efficiencyDisplay.value = efficiency_lpf.toFixed(1);
+        }
     }
-}
-
 }
