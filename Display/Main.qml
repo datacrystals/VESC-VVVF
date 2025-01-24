@@ -97,7 +97,7 @@ Item {
                     }
 
                     Text {
-                        text: "mph"
+                        text: VescIf.useImperialUnits() ? "mph" : "km/h"
                         color: unitColor // Neon indigo
                         font.pixelSize: 14
                         font.bold: true // Bold text
@@ -464,7 +464,7 @@ Item {
                     }
 
                     Text {
-                        text: "Wh/mi"
+                        text: VescIf.useImperialUnits() ? "Wh/mi" : "Wh/km"
                         color: unitColor // Neon indigo
                         font.pixelSize: 16
                         font.bold: true
@@ -596,7 +596,7 @@ Item {
                     }
 
                     Text {
-                        text: "mi"
+                        text: VescIf.useImperialUnits() ? "mi" : "km"
                         color: unitColor // Neon indigo
                         font.pixelSize: 16
                         font.bold: true
@@ -621,7 +621,15 @@ Item {
     Connections {
     target: mCommands
 
-    function onValuesReceived(values, mask) {
+
+    function onValuesSetupReceived(values, mask) {
+
+        // Setup Imperial/Metric
+        var useImperial = VescIf.useImperialUnits()
+        var impFact = useImperial ? 0.621371192 : 1.0
+
+        // Use speed directly from values.speed instead of RPM
+        speedGauge.value = values.speed * 3.6 * impFact; // Convert m/s to km/h or mi/h
         phaseAmpsGauge.value = values.current_motor; // Example: Phase current
         powerGauge.value = (values.current_in * values.v_in) / 1000; // Convert to kW
         throttleGauge.value = values.duty_now * 100; // Example: Throttle (assuming duty cycle is 0-1)
@@ -631,20 +639,15 @@ Item {
         inverterTempValue.text = values.temp_mos.toFixed(1);
         batteryVoltsValue.text = values.v_in.toFixed(1);
         usedAhValue.text = values.amp_hours.toFixed(1);
-    }
-
-    function onValuesSetupReceived(values, mask) {
-        // Use speed directly from values.speed instead of RPM
-        speedGauge.value = values.speed * 0.621371; // Convert km/h to mph
 
         // Update odometer (distance) from values.odometer
-        distanceValue.text = (values.odometer / 1000).toFixed(1); // Convert meters to kilometers
+        distanceValue.text = ((values.odometer * impFact) / 1000.0).toFixed(1); // Convert meters to km or mi
 
-        // Calculate efficiency (Wh/mi)
-        var powerWatts = values.current_in * values.v_in;
-        var speedMph = values.speed * 0.621371; // Convert km/h to mph
-        var efficiency = speedMph > 0 ? (powerWatts / speedMph) : 0;
-        efficiencyValue.text = efficiency.toFixed(1);
+        // Calcualte efficiency
+        var alpha = 0.05
+        var efficiencyNow = Math.max( Math.min(values.current_in * values.v_in/Math.max(values.speed * 3.6 * impFact, 1e-6) , 60) , -60)
+        efficiency_lpf = (1.0 - alpha) * efficiency_lpf + alpha *  efficiencyNow
+        efficiencyValue.text = efficiency_lpf.toFixed(1);
     }
 }
 
