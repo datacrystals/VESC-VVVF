@@ -3,7 +3,6 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Extras 1.4 // Import for Gauge
 import Vedder.vesc.utility 1.0
-
 import Vedder.vesc.commands 1.0
 import Vedder.vesc.configparams 1.0
 import "qrc:/mobile"
@@ -269,7 +268,7 @@ Item {
                 spacing: 0
 
                 Text {
-                    text: "TrEff"
+                    text: "MtrDty"
                     color: "white"
                     font.pixelSize: 20
                     font.bold: true // Bold text
@@ -431,7 +430,7 @@ Item {
             }
         }
 
-        // Motor Duty Cycle
+        // Efficiency (Wh/mi)
         Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -444,7 +443,7 @@ Item {
                 spacing: 5
 
                 Text {
-                    text: "Duty Cycle"
+                    text: "Efficiency"
                     color: "white"
                     font.pixelSize: 16
                     font.bold: true
@@ -456,7 +455,7 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
 
                     Text {
-                        id: dutyCycleValue
+                        id: efficiencyValue
                         text: "00.0"
                         color: "white"
                         font.pixelSize: 24
@@ -465,7 +464,7 @@ Item {
                     }
 
                     Text {
-                        text: "%"
+                        text: "Wh/mi"
                         color: unitColor // Neon indigo
                         font.pixelSize: 16
                         font.bold: true
@@ -608,22 +607,45 @@ Item {
         }
     }
 
-    Connections {
-        target: mCommands
+    Timer {
+        running: true
+        repeat: true
+        interval: 100
 
-        function onValuesReceived(values, mask) {
-            speedGauge.value = Math.abs(values.rpm) / 32 * 0.621371 // Convert RPM to mph
-            phaseAmpsGauge.value = values.current_motor // Example: Phase current
-            powerGauge.value = (values.current_in * values.v_in) / 1000 // Convert to kW
-            throttleGauge.value = values.duty_cycle * 100 // Example: Throttle (assuming duty cycle is 0-1)
-
-            // Update bottom grid values
-            motorTempValue.text = values.motor_temp.toFixed(1)
-            inverterTempValue.text = values.inverter_temp.toFixed(1)
-            dutyCycleValue.text = (values.duty_cycle * 100).toFixed(1)
-            batteryVoltsValue.text = values.v_in.toFixed(1)
-            usedAhValue.text = values.amp_hours.toFixed(1)
-            distanceValue.text = (values.tachometer / 1609.34).toFixed(1) // Convert meters to miles
+        onTriggered: {
+            mCommands.getValues(); // Fetch standard values (current, voltage, duty cycle, etc.)
+            mCommands.getValuesSetup(); // Fetch setup values (speed, odometer, etc.)
         }
     }
+
+    Connections {
+    target: mCommands
+
+    function onValuesReceived(values, mask) {
+        phaseAmpsGauge.value = values.current_motor; // Example: Phase current
+        powerGauge.value = (values.current_in * values.v_in) / 1000; // Convert to kW
+        throttleGauge.value = values.duty_now * 100; // Example: Throttle (assuming duty cycle is 0-1)
+
+        // Update bottom grid values
+        motorTempValue.text = values.temp_motor.toFixed(1);
+        inverterTempValue.text = values.temp_mos.toFixed(1);
+        batteryVoltsValue.text = values.v_in.toFixed(1);
+        usedAhValue.text = values.amp_hours.toFixed(1);
+    }
+
+    function onValuesSetupReceived(values, mask) {
+        // Use speed directly from values.speed instead of RPM
+        speedGauge.value = values.speed * 0.621371; // Convert km/h to mph
+
+        // Update odometer (distance) from values.odometer
+        distanceValue.text = (values.odometer / 1000).toFixed(1); // Convert meters to kilometers
+
+        // Calculate efficiency (Wh/mi)
+        var powerWatts = values.current_in * values.v_in;
+        var speedMph = values.speed * 0.621371; // Convert km/h to mph
+        var efficiency = speedMph > 0 ? (powerWatts / speedMph) : 0;
+        efficiencyValue.text = efficiency.toFixed(1);
+    }
+}
+
 }
