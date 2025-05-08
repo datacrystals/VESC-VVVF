@@ -11,6 +11,7 @@ Item {
     id: mainItem
     anchors.fill: parent
 
+
     property Commands mCommands: VescIf.commands()
     property ConfigParams mMcConf: VescIf.mcConfig()
 
@@ -238,10 +239,10 @@ Item {
             distanceDisplay.value = ((values.odometer * impFact) / 1000.0).toFixed(1); // Convert meters to km or mi
 
             // Calculate efficiency
-            var alpha = 0.05
-            var efficiencyNow = Math.max(Math.min(values.current_in * values.v_in / Math.max(values.speed * 3.6 * impFact, 1e-6), 60), -60)
-            efficiency_lpf = (1.0 - alpha) * efficiency_lpf + alpha * efficiencyNow
-            efficiencyDisplay.value = efficiency_lpf.toFixed(1);
+            //var alpha = 0.05
+            //var efficiencyNow = Math.max(Math.min(values.current_in * values.v_in / Math.max(values.speed * 3.6 * impFact, 1e-6), 60), -60)
+            //var efficiency_lpf = (1.0 - alpha) * efficiency_lpf + alpha * efficiencyNow
+            //efficiencyDisplay.value = efficiency_lpf.toFixed(1);
         }
     }
 }

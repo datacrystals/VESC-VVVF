@@ -164,7 +164,16 @@ Item {
             Layout.alignment: Qt.AlignHCenter // Center the content
 
             Text {
-                text: root.value.toFixed(1).padStart(5, '0') // 000.0 format
+                text: {
+                    var formattedValue = root.value.toFixed(1);
+                    if (root.value < 0) {
+                        // Add a negative sign to the left of the value
+                        formattedValue = "-" + Math.abs(root.value).toFixed(1).padStart(4, '0'); // Ensure 4 digits after the negative sign
+                    } else {
+                        formattedValue = formattedValue.padStart(5, '0'); // 000.0 format
+                    }
+                    return formattedValue;
+                }
                 color: root.valueColor
                 font.family: "Monospace"
                 font.pixelSize: root.valueFontSize

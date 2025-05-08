@@ -21,7 +21,7 @@ Disassembly of section .init_fun:
   14:	9001      	str	r0, [sp, #4]
   16:	f001 fe1f 	bl	1c58 <InitializeConfiguration>
   1a:	9801      	ldr	r0, [sp, #4]
-  1c:	f001 ff3a 	bl	1e94 <PrintInverterConfig>
+  1c:	f001 ff0e 	bl	1e3c <PrintInverterConfig>
   20:	4b21      	ldr	r3, [pc, #132]	; (a8 <init+0xa4>)
   22:	4922      	ldr	r1, [pc, #136]	; (ac <init+0xa8>)
   24:	4822      	ldr	r0, [pc, #136]	; (b0 <init+0xac>)
@@ -645,7 +645,7 @@ Disassembly of section .text:
      9d0:	5252455b 	subspl	r4, r2, #381681664	; 0x16c00000
      9d4:	205d524f 	subscs	r5, sp, pc, asr #4
      9d8:	79616c50 	stmdbvc	r1!, {r4, r6, sl, fp, sp, lr}^
-     9dc:	6b636162 	blvs	18d8f6c <GenerateTriangle+0x18d6dc0>
+     9dc:	6b636162 	blvs	18d8f6c <GenerateTriangle+0x18d6e18>
      9e0:	72685420 	rsbvc	r5, r8, #32, 8	; 0x20000000
      9e4:	20646165 	rsbcs	r6, r4, r5, ror #2
      9e8:	72617453 	rsbvc	r7, r1, #1392508928	; 0x53000000
@@ -654,7 +654,7 @@ Disassembly of section .text:
      9f4:	706d6153 	rsbvc	r6, sp, r3, asr r1
      9f8:	4220656c 	eormi	r6, r0, #108, 10	; 0x1b000000
      9fc:	65666675 	strbvs	r6, [r6, #-1653]!	; 0xfffff98b
-     a00:	0a217372 	beq	85d7d0 <GenerateTriangle+0x85b624>
+     a00:	0a217372 	beq	85d7d0 <GenerateTriangle+0x85b67c>
      a04:	616c5000 	cmnvs	ip, r0
      a08:	63616279 	cmnvs	r1, #-1879048185	; 0x90000007
      a0c:	6f6c206b 	svcvs	0x006c206b
@@ -702,7 +702,7 @@ Disassembly of section .text:
      ab8:	6165726c 	cmnvs	r5, ip, ror #4
      abc:	72207964 	eorvc	r7, r0, #100, 18	; 0x190000
      ac0:	696e6e75 	stmdbvs	lr!, {r0, r2, r4, r5, r6, r9, sl, fp, sp, lr}^
-     ac4:	0a2e676e 	beq	b9a884 <GenerateTriangle+0xb986d8>
+     ac4:	0a2e676e 	beq	b9a884 <GenerateTriangle+0xb98730>
 	...
      ad0:	656e6547 	strbvs	r6, [lr, #-1351]!	; 0xfffffab9
      ad4:	6f746172 	svcvs	0x00746172
@@ -713,7 +713,7 @@ Disassembly of section .text:
      ae8:	61657268 	cmnvs	r5, r8, ror #4
      aec:	73207364 			; <UNDEFINED> instruction: 0x73207364
      af0:	70706f74 	rsbsvc	r6, r0, r4, ror pc
-     af4:	0a2e6465 	beq	b99c90 <GenerateTriangle+0xb97ae4>
+     af4:	0a2e6465 	beq	b99c90 <GenerateTriangle+0xb97b3c>
      af8:	6e654700 	cdpvs	7, 6, cr4, cr5, cr0, {0}
      afc:	74617265 	strbtvc	r7, [r1], #-613	; 0xfffffd9b
      b00:	6120726f 			; <UNDEFINED> instruction: 0x6120726f
@@ -779,7 +779,7 @@ Disassembly of section .text:
      bf0:	656d7573 	strbvs	r7, [sp, #-1395]!	; 0xfffffa8d
      bf4:	61732064 	cmnvs	r3, r4, rrx
      bf8:	656c706d 	strbvs	r7, [ip, #-109]!	; 0xffffff93
-     bfc:	3a732f73 	bcc	1ccc9d0 <GenerateTriangle+0x1cca824>
+     bfc:	3a732f73 	bcc	1ccc9d0 <GenerateTriangle+0x1cca87c>
      c00:	312e2520 			; <UNDEFINED> instruction: 0x312e2520
      c04:	000a2966 	andeq	r2, sl, r6, ror #18
      c08:	72727543 	rsbsvc	r7, r2, #281018368	; 0x10c00000
@@ -810,7 +810,7 @@ Disassembly of section .text:
      c6c:	65697272 	strbvs	r7, [r9, #-626]!	; 0xfffffd8e
      c70:	72462072 	subvc	r2, r6, #114	; 0x72
      c74:	65757165 	ldrbvs	r7, [r5, #-357]!	; 0xfffffe9b
-     c78:	3a79636e 	bcc	1e59a38 <GenerateTriangle+0x1e5788c>
+     c78:	3a79636e 	bcc	1e59a38 <GenerateTriangle+0x1e578e4>
      c7c:	312e2520 			; <UNDEFINED> instruction: 0x312e2520
      c80:	2c7a4866 	ldclcs	8, cr4, [sl], #-408	; 0xfffffe68
      c84:	706d4120 	rsbvc	r4, sp, r0, lsr #2
@@ -843,7 +843,7 @@ Disassembly of section .text:
      cfc:	6f747320 	svcvs	0x00747320
      d00:	75662070 	strbvc	r2, [r6, #-112]!	; 0xffffff90
      d04:	6974636e 	ldmdbvs	r4!, {r1, r2, r3, r5, r6, r8, r9, sp, lr}^
-     d08:	0a2e6e6f 	beq	b9c6cc <GenerateTriangle+0xb9a520>
+     d08:	0a2e6e6f 	beq	b9c6cc <GenerateTriangle+0xb9a578>
      d0c:	00000000 	andeq	r0, r0, r0
      d10:	2d747865 	ldclcs	8, cr7, [r4, #-404]!	; 0xfffffe6c
      d14:	72617473 	rsbvc	r7, r1, #1929379840	; 0x73000000
@@ -902,7 +902,7 @@ Disassembly of section .text:
      de8:	71657246 	cmnvc	r5, r6, asr #4
      dec:	636e6575 	cmnvs	lr, #490733568	; 0x1d400000
      df0:	74532079 	ldrbvc	r2, [r3], #-121	; 0xffffff87
-     df4:	3a747261 	bcc	1d1d780 <GenerateTriangle+0x1d1b5d4>
+     df4:	3a747261 	bcc	1d1d780 <GenerateTriangle+0x1d1b62c>
      df8:	20642520 	rsbcs	r2, r4, r0, lsr #10
      dfc:	000a7a48 	andeq	r7, sl, r8, asr #20
      e00:	20202020 	eorcs	r2, r0, r0, lsr #32
@@ -912,7 +912,7 @@ Disassembly of section .text:
      e10:	636e6575 	cmnvs	lr, #490733568	; 0x1d400000
      e14:	6e452079 	mcrvs	0, 2, r2, cr5, cr9, {3}
      e18:	25203a64 	strcs	r3, [r0, #-2660]!	; 0xfffff59c
-     e1c:	7a482064 	bvc	1208fb4 <GenerateTriangle+0x1206e08>
+     e1c:	7a482064 	bvc	1208fb4 <GenerateTriangle+0x1206e60>
      e20:	2020000a 	eorcs	r0, r0, sl
      e24:	754e2020 	strbvc	r2, [lr, #-32]	; 0xffffffe0
      e28:	7265626d 	rsbvc	r6, r5, #-805306362	; 0xd0000006
@@ -934,7 +934,7 @@ Disassembly of section .text:
      e68:	6e6f4320 	cdpvs	3, 6, cr4, cr15, cr0, {1}
      e6c:	75676966 	strbvc	r6, [r7, #-2406]!	; 0xfffff69a
      e70:	69746172 	ldmdbvs	r4!, {r1, r4, r5, r6, r8, sp, lr}^
-     e74:	0a3a6e6f 	beq	e9c838 <GenerateTriangle+0xe9a68c>
+     e74:	0a3a6e6f 	beq	e9c838 <GenerateTriangle+0xe9a6e4>
      e78:	4d202000 	stcmi	0, cr2, [r0, #-0]
      e7c:	53207861 			; <UNDEFINED> instruction: 0x53207861
      e80:	64656570 	strbtvs	r6, [r5], #-1392	; 0xfffffa90
@@ -946,8 +946,8 @@ Disassembly of section .text:
      e98:	5320666f 			; <UNDEFINED> instruction: 0x5320666f
      e9c:	64656570 	strbtvs	r6, [r5], #-1392	; 0xfffffa90
      ea0:	6e615220 	cdpvs	2, 6, cr5, cr1, cr0, {1}
-     ea4:	3a736567 	bcc	1cda448 <GenerateTriangle+0x1cd829c>
-     ea8:	0a642520 	beq	190a330 <GenerateTriangle+0x1908184>
+     ea4:	3a736567 	bcc	1cda448 <GenerateTriangle+0x1cd82f4>
+     ea8:	0a642520 	beq	190a330 <GenerateTriangle+0x19081dc>
      eac:	70530a00 	subsvc	r0, r3, r0, lsl #20
      eb0:	20646565 	rsbcs	r6, r4, r5, ror #10
      eb4:	676e6152 			; <UNDEFINED> instruction: 0x676e6152
@@ -956,8 +956,8 @@ Disassembly of section .text:
      ec0:	6e694d20 	cdpvs	13, 6, cr4, cr9, cr0, {1}
      ec4:	65705320 	ldrbvs	r5, [r0, #-800]!	; 0xfffffce0
      ec8:	203a6465 	eorscs	r6, sl, r5, ror #8
-     ecc:	6b206625 	blvs	81a768 <GenerateTriangle+0x8185bc>
-     ed0:	0a682f6d 	beq	1a0cc8c <GenerateTriangle+0x1a0aae0>
+     ecc:	6b206625 	blvs	81a768 <GenerateTriangle+0x818614>
+     ed0:	0a682f6d 	beq	1a0cc8c <GenerateTriangle+0x1a0ab38>
      ed4:	41202000 			; <UNDEFINED> instruction: 0x41202000
      ed8:	6c656363 	stclvs	3, cr6, [r5], #-396	; 0xfffffe74
      edc:	74617265 	strbtvc	r7, [r1], #-613	; 0xfffffd9b
@@ -966,7 +966,7 @@ Disassembly of section .text:
      ee8:	6e6f4320 	cdpvs	3, 6, cr4, cr15, cr0, {1}
      eec:	75676966 	strbvc	r6, [r7, #-2406]!	; 0xfffff69a
      ef0:	69746172 	ldmdbvs	r4!, {r1, r4, r5, r6, r8, sp, lr}^
-     ef4:	0a3a6e6f 	beq	e9c8b8 <GenerateTriangle+0xe9a70c>
+     ef4:	0a3a6e6f 	beq	e9c8b8 <GenerateTriangle+0xe9a764>
      ef8:	43202000 	nopmi	{0}	; <UNPREDICTABLE>
      efc:	7473616f 	ldrbtvc	r6, [r3], #-367	; 0xfffffe91
      f00:	20676e69 	rsbcs	r6, r7, r9, ror #28
@@ -974,7 +974,7 @@ Disassembly of section .text:
      f08:	6e6f4320 	cdpvs	3, 6, cr4, cr15, cr0, {1}
      f0c:	75676966 	strbvc	r6, [r7, #-2406]!	; 0xfffff69a
      f10:	69746172 	ldmdbvs	r4!, {r1, r4, r5, r6, r8, sp, lr}^
-     f14:	0a3a6e6f 	beq	e9c8d8 <GenerateTriangle+0xe9a72c>
+     f14:	0a3a6e6f 	beq	e9c8d8 <GenerateTriangle+0xe9a784>
      f18:	44202000 	strtmi	r2, [r0], #-0
      f1c:	6c656365 	stclvs	3, cr6, [r5], #-404	; 0xfffffe6c
      f20:	74617265 	strbtvc	r7, [r1], #-613	; 0xfffffd9b
@@ -983,25 +983,25 @@ Disassembly of section .text:
      f2c:	6e6f4320 	cdpvs	3, 6, cr4, cr15, cr0, {1}
      f30:	75676966 	strbvc	r6, [r7, #-2406]!	; 0xfffff69a
      f34:	69746172 	ldmdbvs	r4!, {r1, r4, r5, r6, r8, sp, lr}^
-     f38:	0a3a6e6f 	beq	e9c8fc <GenerateTriangle+0xe9a750>
+     f38:	0a3a6e6f 	beq	e9c8fc <GenerateTriangle+0xe9a7a8>
      f3c:	00000000 	andeq	r0, r0, r0
 
 00000f40 <SineLookupTable>:
      f40:	64584c40 	ldrbvs	r4, [r8], #-3136	; 0xfffff3c0
      f44:	91867b6f 	orrls	r7, r6, pc, ror #22
-     f48:	bab0a69c 	blt	fec2a9c0 <GenerateTriangle+0xfec28814>
-     f4c:	dbd3cbc3 	blle	ff4f3e60 <GenerateTriangle+0xff4f1cb4>
+     f48:	bab0a69c 	blt	fec2a9c0 <GenerateTriangle+0xfec2886c>
+     f4c:	dbd3cbc3 	blle	ff4f3e60 <GenerateTriangle+0xff4f1d0c>
      f50:	f2ede7e1 	vqdmlsl.s32	q15, d29, d1[1]
      f54:	fdfcf9f6 	ldc2l	9, cr15, [ip, #492]!	; 0x1ec	; <UNPREDICTABLE>
      f58:	fdffffff 	ldc2l	15, cr15, [pc, #1020]!	; 135c <ext_start_audio_loop+0xb4>
      f5c:	f2f6f9fc 			; <UNDEFINED> instruction: 0xf2f6f9fc
-     f60:	dbe1e7ed 	blle	ff87af1c <GenerateTriangle+0xff878d70>
-     f64:	bac3cbd3 	blt	ff0f3eb8 <GenerateTriangle+0xff0f1d0c>
+     f60:	dbe1e7ed 	blle	ff87af1c <GenerateTriangle+0xff878dc8>
+     f64:	bac3cbd3 	blt	ff0f3eb8 <GenerateTriangle+0xff0f1d64>
      f68:	919ca6b0 			; <UNDEFINED> instruction: 0x919ca6b0
      f6c:	646f7b86 	strbtvs	r7, [pc], #-2950	; f74 <SineLookupTable+0x34>
      f70:	34404c58 	strbcc	r4, [r0], #-3160	; 0xfffff3a8
      f74:	05111c28 	ldreq	r1, [r1, #-3112]	; 0xfffff3d8
-     f78:	dae4effa 	ble	ff93cf68 <GenerateTriangle+0xff93adbc>
+     f78:	dae4effa 	ble	ff93cf68 <GenerateTriangle+0xff93ae14>
      f7c:	b5bdc6d0 	ldrlt	ip, [sp, #1744]!	; 0x6d0
      f80:	999fa5ad 	ldmibls	pc, {r0, r2, r3, r5, r7, r8, sl, sp, pc}	; <UNPREDICTABLE>
      f84:	878a8e93 			; <UNDEFINED> instruction: 0x878a8e93
@@ -1009,7 +1009,7 @@ Disassembly of section .text:
      f8c:	87848381 	strhi	r8, [r4, r1, lsl #7]
      f90:	99938e8a 	ldmibls	r3, {r1, r3, r7, r9, sl, fp, pc}
      f94:	b5ada59f 	strlt	sl, [sp, #1439]!	; 0x59f
-     f98:	dad0c6bd 	ble	ff432a94 <GenerateTriangle+0xff4308e8>
+     f98:	dad0c6bd 	ble	ff432a94 <GenerateTriangle+0xff430940>
      f9c:	05faefe4 	ldrbeq	lr, [sl, #4068]!	; 0xfe4
      fa0:	34281c11 	strtcc	r1, [r8], #-3089	; 0xfffff3ef
 	...
@@ -1581,7 +1581,7 @@ Disassembly of section .text.generator_loop:
     1636:	4c2c      	ldr	r4, [pc, #176]	; (16e8 <generator_loop+0xb8>)
     1638:	4e2c      	ldr	r6, [pc, #176]	; (16ec <generator_loop+0xbc>)
     163a:	4478      	add	r0, pc
-    163c:	f000 fcd8 	bl	1ff0 <SPWMGenerator_Init>
+    163c:	f000 fcac 	bl	1f98 <SPWMGenerator_Init>
     1640:	447d      	add	r5, pc
     1642:	447c      	add	r4, pc
     1644:	447e      	add	r6, pc
@@ -1631,7 +1631,7 @@ Disassembly of section .text.generator_loop:
     16a6:	ed93 0a00 	vldr	s0, [r3]
     16aa:	4478      	add	r0, pc
     16ac:	2396      	movs	r3, #150	; 0x96
-    16ae:	f000 fcd1 	bl	2054 <SPWMGenerator_GenerateSamples>
+    16ae:	f000 fca5 	bl	1ffc <SPWMGenerator_GenerateSamples>
     16b2:	4b18      	ldr	r3, [pc, #96]	; (1714 <generator_loop+0xe4>)
     16b4:	4918      	ldr	r1, [pc, #96]	; (1718 <generator_loop+0xe8>)
     16b6:	447b      	add	r3, pc
@@ -1817,7 +1817,7 @@ Disassembly of section .text.update_spwm_settings:
     18c2:	4e30      	ldr	r6, [pc, #192]	; (1984 <update_spwm_settings+0x1bc>)
     18c4:	466c      	mov	r4, sp
     18c6:	4620      	mov	r0, r4
-    18c8:	f000 fa2c 	bl	1d24 <GetSpeedRangeAtSpeed>
+    18c8:	f000 fa00 	bl	1ccc <GetSpeedRangeAtSpeed>
     18cc:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
     18ce:	447e      	add	r6, pc
     18d0:	4635      	mov	r5, r6
@@ -2174,7 +2174,7 @@ Disassembly of section .text.InitializeConfiguration:
 
 00001c58 <InitializeConfiguration>:
     1c58:	b570      	push	{r4, r5, r6, lr}
-    1c5a:	4b31      	ldr	r3, [pc, #196]	; (1d20 <InitializeConfiguration+0xc8>)
+    1c5a:	4b1b      	ldr	r3, [pc, #108]	; (1cc8 <InitializeConfiguration+0x70>)
     1c5c:	6003      	str	r3, [r0, #0]
     1c5e:	b086      	sub	sp, #24
     1c60:	ac02      	add	r4, sp, #8
@@ -2182,7 +2182,7 @@ Disassembly of section .text.InitializeConfiguration:
     1c66:	4605      	mov	r5, r0
     1c68:	ae04      	add	r6, sp, #16
     1c6a:	6043      	str	r3, [r0, #4]
-    1c6c:	f640 31b8 	movw	r1, #3000	; 0xbb8
+    1c6c:	f44f 617a 	mov.w	r1, #4000	; 0xfa0
     1c70:	4620      	mov	r0, r4
     1c72:	f7ff ff9f 	bl	1bb4 <AddSPWM_AsyncFixed>
     1c76:	e896 0003 	ldmia.w	r6, {r0, r1}
@@ -2203,513 +2203,486 @@ Disassembly of section .text.InitializeConfiguration:
     1ca8:	e894 000c 	ldmia.w	r4, {r2, r3}
     1cac:	2100      	movs	r1, #0
     1cae:	f7ff ffb0 	bl	1c12 <SetSPWM_Deceleration>
-    1cb2:	eef2 0a04 	vmov.f32	s1, #36	; 0x41200000  10.0
+    1cb2:	eef3 0a0f 	vmov.f32	s1, #63	; 0x41f80000  31.0
     1cb6:	eebf 0a00 	vmov.f32	s0, #240	; 0xbf800000 -1.0
-    1cba:	4628      	mov	r0, r5
-    1cbc:	2100      	movs	r1, #0
-    1cbe:	f7ff ffbc 	bl	1c3a <SetSpeedRangeSpeed>
-    1cc2:	4620      	mov	r0, r4
-    1cc4:	f44f 617a 	mov.w	r1, #4000	; 0xfa0
-    1cc8:	f7ff ff74 	bl	1bb4 <AddSPWM_AsyncFixed>
-    1ccc:	e896 0003 	ldmia.w	r6, {r0, r1}
-    1cd0:	e88d 0003 	stmia.w	sp, {r0, r1}
-    1cd4:	4628      	mov	r0, r5
-    1cd6:	e894 000c 	ldmia.w	r4, {r2, r3}
-    1cda:	2101      	movs	r1, #1
-    1cdc:	f7ff ff71 	bl	1bc2 <SetSPWM_Acceleration>
-    1ce0:	e896 0003 	ldmia.w	r6, {r0, r1}
-    1ce4:	e88d 0003 	stmia.w	sp, {r0, r1}
-    1ce8:	4628      	mov	r0, r5
-    1cea:	e894 000c 	ldmia.w	r4, {r2, r3}
-    1cee:	2101      	movs	r1, #1
-    1cf0:	f7ff ff7b 	bl	1bea <SetSPWM_Coasting>
-    1cf4:	e896 0003 	ldmia.w	r6, {r0, r1}
-    1cf8:	e88d 0003 	stmia.w	sp, {r0, r1}
-    1cfc:	4628      	mov	r0, r5
-    1cfe:	e894 000c 	ldmia.w	r4, {r2, r3}
-    1d02:	2101      	movs	r1, #1
-    1d04:	f7ff ff85 	bl	1c12 <SetSPWM_Deceleration>
-    1d08:	eef3 0a0f 	vmov.f32	s1, #63	; 0x41f80000  31.0
-    1d0c:	eeb2 0a04 	vmov.f32	s0, #36	; 0x41200000  10.0
-    1d10:	2101      	movs	r1, #1
-    1d12:	4628      	mov	r0, r5
-    1d14:	b006      	add	sp, #24
-    1d16:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
-    1d1a:	f7ff bf8e 	b.w	1c3a <SetSpeedRangeSpeed>
-    1d1e:	bf00      	nop
-    1d20:	43480000 	movtmi	r0, #32768	; 0x8000
+    1cba:	2100      	movs	r1, #0
+    1cbc:	4628      	mov	r0, r5
+    1cbe:	b006      	add	sp, #24
+    1cc0:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+    1cc4:	f7ff bfb9 	b.w	1c3a <SetSpeedRangeSpeed>
+    1cc8:	43480000 	movtmi	r0, #32768	; 0x8000
 
 Disassembly of section .text.GetSpeedRangeAtSpeed:
 
-00001d24 <GetSpeedRangeAtSpeed>:
-    1d24:	b570      	push	{r4, r5, r6, lr}
-    1d26:	ed2d 8b02 	vpush	{d8}
-    1d2a:	b08e      	sub	sp, #56	; 0x38
-    1d2c:	466b      	mov	r3, sp
-    1d2e:	4606      	mov	r6, r0
-    1d30:	460c      	mov	r4, r1
-    1d32:	4618      	mov	r0, r3
-    1d34:	2238      	movs	r2, #56	; 0x38
-    1d36:	2100      	movs	r1, #0
-    1d38:	eeb0 8a40 	vmov.f32	s16, s0
-    1d3c:	eef0 8a60 	vmov.f32	s17, s1
-    1d40:	f7fe fdee 	bl	920 <memset>
-    1d44:	4603      	mov	r3, r0
-    1d46:	b114      	cbz	r4, 1d4e <GetSpeedRangeAtSpeed+0x2a>
-    1d48:	f8d4 0388 	ldr.w	r0, [r4, #904]	; 0x388
-    1d4c:	b990      	cbnz	r0, 1d74 <GetSpeedRangeAtSpeed+0x50>
-    1d4e:	4a25      	ldr	r2, [pc, #148]	; (1de4 <GetSpeedRangeAtSpeed+0xc0>)
-    1d50:	9201      	str	r2, [sp, #4]
-    1d52:	4635      	mov	r5, r6
-    1d54:	461c      	mov	r4, r3
-    1d56:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
-    1d58:	c50f      	stmia	r5!, {r0, r1, r2, r3}
-    1d5a:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
-    1d5c:	c50f      	stmia	r5!, {r0, r1, r2, r3}
-    1d5e:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
-    1d60:	c50f      	stmia	r5!, {r0, r1, r2, r3}
-    1d62:	e894 0003 	ldmia.w	r4, {r0, r1}
-    1d66:	e885 0003 	stmia.w	r5, {r0, r1}
-    1d6a:	4630      	mov	r0, r6
-    1d6c:	b00e      	add	sp, #56	; 0x38
-    1d6e:	ecbd 8b02 	vpop	{d8}
-    1d72:	bd70      	pop	{r4, r5, r6, pc}
-    1d74:	edd4 7a00 	vldr	s15, [r4]
-    1d78:	eef4 7a48 	vcmp.f32	s15, s16
-    1d7c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    1d80:	bf48      	it	mi
-    1d82:	eeb0 8a67 	vmovmi.f32	s16, s15
-    1d86:	edd4 7a01 	vldr	s15, [r4, #4]
-    1d8a:	eef4 7ac8 	vcmpe.f32	s15, s16
-    1d8e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    1d92:	dd06      	ble.n	1da2 <GetSpeedRangeAtSpeed+0x7e>
-    1d94:	eef0 7a08 	vmov.f32	s15, #8	; 0x40400000  3.0
-    1d98:	eef4 8ae7 	vcmpe.f32	s17, s15
-    1d9c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    1da0:	d4d5      	bmi.n	1d4e <GetSpeedRangeAtSpeed+0x2a>
-    1da2:	4622      	mov	r2, r4
-    1da4:	2100      	movs	r1, #0
-    1da6:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
-    1daa:	4288      	cmp	r0, r1
-    1dac:	ddcf      	ble.n	1d4e <GetSpeedRangeAtSpeed+0x2a>
-    1dae:	edd2 7a02 	vldr	s15, [r2, #8]
-    1db2:	b909      	cbnz	r1, 1db8 <GetSpeedRangeAtSpeed+0x94>
-    1db4:	ee77 7ac7 	vsub.f32	s15, s15, s14
-    1db8:	eeb4 8ae7 	vcmpe.f32	s16, s15
-    1dbc:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    1dc0:	db0c      	blt.n	1ddc <GetSpeedRangeAtSpeed+0xb8>
-    1dc2:	edd2 7a03 	vldr	s15, [r2, #12]
-    1dc6:	eef4 7ac8 	vcmpe.f32	s15, s16
-    1dca:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    1dce:	db05      	blt.n	1ddc <GetSpeedRangeAtSpeed+0xb8>
-    1dd0:	2338      	movs	r3, #56	; 0x38
-    1dd2:	fb03 4401 	mla	r4, r3, r1, r4
-    1dd6:	4635      	mov	r5, r6
-    1dd8:	3408      	adds	r4, #8
-    1dda:	e7bc      	b.n	1d56 <GetSpeedRangeAtSpeed+0x32>
-    1ddc:	3101      	adds	r1, #1
-    1dde:	3238      	adds	r2, #56	; 0x38
-    1de0:	e7e3      	b.n	1daa <GetSpeedRangeAtSpeed+0x86>
-    1de2:	bf00      	nop
-    1de4:	47c34f80 	strbmi	r4, [r3, r0, lsl #31]
+00001ccc <GetSpeedRangeAtSpeed>:
+    1ccc:	b570      	push	{r4, r5, r6, lr}
+    1cce:	ed2d 8b02 	vpush	{d8}
+    1cd2:	b08e      	sub	sp, #56	; 0x38
+    1cd4:	466b      	mov	r3, sp
+    1cd6:	4606      	mov	r6, r0
+    1cd8:	460c      	mov	r4, r1
+    1cda:	4618      	mov	r0, r3
+    1cdc:	2238      	movs	r2, #56	; 0x38
+    1cde:	2100      	movs	r1, #0
+    1ce0:	eeb0 8a40 	vmov.f32	s16, s0
+    1ce4:	eef0 8a60 	vmov.f32	s17, s1
+    1ce8:	f7fe fe1a 	bl	920 <memset>
+    1cec:	4603      	mov	r3, r0
+    1cee:	b114      	cbz	r4, 1cf6 <GetSpeedRangeAtSpeed+0x2a>
+    1cf0:	f8d4 0388 	ldr.w	r0, [r4, #904]	; 0x388
+    1cf4:	b990      	cbnz	r0, 1d1c <GetSpeedRangeAtSpeed+0x50>
+    1cf6:	4a25      	ldr	r2, [pc, #148]	; (1d8c <GetSpeedRangeAtSpeed+0xc0>)
+    1cf8:	9201      	str	r2, [sp, #4]
+    1cfa:	4635      	mov	r5, r6
+    1cfc:	461c      	mov	r4, r3
+    1cfe:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
+    1d00:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+    1d02:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
+    1d04:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+    1d06:	cc0f      	ldmia	r4!, {r0, r1, r2, r3}
+    1d08:	c50f      	stmia	r5!, {r0, r1, r2, r3}
+    1d0a:	e894 0003 	ldmia.w	r4, {r0, r1}
+    1d0e:	e885 0003 	stmia.w	r5, {r0, r1}
+    1d12:	4630      	mov	r0, r6
+    1d14:	b00e      	add	sp, #56	; 0x38
+    1d16:	ecbd 8b02 	vpop	{d8}
+    1d1a:	bd70      	pop	{r4, r5, r6, pc}
+    1d1c:	edd4 7a00 	vldr	s15, [r4]
+    1d20:	eef4 7a48 	vcmp.f32	s15, s16
+    1d24:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    1d28:	bf48      	it	mi
+    1d2a:	eeb0 8a67 	vmovmi.f32	s16, s15
+    1d2e:	edd4 7a01 	vldr	s15, [r4, #4]
+    1d32:	eef4 7ac8 	vcmpe.f32	s15, s16
+    1d36:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    1d3a:	dd06      	ble.n	1d4a <GetSpeedRangeAtSpeed+0x7e>
+    1d3c:	eef0 7a08 	vmov.f32	s15, #8	; 0x40400000  3.0
+    1d40:	eef4 8ae7 	vcmpe.f32	s17, s15
+    1d44:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    1d48:	d4d5      	bmi.n	1cf6 <GetSpeedRangeAtSpeed+0x2a>
+    1d4a:	4622      	mov	r2, r4
+    1d4c:	2100      	movs	r1, #0
+    1d4e:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
+    1d52:	4288      	cmp	r0, r1
+    1d54:	ddcf      	ble.n	1cf6 <GetSpeedRangeAtSpeed+0x2a>
+    1d56:	edd2 7a02 	vldr	s15, [r2, #8]
+    1d5a:	b909      	cbnz	r1, 1d60 <GetSpeedRangeAtSpeed+0x94>
+    1d5c:	ee77 7ac7 	vsub.f32	s15, s15, s14
+    1d60:	eeb4 8ae7 	vcmpe.f32	s16, s15
+    1d64:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    1d68:	db0c      	blt.n	1d84 <GetSpeedRangeAtSpeed+0xb8>
+    1d6a:	edd2 7a03 	vldr	s15, [r2, #12]
+    1d6e:	eef4 7ac8 	vcmpe.f32	s15, s16
+    1d72:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    1d76:	db05      	blt.n	1d84 <GetSpeedRangeAtSpeed+0xb8>
+    1d78:	2338      	movs	r3, #56	; 0x38
+    1d7a:	fb03 4401 	mla	r4, r3, r1, r4
+    1d7e:	4635      	mov	r5, r6
+    1d80:	3408      	adds	r4, #8
+    1d82:	e7bc      	b.n	1cfe <GetSpeedRangeAtSpeed+0x32>
+    1d84:	3101      	adds	r1, #1
+    1d86:	3238      	adds	r2, #56	; 0x38
+    1d88:	e7e3      	b.n	1d52 <GetSpeedRangeAtSpeed+0x86>
+    1d8a:	bf00      	nop
+    1d8c:	47c34f80 	strbmi	r4, [r3, r0, lsl #31]
 
 Disassembly of section .text.PrintSPWMConfig:
 
-00001de8 <PrintSPWMConfig>:
-    1de8:	b570      	push	{r4, r5, r6, lr}
-    1dea:	7803      	ldrb	r3, [r0, #0]
-    1dec:	4604      	mov	r4, r0
-    1dee:	2b04      	cmp	r3, #4
-    1df0:	d82e      	bhi.n	1e50 <PrintSPWMConfig+0x68>
-    1df2:	e8df f003 	tbb	[pc, r3]
-    1df6:	2421032a 	strtcs	r0, [r1], #-810	; 0xfffffcd6
-    1dfa:	491b0027 	ldmdbmi	fp, {r0, r1, r2, r5}
-    1dfe:	4479      	add	r1, pc
-    1e00:	4d19      	ldr	r5, [pc, #100]	; (1e68 <PrintSPWMConfig+0x80>)
-    1e02:	481b      	ldr	r0, [pc, #108]	; (1e70 <PrintSPWMConfig+0x88>)
+00001d90 <PrintSPWMConfig>:
+    1d90:	b570      	push	{r4, r5, r6, lr}
+    1d92:	7803      	ldrb	r3, [r0, #0]
+    1d94:	4604      	mov	r4, r0
+    1d96:	2b04      	cmp	r3, #4
+    1d98:	d82e      	bhi.n	1df8 <PrintSPWMConfig+0x68>
+    1d9a:	e8df f003 	tbb	[pc, r3]
+    1d9e:	2421032a 	strtcs	r0, [r1], #-810	; 0xfffffcd6
+    1da2:	491b0027 	ldmdbmi	fp, {r0, r1, r2, r5}
+    1da6:	4479      	add	r1, pc
+    1da8:	4d19      	ldr	r5, [pc, #100]	; (1e10 <PrintSPWMConfig+0x80>)
+    1daa:	481b      	ldr	r0, [pc, #108]	; (1e18 <PrintSPWMConfig+0x88>)
+    1dac:	f8d5 30b4 	ldr.w	r3, [r5, #180]	; 0xb4
+    1db0:	4478      	add	r0, pc
+    1db2:	4798      	blx	r3
+    1db4:	7823      	ldrb	r3, [r4, #0]
+    1db6:	1e5a      	subs	r2, r3, #1
+    1db8:	2a02      	cmp	r2, #2
+    1dba:	d820      	bhi.n	1dfe <PrintSPWMConfig+0x6e>
+    1dbc:	4817      	ldr	r0, [pc, #92]	; (1e1c <PrintSPWMConfig+0x8c>)
+    1dbe:	f8d5 30b4 	ldr.w	r3, [r5, #180]	; 0xb4
+    1dc2:	6861      	ldr	r1, [r4, #4]
+    1dc4:	4478      	add	r0, pc
+    1dc6:	4798      	blx	r3
+    1dc8:	7823      	ldrb	r3, [r4, #0]
+    1dca:	3b02      	subs	r3, #2
+    1dcc:	2b01      	cmp	r3, #1
+    1dce:	d81e      	bhi.n	1e0e <PrintSPWMConfig+0x7e>
+    1dd0:	4813      	ldr	r0, [pc, #76]	; (1e20 <PrintSPWMConfig+0x90>)
+    1dd2:	f8d5 30b4 	ldr.w	r3, [r5, #180]	; 0xb4
+    1dd6:	68a1      	ldr	r1, [r4, #8]
+    1dd8:	4478      	add	r0, pc
+    1dda:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+    1dde:	4718      	bx	r3
+    1de0:	4910      	ldr	r1, [pc, #64]	; (1e24 <PrintSPWMConfig+0x94>)
+    1de2:	4479      	add	r1, pc
+    1de4:	e7e0      	b.n	1da8 <PrintSPWMConfig+0x18>
+    1de6:	4910      	ldr	r1, [pc, #64]	; (1e28 <PrintSPWMConfig+0x98>)
+    1de8:	4479      	add	r1, pc
+    1dea:	e7dd      	b.n	1da8 <PrintSPWMConfig+0x18>
+    1dec:	490f      	ldr	r1, [pc, #60]	; (1e2c <PrintSPWMConfig+0x9c>)
+    1dee:	4479      	add	r1, pc
+    1df0:	e7da      	b.n	1da8 <PrintSPWMConfig+0x18>
+    1df2:	490f      	ldr	r1, [pc, #60]	; (1e30 <PrintSPWMConfig+0xa0>)
+    1df4:	4479      	add	r1, pc
+    1df6:	e7d7      	b.n	1da8 <PrintSPWMConfig+0x18>
+    1df8:	490e      	ldr	r1, [pc, #56]	; (1e34 <PrintSPWMConfig+0xa4>)
+    1dfa:	4479      	add	r1, pc
+    1dfc:	e7d4      	b.n	1da8 <PrintSPWMConfig+0x18>
+    1dfe:	2b04      	cmp	r3, #4
+    1e00:	d105      	bne.n	1e0e <PrintSPWMConfig+0x7e>
+    1e02:	480d      	ldr	r0, [pc, #52]	; (1e38 <PrintSPWMConfig+0xa8>)
     1e04:	f8d5 30b4 	ldr.w	r3, [r5, #180]	; 0xb4
-    1e08:	4478      	add	r0, pc
-    1e0a:	4798      	blx	r3
-    1e0c:	7823      	ldrb	r3, [r4, #0]
-    1e0e:	1e5a      	subs	r2, r3, #1
-    1e10:	2a02      	cmp	r2, #2
-    1e12:	d820      	bhi.n	1e56 <PrintSPWMConfig+0x6e>
-    1e14:	4817      	ldr	r0, [pc, #92]	; (1e74 <PrintSPWMConfig+0x8c>)
-    1e16:	f8d5 30b4 	ldr.w	r3, [r5, #180]	; 0xb4
-    1e1a:	6861      	ldr	r1, [r4, #4]
-    1e1c:	4478      	add	r0, pc
-    1e1e:	4798      	blx	r3
-    1e20:	7823      	ldrb	r3, [r4, #0]
-    1e22:	3b02      	subs	r3, #2
-    1e24:	2b01      	cmp	r3, #1
-    1e26:	d81e      	bhi.n	1e66 <PrintSPWMConfig+0x7e>
-    1e28:	4813      	ldr	r0, [pc, #76]	; (1e78 <PrintSPWMConfig+0x90>)
-    1e2a:	f8d5 30b4 	ldr.w	r3, [r5, #180]	; 0xb4
-    1e2e:	68a1      	ldr	r1, [r4, #8]
-    1e30:	4478      	add	r0, pc
-    1e32:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
-    1e36:	4718      	bx	r3
-    1e38:	4910      	ldr	r1, [pc, #64]	; (1e7c <PrintSPWMConfig+0x94>)
-    1e3a:	4479      	add	r1, pc
-    1e3c:	e7e0      	b.n	1e00 <PrintSPWMConfig+0x18>
-    1e3e:	4910      	ldr	r1, [pc, #64]	; (1e80 <PrintSPWMConfig+0x98>)
-    1e40:	4479      	add	r1, pc
-    1e42:	e7dd      	b.n	1e00 <PrintSPWMConfig+0x18>
-    1e44:	490f      	ldr	r1, [pc, #60]	; (1e84 <PrintSPWMConfig+0x9c>)
-    1e46:	4479      	add	r1, pc
-    1e48:	e7da      	b.n	1e00 <PrintSPWMConfig+0x18>
-    1e4a:	490f      	ldr	r1, [pc, #60]	; (1e88 <PrintSPWMConfig+0xa0>)
-    1e4c:	4479      	add	r1, pc
-    1e4e:	e7d7      	b.n	1e00 <PrintSPWMConfig+0x18>
-    1e50:	490e      	ldr	r1, [pc, #56]	; (1e8c <PrintSPWMConfig+0xa4>)
-    1e52:	4479      	add	r1, pc
-    1e54:	e7d4      	b.n	1e00 <PrintSPWMConfig+0x18>
-    1e56:	2b04      	cmp	r3, #4
-    1e58:	d105      	bne.n	1e66 <PrintSPWMConfig+0x7e>
-    1e5a:	480d      	ldr	r0, [pc, #52]	; (1e90 <PrintSPWMConfig+0xa8>)
-    1e5c:	f8d5 30b4 	ldr.w	r3, [r5, #180]	; 0xb4
-    1e60:	68e1      	ldr	r1, [r4, #12]
-    1e62:	4478      	add	r0, pc
-    1e64:	e7e5      	b.n	1e32 <PrintSPWMConfig+0x4a>
-    1e66:	bd70      	pop	{r4, r5, r6, pc}
-    1e68:	1000f800 	andne	pc, r0, r0, lsl #16
-    1e6c:	ffffed85 			; <UNDEFINED> instruction: 0xffffed85
-    1e70:	ffffefbd 			; <UNDEFINED> instruction: 0xffffefbd
-    1e74:	ffffefbc 			; <UNDEFINED> instruction: 0xffffefbc
-    1e78:	ffffefcc 			; <UNDEFINED> instruction: 0xffffefcc
-    1e7c:	ffffed26 			; <UNDEFINED> instruction: 0xffffed26
-    1e80:	ffffed2b 			; <UNDEFINED> instruction: 0xffffed2b
-    1e84:	ffffed31 			; <UNDEFINED> instruction: 0xffffed31
-    1e88:	ffffef60 			; <UNDEFINED> instruction: 0xffffef60
-    1e8c:	ffffecf0 			; <UNDEFINED> instruction: 0xffffecf0
-    1e90:	ffffefbc 			; <UNDEFINED> instruction: 0xffffefbc
+    1e08:	68e1      	ldr	r1, [r4, #12]
+    1e0a:	4478      	add	r0, pc
+    1e0c:	e7e5      	b.n	1dda <PrintSPWMConfig+0x4a>
+    1e0e:	bd70      	pop	{r4, r5, r6, pc}
+    1e10:	1000f800 	andne	pc, r0, r0, lsl #16
+    1e14:	ffffeddd 			; <UNDEFINED> instruction: 0xffffeddd
+    1e18:	fffff015 			; <UNDEFINED> instruction: 0xfffff015
+    1e1c:	fffff014 			; <UNDEFINED> instruction: 0xfffff014
+    1e20:	fffff024 			; <UNDEFINED> instruction: 0xfffff024
+    1e24:	ffffed7e 			; <UNDEFINED> instruction: 0xffffed7e
+    1e28:	ffffed83 			; <UNDEFINED> instruction: 0xffffed83
+    1e2c:	ffffed89 			; <UNDEFINED> instruction: 0xffffed89
+    1e30:	ffffefb8 			; <UNDEFINED> instruction: 0xffffefb8
+    1e34:	ffffed48 			; <UNDEFINED> instruction: 0xffffed48
+    1e38:	fffff014 			; <UNDEFINED> instruction: 0xfffff014
 
 Disassembly of section .text.PrintInverterConfig:
 
-00001e94 <PrintInverterConfig>:
-    1e94:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
-    1e98:	4c32      	ldr	r4, [pc, #200]	; (1f64 <PrintInverterConfig+0xd0>)
-    1e9a:	4605      	mov	r5, r0
-    1e9c:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1ea0:	b920      	cbnz	r0, 1eac <PrintInverterConfig+0x18>
-    1ea2:	4831      	ldr	r0, [pc, #196]	; (1f68 <PrintInverterConfig+0xd4>)
-    1ea4:	e8bd 47f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
-    1ea8:	4478      	add	r0, pc
-    1eaa:	4718      	bx	r3
-    1eac:	482f      	ldr	r0, [pc, #188]	; (1f6c <PrintInverterConfig+0xd8>)
-    1eae:	f8df 80c0 	ldr.w	r8, [pc, #192]	; 1f70 <PrintInverterConfig+0xdc>
-    1eb2:	f8df 90c0 	ldr.w	r9, [pc, #192]	; 1f74 <PrintInverterConfig+0xe0>
-    1eb6:	f8df a0c0 	ldr.w	sl, [pc, #192]	; 1f78 <PrintInverterConfig+0xe4>
-    1eba:	4478      	add	r0, pc
-    1ebc:	4798      	blx	r3
-    1ebe:	6828      	ldr	r0, [r5, #0]
-    1ec0:	f7fe fcd2 	bl	868 <__aeabi_f2d>
-    1ec4:	4602      	mov	r2, r0
-    1ec6:	482d      	ldr	r0, [pc, #180]	; (1f7c <PrintInverterConfig+0xe8>)
-    1ec8:	460b      	mov	r3, r1
-    1eca:	4478      	add	r0, pc
-    1ecc:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
-    1ed0:	4788      	blx	r1
-    1ed2:	482b      	ldr	r0, [pc, #172]	; (1f80 <PrintInverterConfig+0xec>)
-    1ed4:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1ed8:	f8d5 1388 	ldr.w	r1, [r5, #904]	; 0x388
-    1edc:	4478      	add	r0, pc
-    1ede:	4798      	blx	r3
-    1ee0:	f105 0610 	add.w	r6, r5, #16
-    1ee4:	2700      	movs	r7, #0
-    1ee6:	44f8      	add	r8, pc
-    1ee8:	44f9      	add	r9, pc
-    1eea:	44fa      	add	sl, pc
-    1eec:	f8d5 3388 	ldr.w	r3, [r5, #904]	; 0x388
-    1ef0:	42bb      	cmp	r3, r7
-    1ef2:	dc01      	bgt.n	1ef8 <PrintInverterConfig+0x64>
-    1ef4:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
-    1ef8:	3701      	adds	r7, #1
-    1efa:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1efe:	4639      	mov	r1, r7
-    1f00:	4640      	mov	r0, r8
-    1f02:	4798      	blx	r3
-    1f04:	f856 0c08 	ldr.w	r0, [r6, #-8]
-    1f08:	f7fe fcae 	bl	868 <__aeabi_f2d>
-    1f0c:	4602      	mov	r2, r0
-    1f0e:	460b      	mov	r3, r1
-    1f10:	4648      	mov	r0, r9
-    1f12:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
-    1f16:	4788      	blx	r1
-    1f18:	f856 0c04 	ldr.w	r0, [r6, #-4]
-    1f1c:	f7fe fca4 	bl	868 <__aeabi_f2d>
-    1f20:	4602      	mov	r2, r0
-    1f22:	460b      	mov	r3, r1
-    1f24:	4650      	mov	r0, sl
-    1f26:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
-    1f2a:	4788      	blx	r1
-    1f2c:	4815      	ldr	r0, [pc, #84]	; (1f84 <PrintInverterConfig+0xf0>)
-    1f2e:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1f32:	4478      	add	r0, pc
-    1f34:	4798      	blx	r3
-    1f36:	4630      	mov	r0, r6
-    1f38:	f7ff ff56 	bl	1de8 <PrintSPWMConfig>
-    1f3c:	4812      	ldr	r0, [pc, #72]	; (1f88 <PrintInverterConfig+0xf4>)
-    1f3e:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1f42:	4478      	add	r0, pc
-    1f44:	4798      	blx	r3
-    1f46:	f106 0010 	add.w	r0, r6, #16
-    1f4a:	f7ff ff4d 	bl	1de8 <PrintSPWMConfig>
-    1f4e:	480f      	ldr	r0, [pc, #60]	; (1f8c <PrintInverterConfig+0xf8>)
-    1f50:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
-    1f54:	4478      	add	r0, pc
-    1f56:	4798      	blx	r3
-    1f58:	f106 0020 	add.w	r0, r6, #32
-    1f5c:	f7ff ff44 	bl	1de8 <PrintSPWMConfig>
-    1f60:	3638      	adds	r6, #56	; 0x38
-    1f62:	e7c3      	b.n	1eec <PrintInverterConfig+0x58>
-    1f64:	1000f800 	andne	pc, r0, r0, lsl #16
-    1f68:	ffffef94 			; <UNDEFINED> instruction: 0xffffef94
-    1f6c:	ffffefa2 			; <UNDEFINED> instruction: 0xffffefa2
-    1f70:	ffffefc3 			; <UNDEFINED> instruction: 0xffffefc3
-    1f74:	ffffefd3 			; <UNDEFINED> instruction: 0xffffefd3
-    1f78:	ffffef8b 			; <UNDEFINED> instruction: 0xffffef8b
-    1f7c:	ffffefab 			; <UNDEFINED> instruction: 0xffffefab
-    1f80:	ffffefaf 			; <UNDEFINED> instruction: 0xffffefaf
-    1f84:	ffffef9f 			; <UNDEFINED> instruction: 0xffffef9f
-    1f88:	ffffefb3 			; <UNDEFINED> instruction: 0xffffefb3
-    1f8c:	ffffefc1 			; <UNDEFINED> instruction: 0xffffefc1
+00001e3c <PrintInverterConfig>:
+    1e3c:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+    1e40:	4c32      	ldr	r4, [pc, #200]	; (1f0c <PrintInverterConfig+0xd0>)
+    1e42:	4605      	mov	r5, r0
+    1e44:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    1e48:	b920      	cbnz	r0, 1e54 <PrintInverterConfig+0x18>
+    1e4a:	4831      	ldr	r0, [pc, #196]	; (1f10 <PrintInverterConfig+0xd4>)
+    1e4c:	e8bd 47f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+    1e50:	4478      	add	r0, pc
+    1e52:	4718      	bx	r3
+    1e54:	482f      	ldr	r0, [pc, #188]	; (1f14 <PrintInverterConfig+0xd8>)
+    1e56:	f8df 80c0 	ldr.w	r8, [pc, #192]	; 1f18 <PrintInverterConfig+0xdc>
+    1e5a:	f8df 90c0 	ldr.w	r9, [pc, #192]	; 1f1c <PrintInverterConfig+0xe0>
+    1e5e:	f8df a0c0 	ldr.w	sl, [pc, #192]	; 1f20 <PrintInverterConfig+0xe4>
+    1e62:	4478      	add	r0, pc
+    1e64:	4798      	blx	r3
+    1e66:	6828      	ldr	r0, [r5, #0]
+    1e68:	f7fe fcfe 	bl	868 <__aeabi_f2d>
+    1e6c:	4602      	mov	r2, r0
+    1e6e:	482d      	ldr	r0, [pc, #180]	; (1f24 <PrintInverterConfig+0xe8>)
+    1e70:	460b      	mov	r3, r1
+    1e72:	4478      	add	r0, pc
+    1e74:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
+    1e78:	4788      	blx	r1
+    1e7a:	482b      	ldr	r0, [pc, #172]	; (1f28 <PrintInverterConfig+0xec>)
+    1e7c:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    1e80:	f8d5 1388 	ldr.w	r1, [r5, #904]	; 0x388
+    1e84:	4478      	add	r0, pc
+    1e86:	4798      	blx	r3
+    1e88:	f105 0610 	add.w	r6, r5, #16
+    1e8c:	2700      	movs	r7, #0
+    1e8e:	44f8      	add	r8, pc
+    1e90:	44f9      	add	r9, pc
+    1e92:	44fa      	add	sl, pc
+    1e94:	f8d5 3388 	ldr.w	r3, [r5, #904]	; 0x388
+    1e98:	42bb      	cmp	r3, r7
+    1e9a:	dc01      	bgt.n	1ea0 <PrintInverterConfig+0x64>
+    1e9c:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+    1ea0:	3701      	adds	r7, #1
+    1ea2:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    1ea6:	4639      	mov	r1, r7
+    1ea8:	4640      	mov	r0, r8
+    1eaa:	4798      	blx	r3
+    1eac:	f856 0c08 	ldr.w	r0, [r6, #-8]
+    1eb0:	f7fe fcda 	bl	868 <__aeabi_f2d>
+    1eb4:	4602      	mov	r2, r0
+    1eb6:	460b      	mov	r3, r1
+    1eb8:	4648      	mov	r0, r9
+    1eba:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
+    1ebe:	4788      	blx	r1
+    1ec0:	f856 0c04 	ldr.w	r0, [r6, #-4]
+    1ec4:	f7fe fcd0 	bl	868 <__aeabi_f2d>
+    1ec8:	4602      	mov	r2, r0
+    1eca:	460b      	mov	r3, r1
+    1ecc:	4650      	mov	r0, sl
+    1ece:	f8d4 10b4 	ldr.w	r1, [r4, #180]	; 0xb4
+    1ed2:	4788      	blx	r1
+    1ed4:	4815      	ldr	r0, [pc, #84]	; (1f2c <PrintInverterConfig+0xf0>)
+    1ed6:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    1eda:	4478      	add	r0, pc
+    1edc:	4798      	blx	r3
+    1ede:	4630      	mov	r0, r6
+    1ee0:	f7ff ff56 	bl	1d90 <PrintSPWMConfig>
+    1ee4:	4812      	ldr	r0, [pc, #72]	; (1f30 <PrintInverterConfig+0xf4>)
+    1ee6:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    1eea:	4478      	add	r0, pc
+    1eec:	4798      	blx	r3
+    1eee:	f106 0010 	add.w	r0, r6, #16
+    1ef2:	f7ff ff4d 	bl	1d90 <PrintSPWMConfig>
+    1ef6:	480f      	ldr	r0, [pc, #60]	; (1f34 <PrintInverterConfig+0xf8>)
+    1ef8:	f8d4 30b4 	ldr.w	r3, [r4, #180]	; 0xb4
+    1efc:	4478      	add	r0, pc
+    1efe:	4798      	blx	r3
+    1f00:	f106 0020 	add.w	r0, r6, #32
+    1f04:	f7ff ff44 	bl	1d90 <PrintSPWMConfig>
+    1f08:	3638      	adds	r6, #56	; 0x38
+    1f0a:	e7c3      	b.n	1e94 <PrintInverterConfig+0x58>
+    1f0c:	1000f800 	andne	pc, r0, r0, lsl #16
+    1f10:	ffffefec 			; <UNDEFINED> instruction: 0xffffefec
+    1f14:	ffffeffa 			; <UNDEFINED> instruction: 0xffffeffa
+    1f18:	fffff01b 			; <UNDEFINED> instruction: 0xfffff01b
+    1f1c:	fffff02b 			; <UNDEFINED> instruction: 0xfffff02b
+    1f20:	ffffefe3 			; <UNDEFINED> instruction: 0xffffefe3
+    1f24:	fffff003 			; <UNDEFINED> instruction: 0xfffff003
+    1f28:	fffff007 			; <UNDEFINED> instruction: 0xfffff007
+    1f2c:	ffffeff7 			; <UNDEFINED> instruction: 0xffffeff7
+    1f30:	fffff00b 			; <UNDEFINED> instruction: 0xfffff00b
+    1f34:	fffff019 			; <UNDEFINED> instruction: 0xfffff019
 
 Disassembly of section .text.get_enhanced_random:
 
-00001f90 <get_enhanced_random>:
-    1f90:	4a0d      	ldr	r2, [pc, #52]	; (1fc8 <get_enhanced_random+0x38>)
-    1f92:	490e      	ldr	r1, [pc, #56]	; (1fcc <get_enhanced_random+0x3c>)
-    1f94:	447a      	add	r2, pc
-    1f96:	4479      	add	r1, pc
-    1f98:	8813      	ldrh	r3, [r2, #0]
-    1f9a:	f831 0013 	ldrh.w	r0, [r1, r3, lsl #1]
-    1f9e:	490c      	ldr	r1, [pc, #48]	; (1fd0 <get_enhanced_random+0x40>)
-    1fa0:	3301      	adds	r3, #1
-    1fa2:	4479      	add	r1, pc
-    1fa4:	b2db      	uxtb	r3, r3
-    1fa6:	8013      	strh	r3, [r2, #0]
-    1fa8:	880b      	ldrh	r3, [r1, #0]
-    1faa:	08da      	lsrs	r2, r3, #3
-    1fac:	ea82 0293 	eor.w	r2, r2, r3, lsr #2
-    1fb0:	405a      	eors	r2, r3
-    1fb2:	ea82 1253 	eor.w	r2, r2, r3, lsr #5
-    1fb6:	f002 0201 	and.w	r2, r2, #1
-    1fba:	085b      	lsrs	r3, r3, #1
-    1fbc:	ea43 33c2 	orr.w	r3, r3, r2, lsl #15
-    1fc0:	800b      	strh	r3, [r1, #0]
-    1fc2:	4058      	eors	r0, r3
-    1fc4:	4770      	bx	lr
-    1fc6:	bf00      	nop
-    1fc8:	ffffe5ec 			; <UNDEFINED> instruction: 0xffffe5ec
-    1fcc:	fffff016 			; <UNDEFINED> instruction: 0xfffff016
-    1fd0:	ffffe14c 			; <UNDEFINED> instruction: 0xffffe14c
+00001f38 <get_enhanced_random>:
+    1f38:	4a0d      	ldr	r2, [pc, #52]	; (1f70 <get_enhanced_random+0x38>)
+    1f3a:	490e      	ldr	r1, [pc, #56]	; (1f74 <get_enhanced_random+0x3c>)
+    1f3c:	447a      	add	r2, pc
+    1f3e:	4479      	add	r1, pc
+    1f40:	8813      	ldrh	r3, [r2, #0]
+    1f42:	f831 0013 	ldrh.w	r0, [r1, r3, lsl #1]
+    1f46:	490c      	ldr	r1, [pc, #48]	; (1f78 <get_enhanced_random+0x40>)
+    1f48:	3301      	adds	r3, #1
+    1f4a:	4479      	add	r1, pc
+    1f4c:	b2db      	uxtb	r3, r3
+    1f4e:	8013      	strh	r3, [r2, #0]
+    1f50:	880b      	ldrh	r3, [r1, #0]
+    1f52:	08da      	lsrs	r2, r3, #3
+    1f54:	ea82 0293 	eor.w	r2, r2, r3, lsr #2
+    1f58:	405a      	eors	r2, r3
+    1f5a:	ea82 1253 	eor.w	r2, r2, r3, lsr #5
+    1f5e:	f002 0201 	and.w	r2, r2, #1
+    1f62:	085b      	lsrs	r3, r3, #1
+    1f64:	ea43 33c2 	orr.w	r3, r3, r2, lsl #15
+    1f68:	800b      	strh	r3, [r1, #0]
+    1f6a:	4058      	eors	r0, r3
+    1f6c:	4770      	bx	lr
+    1f6e:	bf00      	nop
+    1f70:	ffffe644 			; <UNDEFINED> instruction: 0xffffe644
+    1f74:	fffff06e 			; <UNDEFINED> instruction: 0xfffff06e
+    1f78:	ffffe1a4 			; <UNDEFINED> instruction: 0xffffe1a4
 
 Disassembly of section .text.random_range:
 
-00001fd4 <random_range>:
-    1fd4:	b538      	push	{r3, r4, r5, lr}
-    1fd6:	4605      	mov	r5, r0
-    1fd8:	460c      	mov	r4, r1
-    1fda:	f7ff ffd9 	bl	1f90 <get_enhanced_random>
-    1fde:	1b61      	subs	r1, r4, r5
-    1fe0:	3101      	adds	r1, #1
-    1fe2:	fb90 f3f1 	sdiv	r3, r0, r1
-    1fe6:	fb03 0011 	mls	r0, r3, r1, r0
-    1fea:	4428      	add	r0, r5
-    1fec:	bd38      	pop	{r3, r4, r5, pc}
+00001f7c <random_range>:
+    1f7c:	b538      	push	{r3, r4, r5, lr}
+    1f7e:	4605      	mov	r5, r0
+    1f80:	460c      	mov	r4, r1
+    1f82:	f7ff ffd9 	bl	1f38 <get_enhanced_random>
+    1f86:	1b61      	subs	r1, r4, r5
+    1f88:	3101      	adds	r1, #1
+    1f8a:	fb90 f3f1 	sdiv	r3, r0, r1
+    1f8e:	fb03 0011 	mls	r0, r3, r1, r0
+    1f92:	4428      	add	r0, r5
+    1f94:	bd38      	pop	{r3, r4, r5, pc}
 
 Disassembly of section .text.SPWMGenerator_Init:
 
-00001ff0 <SPWMGenerator_Init>:
-    1ff0:	4a05      	ldr	r2, [pc, #20]	; (2008 <SPWMGenerator_Init+0x18>)
-    1ff2:	6082      	str	r2, [r0, #8]
-    1ff4:	4a05      	ldr	r2, [pc, #20]	; (200c <SPWMGenerator_Init+0x1c>)
-    1ff6:	60c2      	str	r2, [r0, #12]
-    1ff8:	2300      	movs	r3, #0
-    1ffa:	f04f 527e 	mov.w	r2, #1065353216	; 0x3f800000
-    1ffe:	6003      	str	r3, [r0, #0]
-    2000:	6043      	str	r3, [r0, #4]
-    2002:	6102      	str	r2, [r0, #16]
-    2004:	6143      	str	r3, [r0, #20]
-    2006:	4770      	bx	lr
-    2008:	447a0000 	ldrbtmi	r0, [sl], #-0
-    200c:	42c80000 	sbcmi	r0, r8, #0
+00001f98 <SPWMGenerator_Init>:
+    1f98:	4a05      	ldr	r2, [pc, #20]	; (1fb0 <SPWMGenerator_Init+0x18>)
+    1f9a:	6082      	str	r2, [r0, #8]
+    1f9c:	4a05      	ldr	r2, [pc, #20]	; (1fb4 <SPWMGenerator_Init+0x1c>)
+    1f9e:	60c2      	str	r2, [r0, #12]
+    1fa0:	2300      	movs	r3, #0
+    1fa2:	f04f 527e 	mov.w	r2, #1065353216	; 0x3f800000
+    1fa6:	6003      	str	r3, [r0, #0]
+    1fa8:	6043      	str	r3, [r0, #4]
+    1faa:	6102      	str	r2, [r0, #16]
+    1fac:	6143      	str	r3, [r0, #20]
+    1fae:	4770      	bx	lr
+    1fb0:	447a0000 	ldrbtmi	r0, [sl], #-0
+    1fb4:	42c80000 	sbcmi	r0, r8, #0
 
 Disassembly of section .text.SPWMGenerator_GenerateSin:
 
-00002010 <SPWMGenerator_GenerateSin>:
-    2010:	eddf 7a0c 	vldr	s15, [pc, #48]	; 2044 <SPWMGenerator_GenerateSin+0x34>
-    2014:	ed9f 7a0c 	vldr	s14, [pc, #48]	; 2048 <SPWMGenerator_GenerateSin+0x38>
-    2018:	4a0c      	ldr	r2, [pc, #48]	; (204c <SPWMGenerator_GenerateSin+0x3c>)
-    201a:	ee20 0a27 	vmul.f32	s0, s0, s15
-    201e:	2164      	movs	r1, #100	; 0x64
-    2020:	eec0 7a07 	vdiv.f32	s15, s0, s14
-    2024:	447a      	add	r2, pc
-    2026:	eefd 7ae7 	vcvt.s32.f32	s15, s15
-    202a:	ee17 3a90 	vmov	r3, s15
-    202e:	fb93 f0f1 	sdiv	r0, r3, r1
-    2032:	fb01 3310 	mls	r3, r1, r0, r3
-    2036:	2b00      	cmp	r3, #0
-    2038:	bfb8      	it	lt
-    203a:	185b      	addlt	r3, r3, r1
-    203c:	4904      	ldr	r1, [pc, #16]	; (2050 <SPWMGenerator_GenerateSin+0x40>)
-    203e:	5852      	ldr	r2, [r2, r1]
-    2040:	56d0      	ldrsb	r0, [r2, r3]
-    2042:	4770      	bx	lr
-    2044:	42c80000 	sbcmi	r0, r8, #0
-    2048:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
-    204c:	ffffe560 			; <UNDEFINED> instruction: 0xffffe560
-    2050:	00000000 	andeq	r0, r0, r0
+00001fb8 <SPWMGenerator_GenerateSin>:
+    1fb8:	eddf 7a0c 	vldr	s15, [pc, #48]	; 1fec <SPWMGenerator_GenerateSin+0x34>
+    1fbc:	ed9f 7a0c 	vldr	s14, [pc, #48]	; 1ff0 <SPWMGenerator_GenerateSin+0x38>
+    1fc0:	4a0c      	ldr	r2, [pc, #48]	; (1ff4 <SPWMGenerator_GenerateSin+0x3c>)
+    1fc2:	ee20 0a27 	vmul.f32	s0, s0, s15
+    1fc6:	2164      	movs	r1, #100	; 0x64
+    1fc8:	eec0 7a07 	vdiv.f32	s15, s0, s14
+    1fcc:	447a      	add	r2, pc
+    1fce:	eefd 7ae7 	vcvt.s32.f32	s15, s15
+    1fd2:	ee17 3a90 	vmov	r3, s15
+    1fd6:	fb93 f0f1 	sdiv	r0, r3, r1
+    1fda:	fb01 3310 	mls	r3, r1, r0, r3
+    1fde:	2b00      	cmp	r3, #0
+    1fe0:	bfb8      	it	lt
+    1fe2:	185b      	addlt	r3, r3, r1
+    1fe4:	4904      	ldr	r1, [pc, #16]	; (1ff8 <SPWMGenerator_GenerateSin+0x40>)
+    1fe6:	5852      	ldr	r2, [r2, r1]
+    1fe8:	56d0      	ldrsb	r0, [r2, r3]
+    1fea:	4770      	bx	lr
+    1fec:	42c80000 	sbcmi	r0, r8, #0
+    1ff0:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
+    1ff4:	ffffe5b8 			; <UNDEFINED> instruction: 0xffffe5b8
+    1ff8:	00000000 	andeq	r0, r0, r0
 
 Disassembly of section .text.SPWMGenerator_GenerateSamples:
 
-00002054 <SPWMGenerator_GenerateSamples>:
-    2054:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
-    2058:	ed2d 8b02 	vpush	{d8}
-    205c:	9e08      	ldr	r6, [sp, #32]
-    205e:	4617      	mov	r7, r2
-    2060:	4698      	mov	r8, r3
-    2062:	4604      	mov	r4, r0
-    2064:	b920      	cbnz	r0, 2070 <SPWMGenerator_GenerateSamples+0x1c>
-    2066:	2000      	movs	r0, #0
-    2068:	ecbd 8b02 	vpop	{d8}
-    206c:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
-    2070:	2a00      	cmp	r2, #0
-    2072:	d0f8      	beq.n	2066 <SPWMGenerator_GenerateSamples+0x12>
-    2074:	2e00      	cmp	r6, #0
-    2076:	d0f6      	beq.n	2066 <SPWMGenerator_GenerateSamples+0x12>
-    2078:	7a33      	ldrb	r3, [r6, #8]
-    207a:	b933      	cbnz	r3, 208a <SPWMGenerator_GenerateSamples+0x36>
-    207c:	ea28 72e8 	bic.w	r2, r8, r8, asr #31
-    2080:	4619      	mov	r1, r3
-    2082:	4638      	mov	r0, r7
-    2084:	f7fe fc4c 	bl	920 <memset>
-    2088:	e7ed      	b.n	2066 <SPWMGenerator_GenerateSamples+0x12>
-    208a:	2901      	cmp	r1, #1
-    208c:	d016      	beq.n	20bc <SPWMGenerator_GenerateSamples+0x68>
-    208e:	2902      	cmp	r1, #2
-    2090:	d017      	beq.n	20c2 <SPWMGenerator_GenerateSamples+0x6e>
-    2092:	b951      	cbnz	r1, 20aa <SPWMGenerator_GenerateSamples+0x56>
-    2094:	f106 0508 	add.w	r5, r6, #8
-    2098:	782b      	ldrb	r3, [r5, #0]
-    209a:	2b01      	cmp	r3, #1
-    209c:	d114      	bne.n	20c8 <SPWMGenerator_GenerateSamples+0x74>
-    209e:	edd5 7a01 	vldr	s15, [r5, #4]
-    20a2:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-    20a6:	edc4 7a02 	vstr	s15, [r4, #8]
-    20aa:	ed9f 8a3d 	vldr	s16, [pc, #244]	; 21a0 <SPWMGenerator_GenerateSamples+0x14c>
-    20ae:	eddf 8a3d 	vldr	s17, [pc, #244]	; 21a4 <SPWMGenerator_GenerateSamples+0x150>
-    20b2:	2500      	movs	r5, #0
-    20b4:	4545      	cmp	r5, r8
-    20b6:	db39      	blt.n	212c <SPWMGenerator_GenerateSamples+0xd8>
-    20b8:	2001      	movs	r0, #1
-    20ba:	e7d5      	b.n	2068 <SPWMGenerator_GenerateSamples+0x14>
-    20bc:	f106 0518 	add.w	r5, r6, #24
-    20c0:	e7ea      	b.n	2098 <SPWMGenerator_GenerateSamples+0x44>
-    20c2:	f106 0528 	add.w	r5, r6, #40	; 0x28
-    20c6:	e7e7      	b.n	2098 <SPWMGenerator_GenerateSamples+0x44>
-    20c8:	2b02      	cmp	r3, #2
-    20ca:	d117      	bne.n	20fc <SPWMGenerator_GenerateSamples+0xa8>
-    20cc:	e9d5 1001 	ldrd	r1, r0, [r5, #4]
-    20d0:	1a40      	subs	r0, r0, r1
-    20d2:	ee07 0a90 	vmov	s15, r0
-    20d6:	edd6 6a00 	vldr	s13, [r6]
-    20da:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
-    20de:	edd6 7a01 	vldr	s15, [r6, #4]
-    20e2:	ee70 0ae6 	vsub.f32	s1, s1, s13
-    20e6:	ee77 7ae6 	vsub.f32	s15, s15, s13
-    20ea:	eec0 6aa7 	vdiv.f32	s13, s1, s15
-    20ee:	ee07 1a90 	vmov	s15, r1
-    20f2:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-    20f6:	eee7 7a26 	vfma.f32	s15, s14, s13
-    20fa:	e7d4      	b.n	20a6 <SPWMGenerator_GenerateSamples+0x52>
-    20fc:	2b04      	cmp	r3, #4
-    20fe:	d10c      	bne.n	211a <SPWMGenerator_GenerateSamples+0xc6>
-    2100:	eddd 7a09 	vldr	s15, [sp, #36]	; 0x24
-    2104:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-    2108:	ee80 7a27 	vdiv.f32	s14, s0, s15
-    210c:	edd5 7a03 	vldr	s15, [r5, #12]
-    2110:	eef8 7ae7 	vcvt.f32.s32	s15, s15
-    2114:	ee67 7a27 	vmul.f32	s15, s14, s15
-    2118:	e7c5      	b.n	20a6 <SPWMGenerator_GenerateSamples+0x52>
-    211a:	2b03      	cmp	r3, #3
-    211c:	d1c5      	bne.n	20aa <SPWMGenerator_GenerateSamples+0x56>
-    211e:	e9d5 0101 	ldrd	r0, r1, [r5, #4]
-    2122:	f7ff ff57 	bl	1fd4 <random_range>
-    2126:	ee07 0a90 	vmov	s15, r0
-    212a:	e7ba      	b.n	20a2 <SPWMGenerator_GenerateSamples+0x4e>
-    212c:	edd4 7a03 	vldr	s15, [r4, #12]
-    2130:	edd4 6a02 	vldr	s13, [r4, #8]
-    2134:	ee67 7a88 	vmul.f32	s15, s15, s16
-    2138:	ee66 6a88 	vmul.f32	s13, s13, s16
-    213c:	ee87 7aa8 	vdiv.f32	s14, s15, s17
-    2140:	edd4 7a01 	vldr	s15, [r4, #4]
-    2144:	ee37 7a27 	vadd.f32	s14, s14, s15
-    2148:	eec6 7aa8 	vdiv.f32	s15, s13, s17
-    214c:	edd4 6a00 	vldr	s13, [r4]
-    2150:	ed84 7a01 	vstr	s14, [r4, #4]
-    2154:	eeb4 7ac8 	vcmpe.f32	s14, s16
-    2158:	ee77 7aa6 	vadd.f32	s15, s15, s13
-    215c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    2160:	bfa8      	it	ge
-    2162:	ee37 7a48 	vsubge.f32	s14, s14, s16
-    2166:	eef4 7ac8 	vcmpe.f32	s15, s16
-    216a:	bfa8      	it	ge
-    216c:	ed84 7a01 	vstrge	s14, [r4, #4]
-    2170:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    2174:	edc4 7a00 	vstr	s15, [r4]
-    2178:	bfa8      	it	ge
-    217a:	ee77 7ac8 	vsubge.f32	s15, s15, s16
-    217e:	ed94 0a01 	vldr	s0, [r4, #4]
-    2182:	bfa8      	it	ge
-    2184:	edc4 7a00 	vstrge	s15, [r4]
-    2188:	f7ff ff42 	bl	2010 <SPWMGenerator_GenerateSin>
-    218c:	eddf 0a06 	vldr	s1, [pc, #24]	; 21a8 <SPWMGenerator_GenerateSamples+0x154>
-    2190:	ed94 0a00 	vldr	s0, [r4]
-    2194:	f000 f80a 	bl	21ac <GenerateTriangle>
-    2198:	5578      	strb	r0, [r7, r5]
-    219a:	3501      	adds	r5, #1
-    219c:	e78a      	b.n	20b4 <SPWMGenerator_GenerateSamples+0x60>
-    219e:	bf00      	nop
-    21a0:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
-    21a4:	46c35000 	strbmi	r5, [r3], r0
-    21a8:	3ca3d70a 	stccc	7, cr13, [r3], #40	; 0x28
+00001ffc <SPWMGenerator_GenerateSamples>:
+    1ffc:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+    2000:	ed2d 8b02 	vpush	{d8}
+    2004:	9e08      	ldr	r6, [sp, #32]
+    2006:	4617      	mov	r7, r2
+    2008:	4698      	mov	r8, r3
+    200a:	4604      	mov	r4, r0
+    200c:	b920      	cbnz	r0, 2018 <SPWMGenerator_GenerateSamples+0x1c>
+    200e:	2000      	movs	r0, #0
+    2010:	ecbd 8b02 	vpop	{d8}
+    2014:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+    2018:	2a00      	cmp	r2, #0
+    201a:	d0f8      	beq.n	200e <SPWMGenerator_GenerateSamples+0x12>
+    201c:	2e00      	cmp	r6, #0
+    201e:	d0f6      	beq.n	200e <SPWMGenerator_GenerateSamples+0x12>
+    2020:	7a33      	ldrb	r3, [r6, #8]
+    2022:	b933      	cbnz	r3, 2032 <SPWMGenerator_GenerateSamples+0x36>
+    2024:	ea28 72e8 	bic.w	r2, r8, r8, asr #31
+    2028:	4619      	mov	r1, r3
+    202a:	4638      	mov	r0, r7
+    202c:	f7fe fc78 	bl	920 <memset>
+    2030:	e7ed      	b.n	200e <SPWMGenerator_GenerateSamples+0x12>
+    2032:	2901      	cmp	r1, #1
+    2034:	d016      	beq.n	2064 <SPWMGenerator_GenerateSamples+0x68>
+    2036:	2902      	cmp	r1, #2
+    2038:	d017      	beq.n	206a <SPWMGenerator_GenerateSamples+0x6e>
+    203a:	b951      	cbnz	r1, 2052 <SPWMGenerator_GenerateSamples+0x56>
+    203c:	f106 0508 	add.w	r5, r6, #8
+    2040:	782b      	ldrb	r3, [r5, #0]
+    2042:	2b01      	cmp	r3, #1
+    2044:	d114      	bne.n	2070 <SPWMGenerator_GenerateSamples+0x74>
+    2046:	edd5 7a01 	vldr	s15, [r5, #4]
+    204a:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+    204e:	edc4 7a02 	vstr	s15, [r4, #8]
+    2052:	ed9f 8a3d 	vldr	s16, [pc, #244]	; 2148 <SPWMGenerator_GenerateSamples+0x14c>
+    2056:	eddf 8a3d 	vldr	s17, [pc, #244]	; 214c <SPWMGenerator_GenerateSamples+0x150>
+    205a:	2500      	movs	r5, #0
+    205c:	4545      	cmp	r5, r8
+    205e:	db39      	blt.n	20d4 <SPWMGenerator_GenerateSamples+0xd8>
+    2060:	2001      	movs	r0, #1
+    2062:	e7d5      	b.n	2010 <SPWMGenerator_GenerateSamples+0x14>
+    2064:	f106 0518 	add.w	r5, r6, #24
+    2068:	e7ea      	b.n	2040 <SPWMGenerator_GenerateSamples+0x44>
+    206a:	f106 0528 	add.w	r5, r6, #40	; 0x28
+    206e:	e7e7      	b.n	2040 <SPWMGenerator_GenerateSamples+0x44>
+    2070:	2b02      	cmp	r3, #2
+    2072:	d117      	bne.n	20a4 <SPWMGenerator_GenerateSamples+0xa8>
+    2074:	e9d5 1001 	ldrd	r1, r0, [r5, #4]
+    2078:	1a40      	subs	r0, r0, r1
+    207a:	ee07 0a90 	vmov	s15, r0
+    207e:	edd6 6a00 	vldr	s13, [r6]
+    2082:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
+    2086:	edd6 7a01 	vldr	s15, [r6, #4]
+    208a:	ee70 0ae6 	vsub.f32	s1, s1, s13
+    208e:	ee77 7ae6 	vsub.f32	s15, s15, s13
+    2092:	eec0 6aa7 	vdiv.f32	s13, s1, s15
+    2096:	ee07 1a90 	vmov	s15, r1
+    209a:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+    209e:	eee7 7a26 	vfma.f32	s15, s14, s13
+    20a2:	e7d4      	b.n	204e <SPWMGenerator_GenerateSamples+0x52>
+    20a4:	2b04      	cmp	r3, #4
+    20a6:	d10c      	bne.n	20c2 <SPWMGenerator_GenerateSamples+0xc6>
+    20a8:	eddd 7a09 	vldr	s15, [sp, #36]	; 0x24
+    20ac:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+    20b0:	ee80 7a27 	vdiv.f32	s14, s0, s15
+    20b4:	edd5 7a03 	vldr	s15, [r5, #12]
+    20b8:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+    20bc:	ee67 7a27 	vmul.f32	s15, s14, s15
+    20c0:	e7c5      	b.n	204e <SPWMGenerator_GenerateSamples+0x52>
+    20c2:	2b03      	cmp	r3, #3
+    20c4:	d1c5      	bne.n	2052 <SPWMGenerator_GenerateSamples+0x56>
+    20c6:	e9d5 0101 	ldrd	r0, r1, [r5, #4]
+    20ca:	f7ff ff57 	bl	1f7c <random_range>
+    20ce:	ee07 0a90 	vmov	s15, r0
+    20d2:	e7ba      	b.n	204a <SPWMGenerator_GenerateSamples+0x4e>
+    20d4:	edd4 7a03 	vldr	s15, [r4, #12]
+    20d8:	edd4 6a02 	vldr	s13, [r4, #8]
+    20dc:	ee67 7a88 	vmul.f32	s15, s15, s16
+    20e0:	ee66 6a88 	vmul.f32	s13, s13, s16
+    20e4:	ee87 7aa8 	vdiv.f32	s14, s15, s17
+    20e8:	edd4 7a01 	vldr	s15, [r4, #4]
+    20ec:	ee37 7a27 	vadd.f32	s14, s14, s15
+    20f0:	eec6 7aa8 	vdiv.f32	s15, s13, s17
+    20f4:	edd4 6a00 	vldr	s13, [r4]
+    20f8:	ed84 7a01 	vstr	s14, [r4, #4]
+    20fc:	eeb4 7ac8 	vcmpe.f32	s14, s16
+    2100:	ee77 7aa6 	vadd.f32	s15, s15, s13
+    2104:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    2108:	bfa8      	it	ge
+    210a:	ee37 7a48 	vsubge.f32	s14, s14, s16
+    210e:	eef4 7ac8 	vcmpe.f32	s15, s16
+    2112:	bfa8      	it	ge
+    2114:	ed84 7a01 	vstrge	s14, [r4, #4]
+    2118:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    211c:	edc4 7a00 	vstr	s15, [r4]
+    2120:	bfa8      	it	ge
+    2122:	ee77 7ac8 	vsubge.f32	s15, s15, s16
+    2126:	ed94 0a01 	vldr	s0, [r4, #4]
+    212a:	bfa8      	it	ge
+    212c:	edc4 7a00 	vstrge	s15, [r4]
+    2130:	f7ff ff42 	bl	1fb8 <SPWMGenerator_GenerateSin>
+    2134:	eddf 0a06 	vldr	s1, [pc, #24]	; 2150 <SPWMGenerator_GenerateSamples+0x154>
+    2138:	ed94 0a00 	vldr	s0, [r4]
+    213c:	f000 f80a 	bl	2154 <GenerateTriangle>
+    2140:	5578      	strb	r0, [r7, r5]
+    2142:	3501      	adds	r5, #1
+    2144:	e78a      	b.n	205c <SPWMGenerator_GenerateSamples+0x60>
+    2146:	bf00      	nop
+    2148:	40c90fdb 	ldrdmi	r0, [r9], #251	; 0xfb
+    214c:	46c35000 	strbmi	r5, [r3], r0
+    2150:	3ca3d70a 	stccc	7, cr13, [r3], #40	; 0x28
 
 Disassembly of section .text.GenerateTriangle:
 
-000021ac <GenerateTriangle>:
-    21ac:	ed9f 7a13 	vldr	s14, [pc, #76]	; 21fc <GenerateTriangle+0x50>
-    21b0:	eddf 7a13 	vldr	s15, [pc, #76]	; 2200 <GenerateTriangle+0x54>
-    21b4:	eeb4 0ac7 	vcmpe.f32	s0, s14
-    21b8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
-    21bc:	bf54      	ite	pl
-    21be:	ee30 0a47 	vsubpl.f32	s0, s0, s14
-    21c2:	eec0 6a07 	vdivmi.f32	s13, s0, s14
-    21c6:	b082      	sub	sp, #8
-    21c8:	bf5d      	ittte	pl
-    21ca:	eec0 6a07 	vdivpl.f32	s13, s0, s14
-    21ce:	eeb7 7a00 	vmovpl.f32	s14, #112	; 0x3f800000  1.0
-    21d2:	ee37 7a66 	vsubpl.f32	s14, s14, s13
-    21d6:	ee66 7aa7 	vmulmi.f32	s15, s13, s15
-    21da:	bf58      	it	pl
-    21dc:	ee67 7a27 	vmulpl.f32	s15, s14, s15
-    21e0:	ed9f 7a08 	vldr	s14, [pc, #32]	; 2204 <GenerateTriangle+0x58>
-    21e4:	eef0 6a00 	vmov.f32	s13, #0	; 0x40000000  2.0
-    21e8:	eea7 7aa6 	vfma.f32	s14, s15, s13
-    21ec:	eefd 7ac7 	vcvt.s32.f32	s15, s14
-    21f0:	edcd 7a01 	vstr	s15, [sp, #4]
-    21f4:	f99d 0004 	ldrsb.w	r0, [sp, #4]
-    21f8:	b002      	add	sp, #8
-    21fa:	4770      	bx	lr
-    21fc:	40490fdb 	ldrdmi	r0, [r9], #-251	; 0xffffff05
-    2200:	42fe0000 	rscsmi	r0, lr, #0
-    2204:	c2fe0000 	rscsgt	r0, lr, #0
+00002154 <GenerateTriangle>:
+    2154:	ed9f 7a13 	vldr	s14, [pc, #76]	; 21a4 <GenerateTriangle+0x50>
+    2158:	eddf 7a13 	vldr	s15, [pc, #76]	; 21a8 <GenerateTriangle+0x54>
+    215c:	eeb4 0ac7 	vcmpe.f32	s0, s14
+    2160:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+    2164:	bf54      	ite	pl
+    2166:	ee30 0a47 	vsubpl.f32	s0, s0, s14
+    216a:	eec0 6a07 	vdivmi.f32	s13, s0, s14
+    216e:	b082      	sub	sp, #8
+    2170:	bf5d      	ittte	pl
+    2172:	eec0 6a07 	vdivpl.f32	s13, s0, s14
+    2176:	eeb7 7a00 	vmovpl.f32	s14, #112	; 0x3f800000  1.0
+    217a:	ee37 7a66 	vsubpl.f32	s14, s14, s13
+    217e:	ee66 7aa7 	vmulmi.f32	s15, s13, s15
+    2182:	bf58      	it	pl
+    2184:	ee67 7a27 	vmulpl.f32	s15, s14, s15
+    2188:	ed9f 7a08 	vldr	s14, [pc, #32]	; 21ac <GenerateTriangle+0x58>
+    218c:	eef0 6a00 	vmov.f32	s13, #0	; 0x40000000  2.0
+    2190:	eea7 7aa6 	vfma.f32	s14, s15, s13
+    2194:	eefd 7ac7 	vcvt.s32.f32	s15, s14
+    2198:	edcd 7a01 	vstr	s15, [sp, #4]
+    219c:	f99d 0004 	ldrsb.w	r0, [sp, #4]
+    21a0:	b002      	add	sp, #8
+    21a2:	4770      	bx	lr
+    21a4:	40490fdb 	ldrdmi	r0, [r9], #-251	; 0xffffff05
+    21a8:	42fe0000 	rscsmi	r0, lr, #0
+    21ac:	c2fe0000 	rscsgt	r0, lr, #0
 
 Disassembly of section .comment:
 
 00000000 <.comment>:
-   0:	3a434347 	bcc	10d0d24 <GenerateTriangle+0x10ceb78>
+   0:	3a434347 	bcc	10d0d24 <GenerateTriangle+0x10cebd0>
    4:	35312820 	ldrcc	r2, [r1, #-2080]!	; 0xfffff7e0
    8:	2e30313a 	mrccs	1, 1, r3, cr0, cr10, {1}
    c:	30322d33 	eorscc	r2, r2, r3, lsr sp
@@ -2780,7 +2753,7 @@ Disassembly of section .debug_line:
   80:	2f2f2f34 	svccs	0x002f2f34
   84:	2f362122 	svccs	0x00362122
   88:	312e0903 			; <UNDEFINED> instruction: 0x312e0903
-  8c:	3d2f212f 	stfccs	f2, [pc, #-188]!	; ffffffd8 <GenerateTriangle+0xffffde2c>
+  8c:	3d2f212f 	stfccs	f2, [pc, #-188]!	; ffffffd8 <GenerateTriangle+0xffffde84>
   90:	213d3d2f 	teqcs	sp, pc, lsr #26
   94:	2f212f2f 	svccs	0x00212f2f
   98:	323d2f21 	eorscc	r2, sp, #33, 30	; 0x84
@@ -2803,7 +2776,7 @@ Disassembly of section .debug_line:
   dc:	21212f24 			; <UNDEFINED> instruction: 0x21212f24
   e0:	2f2f2321 	svccs	0x002f2321
   e4:	244b4b2f 	strbcs	r4, [fp], #-2863	; 0xfffff4d1
-  e8:	4b2f2f2f 	blmi	bcbdac <GenerateTriangle+0xbc9c00>
+  e8:	4b2f2f2f 	blmi	bcbdac <GenerateTriangle+0xbc9c58>
   ec:	212f2421 			; <UNDEFINED> instruction: 0x212f2421
   f0:	212f2f25 			; <UNDEFINED> instruction: 0x212f2f25
   f4:	2421212f 	strtcs	r2, [r1], #-303	; 0xfffffed1
@@ -2831,7 +2804,7 @@ Disassembly of section .debug_line:
  14c:	2f222f2f 	svccs	0x00222f2f
  150:	212f2221 			; <UNDEFINED> instruction: 0x212f2221
  154:	2f26232f 	svccs	0x0026232f
- 158:	0b032f2f 	bleq	cbe1c <GenerateTriangle+0xc9c70>
+ 158:	0b032f2f 	bleq	cbe1c <GenerateTriangle+0xc9cc8>
  15c:	22212f2e 	eorcs	r2, r1, #46, 30	; 0xb8
  160:	09032f26 	stmdbeq	r3, {r1, r2, r5, r8, r9, sl, fp, sp}
  164:	22212f20 	eorcs	r2, r1, #32, 30	; 0x80
@@ -2911,23 +2884,23 @@ Disassembly of section .debug_line:
  28c:	06070520 	streq	r0, [r7], -r0, lsr #10
  290:	13090520 	movwne	r0, #38176	; 0x9520
  294:	01060e05 	tsteq	r6, r5, lsl #28
- 298:	2b060905 	blcs	1826b4 <GenerateTriangle+0x180508>
+ 298:	2b060905 	blcs	1826b4 <GenerateTriangle+0x180560>
  29c:	05360305 	ldreq	r0, [r6, #-773]!	; 0xfffffcfb
  2a0:	05010606 	streq	r0, [r1, #-1542]	; 0xfffff9fa
  2a4:	2e750310 	mrccs	3, 3, r0, cr5, cr0, {0}
  2a8:	03060705 	movweq	r0, #26373	; 0x6705
  2ac:	0516200e 	ldreq	r2, [r6, #-14]
  2b0:	0501060e 	streq	r0, [r1, #-1550]	; 0xfffff9f2
- 2b4:	052f0607 	streq	r0, [pc, #-1543]!	; fffffcb5 <GenerateTriangle+0xffffdb09>
+ 2b4:	052f0607 	streq	r0, [pc, #-1543]!	; fffffcb5 <GenerateTriangle+0xffffdb61>
  2b8:	0517060d 	ldreq	r0, [r7, #-1549]	; 0xfffff9f3
  2bc:	07051b0e 	streq	r1, [r5, -lr, lsl #22]
  2c0:	14052f06 	strne	r2, [r5], #-3846	; 0xfffff0fa
  2c4:	160d0501 	strne	r0, [sp], -r1, lsl #10
- 2c8:	0b052006 	bleq	1482e8 <GenerateTriangle+0x14613c>
- 2cc:	1b05ae06 	blne	16baec <GenerateTriangle+0x169940>
- 2d0:	0b051306 	bleq	144ef0 <GenerateTriangle+0x142d44>
- 2d4:	1b052f06 	blne	14bef4 <GenerateTriangle+0x149d48>
- 2d8:	0b051306 	bleq	144ef8 <GenerateTriangle+0x142d4c>
+ 2c8:	0b052006 	bleq	1482e8 <GenerateTriangle+0x146194>
+ 2cc:	1b05ae06 	blne	16baec <GenerateTriangle+0x169998>
+ 2d0:	0b051306 	bleq	144ef0 <GenerateTriangle+0x142d9c>
+ 2d4:	1b052f06 	blne	14bef4 <GenerateTriangle+0x149da0>
+ 2d8:	0b051306 	bleq	144ef8 <GenerateTriangle+0x142da4>
  2dc:	0d052f06 	stceq	15, cr2, [r5, #-24]	; 0xffffffe8
  2e0:	05017a03 	streq	r7, [r1, #-2563]	; 0xfffff5fd
  2e4:	05410618 	strbeq	r0, [r1, #-1560]	; 0xfffff9e8
@@ -2940,7 +2913,7 @@ Disassembly of section .debug_line:
  300:	0f0d052f 	svceq	0x000d052f
  304:	09053106 	stmdbeq	r5, {r1, r2, r8, ip, sp}
  308:	01063606 	tsteq	r6, r6, lsl #12
- 30c:	5a031005 	bpl	c4328 <GenerateTriangle+0xc217c>
+ 30c:	5a031005 	bpl	c4328 <GenerateTriangle+0xc21d4>
  310:	06050520 	streq	r0, [r5], -r0, lsr #10
  314:	052e2703 	streq	r2, [lr, #-1795]!	; 0xfffff8fd
  318:	0501060a 	streq	r0, [r1, #-1546]	; 0xfffff9f6
@@ -3022,7 +2995,7 @@ Disassembly of section .debug_info:
   ec:	14000000 	strne	r0, [r0], #-0
   f0:	00000000 	andeq	r0, r0, r0
   f4:	0a000000 	beq	fc <ActiveSpeedRange+0x8>
-  f8:	2a010073 	bcs	402cc <GenerateTriangle+0x3e120>
+  f8:	2a010073 	bcs	402cc <GenerateTriangle+0x3e178>
   fc:	00008009 	andeq	r8, r0, r9
  100:	0000a600 	andeq	sl, r0, r0, lsl #12
  104:	00009000 	andeq	r9, r0, r0
@@ -3054,7 +3027,7 @@ Disassembly of section .debug_abbrev:
 00000000 <.debug_abbrev>:
    0:	10001101 	andne	r1, r0, r1, lsl #2
    4:	12011106 	andne	r1, r1, #-2147483647	; 0x80000001
-   8:	1b0e0301 	blne	380c14 <GenerateTriangle+0x37ea68>
+   8:	1b0e0301 	blne	380c14 <GenerateTriangle+0x37eac0>
    c:	130e250e 	movwne	r2, #58638	; 0xe50e
   10:	00000005 	andeq	r0, r0, r5
   14:	25011101 	strcs	r1, [r1, #-257]	; 0xfffffeff
@@ -3062,43 +3035,43 @@ Disassembly of section .debug_abbrev:
   1c:	110e1b0e 	tstne	lr, lr, lsl #22
   20:	10061201 	andne	r1, r6, r1, lsl #4
   24:	02000017 	andeq	r0, r0, #23
-  28:	0b0b0024 	bleq	2c00c0 <GenerateTriangle+0x2bdf14>
+  28:	0b0b0024 	bleq	2c00c0 <GenerateTriangle+0x2bdf6c>
   2c:	08030b3e 	stmdaeq	r3, {r1, r2, r3, r4, r5, r8, r9, fp}
   30:	16030000 	strne	r0, [r3], -r0
-  34:	3a0e0300 	bcc	380c3c <GenerateTriangle+0x37ea90>
+  34:	3a0e0300 	bcc	380c3c <GenerateTriangle+0x37eae8>
   38:	390b3b0b 	stmdbcc	fp, {r0, r1, r3, r8, r9, fp, ip, sp}
   3c:	0013490b 	andseq	r4, r3, fp, lsl #18
   40:	00240400 	eoreq	r0, r4, r0, lsl #8
-  44:	0b3e0b0b 	bleq	f82c78 <GenerateTriangle+0xf80acc>
+  44:	0b3e0b0b 	bleq	f82c78 <GenerateTriangle+0xf80b24>
   48:	00000e03 	andeq	r0, r0, r3, lsl #28
-  4c:	0b000f05 	bleq	3c68 <GenerateTriangle+0x1abc>
+  4c:	0b000f05 	bleq	3c68 <GenerateTriangle+0x1b14>
   50:	0600000b 	streq	r0, [r0], -fp
-  54:	0b0b000f 	bleq	2c0098 <GenerateTriangle+0x2bdeec>
+  54:	0b0b000f 	bleq	2c0098 <GenerateTriangle+0x2bdf44>
   58:	00001349 	andeq	r1, r0, r9, asr #6
   5c:	3f012e07 	svccc	0x00012e07
-  60:	3a0e0319 	bcc	380ccc <GenerateTriangle+0x37eb20>
+  60:	3a0e0319 	bcc	380ccc <GenerateTriangle+0x37eb78>
   64:	390b3b0b 	stmdbcc	fp, {r0, r1, r3, r8, r9, fp, ip, sp}
   68:	4919270b 	ldmdbmi	r9, {r0, r1, r3, r8, r9, sl, sp}
   6c:	12011113 	andne	r1, r1, #-1073741820	; 0xc0000004
   70:	97184006 	ldrls	r4, [r8, -r6]
   74:	13011942 	movwne	r1, #6466	; 0x1942
   78:	05080000 	streq	r0, [r8, #-0]
-  7c:	3a080300 	bcc	200c84 <GenerateTriangle+0x1fead8>
+  7c:	3a080300 	bcc	200c84 <GenerateTriangle+0x1feb30>
   80:	390b3b0b 	stmdbcc	fp, {r0, r1, r3, r8, r9, fp, ip, sp}
   84:	0213490b 	andseq	r4, r3, #180224	; 0x2c000
   88:	09000018 	stmdbeq	r0, {r3, r4}
   8c:	08030005 	stmdaeq	r3, {r0, r2}
-  90:	0b3b0b3a 	bleq	ec2d80 <GenerateTriangle+0xec0bd4>
+  90:	0b3b0b3a 	bleq	ec2d80 <GenerateTriangle+0xec0c2c>
   94:	13490b39 	movtne	r0, #39737	; 0x9b39
   98:	42b71702 	adcsmi	r1, r7, #524288	; 0x80000
   9c:	0a000017 	beq	100 <ActiveSpeedRange+0xc>
   a0:	08030034 	stmdaeq	r3, {r2, r4, r5}
-  a4:	0b3b0b3a 	bleq	ec2d94 <GenerateTriangle+0xec0be8>
+  a4:	0b3b0b3a 	bleq	ec2d94 <GenerateTriangle+0xec0c40>
   a8:	13490b39 	movtne	r0, #39737	; 0x9b39
   ac:	42b71702 	adcsmi	r1, r7, #524288	; 0x80000
   b0:	0b000017 	bleq	114 <ActiveSpeedRange+0x20>
   b4:	0e030034 	mcreq	0, 0, r0, cr3, cr4, {1}
-  b8:	0b3b0b3a 	bleq	ec2da8 <GenerateTriangle+0xec0bfc>
+  b8:	0b3b0b3a 	bleq	ec2da8 <GenerateTriangle+0xec0c54>
   bc:	13490b39 	movtne	r0, #39737	; 0x9b39
   c0:	42b71702 	adcsmi	r1, r7, #524288	; 0x80000
   c4:	00000017 	andeq	r0, r0, r7, lsl r0
@@ -3159,7 +3132,7 @@ Disassembly of section .debug_str:
   80:	2f696261 	svccs	0x00696261
   84:	6d756874 	ldclvs	8, cr6, [r5, #-464]!	; 0xfffffe30
   88:	37762f62 	ldrbcc	r2, [r6, -r2, ror #30]!
-  8c:	2b6d2d65 	blcs	1b4b628 <GenerateTriangle+0x1b4947c>
+  8c:	2b6d2d65 	blcs	1b4b628 <GenerateTriangle+0x1b494d4>
   90:	682f7066 	stmdavs	pc!, {r1, r2, r5, r6, ip, sp, lr}	; <UNPREDICTABLE>
   94:	2f647261 	svccs	0x00647261
   98:	6762696c 	strbvs	r6, [r2, -ip, ror #18]!
@@ -3170,7 +3143,7 @@ Disassembly of section .debug_str:
   ac:	20676e6f 	rsbcs	r6, r7, pc, ror #28
   b0:	676e6f6c 	strbvs	r6, [lr, -ip, ror #30]!
   b4:	746e6920 	strbtvc	r6, [lr], #-2336	; 0xfffff6e0
-  b8:	7a697300 	bvc	1a5ccc0 <GenerateTriangle+0x1a5ab14>
+  b8:	7a697300 	bvc	1a5ccc0 <GenerateTriangle+0x1a5ab6c>
   bc:	00745f65 	rsbseq	r5, r4, r5, ror #30
   c0:	676e6f6c 	strbvs	r6, [lr, -ip, ror #30]!
   c4:	6e6f6c20 	cdpvs	12, 6, cr6, cr15, cr0, {1}
@@ -3278,7 +3251,7 @@ Disassembly of section .debug_frame:
   1c:	00000282 	andeq	r0, r0, r2, lsl #5
   20:	0c0e470a 	stceq	7, cr4, [lr], {10}
   24:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  28:	3a03018e 	bcc	c0668 <GenerateTriangle+0xbe4bc>
+  28:	3a03018e 	bcc	c0668 <GenerateTriangle+0xbe514>
   2c:	00000b01 	andeq	r0, r0, r1, lsl #22
   30:	00000018 	andeq	r0, r0, r8, lsl r0
   34:	00000000 	andeq	r0, r0, r0
@@ -3286,21 +3259,21 @@ Disassembly of section .debug_frame:
   3c:	0000001e 	andeq	r0, r0, lr, lsl r0
   40:	0c0e460a 	stceq	6, cr4, [lr], {10}
   44:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  48:	0b49018e 	bleq	1240688 <GenerateTriangle+0x123e4dc>
+  48:	0b49018e 	bleq	1240688 <GenerateTriangle+0x123e534>
   4c:	00000018 	andeq	r0, r0, r8, lsl r0
   50:	00000000 	andeq	r0, r0, r0
   54:	00000844 	andeq	r0, r0, r4, asr #16
   58:	00000022 	andeq	r0, r0, r2, lsr #32
   5c:	0c0e460a 	stceq	6, cr4, [lr], {10}
   60:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  64:	0b4b018e 	bleq	12c06a4 <GenerateTriangle+0x12be4f8>
+  64:	0b4b018e 	bleq	12c06a4 <GenerateTriangle+0x12be550>
   68:	00000018 	andeq	r0, r0, r8, lsl r0
   6c:	00000000 	andeq	r0, r0, r0
   70:	00000868 	andeq	r0, r0, r8, ror #16
   74:	00000042 	andeq	r0, r0, r2, asr #32
   78:	0c0e5a0a 			; <UNDEFINED> instruction: 0x0c0e5a0a
   7c:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  80:	0b47018e 	bleq	11c06c0 <GenerateTriangle+0x11be514>
+  80:	0b47018e 	bleq	11c06c0 <GenerateTriangle+0x11be56c>
   84:	00000024 	andeq	r0, r0, r4, lsr #32
   88:	00000000 	andeq	r0, r0, r0
   8c:	000008ac 	andeq	r0, r0, ip, lsr #17
@@ -3310,7 +3283,7 @@ Disassembly of section .debug_frame:
   9c:	43018e02 	movwmi	r8, #7682	; 0x1e02
   a0:	0c0e450b 	cfstr32eq	mvfx4, [lr], {11}
   a4:	02850384 	addeq	r0, r5, #132, 6	; 0x10000002
-  a8:	0b68018e 	bleq	1a006e8 <GenerateTriangle+0x19fe53c>
+  a8:	0b68018e 	bleq	1a006e8 <GenerateTriangle+0x19fe594>
   ac:	0000000c 	andeq	r0, r0, ip
   b0:	ffffffff 			; <UNDEFINED> instruction: 0xffffffff
   b4:	7c020001 	stcvc	0, cr0, [r2], {1}
